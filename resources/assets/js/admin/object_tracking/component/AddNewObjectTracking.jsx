@@ -20,7 +20,7 @@ export default class AddNewObjectTracking extends React.Component{
       isSubmitted:false
     };
 
-    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id']})
+    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id','table_reference']})
     .then(function(response){
       this.setState({
         listMode:response.data
@@ -48,16 +48,50 @@ export default class AddNewObjectTracking extends React.Component{
 
   }
 
-  submitForm(modeId,data){
-    axios(Constants.OBJECT_TRACKING_ROUTE + 'create',{
+  submitForm(table){
+    var data = {
+      object_name : $('#object_name').val(),
+      organization: $('#organization').val(),
+    }
 
+    if(document.getElementById('object_owner')){
+      data.object_owner = $('#object_owner').val();
+    }
+
+    if(document.getElementById('phone_number')){
+      data.phone_number = $('#phone_number').val();
+    }
+
+    if(document.getElementById('identification')){
+      data.identification = $('#identification').val();
+    }
+
+    this.setState({
+      isSubmitted:true
+    });
+
+    axios.post(Constants.OBJECT_TRACKING_ROUTE + 'create',{
+        table,data
     })
-    .then(function(reponse){
-      
-    })
+    .then(function(response){
+      if(response.data.status=='success'){
+        alert('Thêm thành công!');
+      }
+      else{
+        alert('Thêm không thành công! Xem console.log để biết chi tiết');
+        console.log(response.data.message);
+      }
+      this.setState({
+        isSubmitted:false
+      });
+    }.bind(this))
     .catch(function(err){
-
-    })
+      alert('Thêm không thành công. Xem log để biêt thêm chi tiết!');
+      console.log(err);
+      this.setState({
+        isSubmitted:false
+      });
+    }.bind(this))
   }
 
   render(){
@@ -80,7 +114,8 @@ export default class AddNewObjectTracking extends React.Component{
         {this.state.submitForm!=null?(
           <div>
             <TextField
-              id="display_property"
+              id="object_name"
+              ref="object_name"
               hintText={this.state.submitForm.display_property}
               floatingLabelText={this.state.submitForm.display_property}
             /><br/>
@@ -88,7 +123,8 @@ export default class AddNewObjectTracking extends React.Component{
               this.state.submitForm.object_owner!=null?(
                 <div>
                 <TextField
-                    id="display_property"
+                    id="object_owner"
+                    ref="object_owner"
                     hintText={this.state.submitForm.object_owner}
                     floatingLabelText={this.state.submitForm.object_owner}
                   />
@@ -98,6 +134,7 @@ export default class AddNewObjectTracking extends React.Component{
             }
             <TextField
                 id="organization"
+                ref="organization"
                 hintText="Đơn vị"
                 floatingLabelText="Đơn vị"
               />
@@ -106,6 +143,8 @@ export default class AddNewObjectTracking extends React.Component{
               this.state.submitForm.is_required_phone_number==1?(
                 <div>
                 <TextField
+                    id="phone_number"
+                    ref="phone_number"
                     hintText="Số điện thoại"
                     floatingLabelText="Số điện thoại"
                   /><br/>
@@ -116,15 +155,18 @@ export default class AddNewObjectTracking extends React.Component{
               this.state.submitForm.is_required_identification==1?(
                 <div>
                 <TextField
+                    id="identification"
+                    ref="identification"
                     hintText="Số chứng minh thư"
                     floatingLabelText="Số chứng minh thư"
                   /><br/>
                 </div>
               ):null
             }
+            <br/>
             <RaisedButton
                 disabled = {this.state.isSubmitted}
-                onClick={this.submitForm.bind(this)}
+                onClick={this.submitForm.bind(this,this.state.submitForm.table_reference)}
                 label="Lưu"
                 primary={true}
                 icon={<FontIcon className="material-icons">save</FontIcon>}

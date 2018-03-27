@@ -2233,13 +2233,13 @@ exports.default = function (arr) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(231);
 /* unused harmony reexport MemoryRouter */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(234);
-/* unused harmony reexport NavLink */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(237);
 /* unused harmony reexport Prompt */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(239);
 /* unused harmony reexport Redirect */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(120);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(78);
 /* unused harmony reexport Router */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(245);
@@ -26872,47 +26872,47 @@ var AdminMaster = function (_React$Component) {
             { containerClassName: 'root-drawer' },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement('div', { className: 'drawer-avatar' }),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-              { to: '/app/realtime' },
+              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
+              { to: '/app/realtime', activeClassName: 'active' },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
-                null,
+                { className: 'menu-item' },
                 'Gi\xE1m s\xE1t th\u1EDDi gian th\u1EF1c'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-              { to: '/app/checkpoints' },
+              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
+              { to: '/app/checkpoints', activeClassName: 'active' },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
-                null,
+                { className: 'menu-item' },
                 'Tr\u1EA1m gi\xE1m s\xE1t'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-              { to: '/app/mode-tracking' },
+              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
+              { to: '/app/mode-tracking', activeClassName: 'active' },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
-                null,
+                { className: 'menu-item' },
                 'Ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-              { to: '/app/object-tracking' },
+              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
+              { to: '/app/object-tracking', activeClassName: 'active' },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
-                null,
+                { className: 'menu-item' },
                 '\u0110\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["b" /* Link */],
-              { to: '/app/settings' },
+              __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
+              { to: '/app/settings', activeClassName: 'active' },
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
-                null,
+                { className: 'menu-item' },
                 'C\xE0i \u0111\u1EB7t'
               )
             )
@@ -26920,11 +26920,11 @@ var AdminMaster = function (_React$Component) {
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'div',
             { className: 'root-content' },
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { exact: true, path: '/app/realtime', component: Realtime }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { exact: true, path: '/app/checkpoints', component: Checkpoints }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { path: '/app/mode-tracking', component: ModeTracking }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { path: '/app/object-tracking', component: ObjectTracking }),
-            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* Route */], { path: '/app/settings', component: Settings })
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { exact: true, path: '/app/realtime', component: Realtime }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { exact: true, path: '/app/checkpoints', component: Checkpoints }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { path: '/app/mode-tracking', component: ModeTracking }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { path: '/app/object-tracking', component: ObjectTracking }),
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { path: '/app/settings', component: Settings })
           )
         )
       );
@@ -32248,7 +32248,7 @@ NavLink.defaultProps = {
   ariaCurrent: 'true'
 };
 
-/* unused harmony default export */ var _unused_webpack_default_export = (NavLink);
+/* harmony default export */ __webpack_exports__["a"] = (NavLink);
 
 /***/ }),
 /* 235 */
@@ -41678,9 +41678,9 @@ var RootModeTracking = function (_React$Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'component-content-viewer' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["c" /* Route */], { exact: true, path: '/app/mode-tracking', component: List }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["c" /* Route */], { exact: true, path: '/app/mode-tracking/list', component: List }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["c" /* Route */], { path: '/app/mode-tracking/add', component: Add })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["d" /* Route */], { exact: true, path: '/app/mode-tracking', component: List }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["d" /* Route */], { exact: true, path: '/app/mode-tracking/list', component: List }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7_react_router_dom__["d" /* Route */], { path: '/app/mode-tracking/add', component: Add })
         )
       );
     }
@@ -64588,9 +64588,9 @@ var RootObjectTracking = function (_React$Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           { className: 'component-content-viewer' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* Route */], { exact: true, path: '/app/object-tracking', component: List }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* Route */], { exact: true, path: '/app/object-tracking/list', component: List }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["c" /* Route */], { path: '/app/object-tracking/add', component: Add })
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* Route */], { exact: true, path: '/app/object-tracking', component: List }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* Route */], { exact: true, path: '/app/object-tracking/list', component: List }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_react_router_dom__["d" /* Route */], { path: '/app/object-tracking/add', component: Add })
         )
       );
     }
@@ -64655,7 +64655,7 @@ var AddNewObjectTracking = function (_React$Component) {
       isSubmitted: false
     };
 
-    __WEBPACK_IMPORTED_MODULE_6_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_7__constants_Constants__["a" /* default */].MODE_TRACKING_ROUTE + 'minimal-list', { required: ['name', 'id'] }).then(function (response) {
+    __WEBPACK_IMPORTED_MODULE_6_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_7__constants_Constants__["a" /* default */].MODE_TRACKING_ROUTE + 'minimal-list', { required: ['name', 'id', 'table_reference'] }).then(function (response) {
       this.setState({
         listMode: response.data
       });
@@ -64682,8 +64682,47 @@ var AddNewObjectTracking = function (_React$Component) {
     }
   }, {
     key: 'submitForm',
-    value: function submitForm(modeId, data) {
-      __WEBPACK_IMPORTED_MODULE_6_axios___default()(__WEBPACK_IMPORTED_MODULE_7__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'create', {}).then(function (reponse) {}).catch(function (err) {});
+    value: function submitForm(table) {
+      var data = {
+        object_name: $('#object_name').val(),
+        organization: $('#organization').val()
+      };
+
+      if (document.getElementById('object_owner')) {
+        data.object_owner = $('#object_owner').val();
+      }
+
+      if (document.getElementById('phone_number')) {
+        data.phone_number = $('#phone_number').val();
+      }
+
+      if (document.getElementById('identification')) {
+        data.identification = $('#identification').val();
+      }
+
+      this.setState({
+        isSubmitted: true
+      });
+
+      __WEBPACK_IMPORTED_MODULE_6_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_7__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'create', {
+        table: table, data: data
+      }).then(function (response) {
+        if (response.data.status == 'success') {
+          alert('Thêm thành công!');
+        } else {
+          alert('Thêm không thành công! Xem console.log để biết chi tiết');
+          console.log(response.data.message);
+        }
+        this.setState({
+          isSubmitted: false
+        });
+      }.bind(this)).catch(function (err) {
+        alert('Thêm không thành công. Xem log để biêt thêm chi tiết!');
+        console.log(err);
+        this.setState({
+          isSubmitted: false
+        });
+      }.bind(this));
     }
   }, {
     key: 'render',
@@ -64707,7 +64746,8 @@ var AddNewObjectTracking = function (_React$Component) {
           'div',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-            id: 'display_property',
+            id: 'object_name',
+            ref: 'object_name',
             hintText: this.state.submitForm.display_property,
             floatingLabelText: this.state.submitForm.display_property
           }),
@@ -64716,7 +64756,8 @@ var AddNewObjectTracking = function (_React$Component) {
             'div',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-              id: 'display_property',
+              id: 'object_owner',
+              ref: 'object_owner',
               hintText: this.state.submitForm.object_owner,
               floatingLabelText: this.state.submitForm.object_owner
             }),
@@ -64724,6 +64765,7 @@ var AddNewObjectTracking = function (_React$Component) {
           ) : null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
             id: 'organization',
+            ref: 'organization',
             hintText: '\u0110\u01A1n v\u1ECB',
             floatingLabelText: '\u0110\u01A1n v\u1ECB'
           }),
@@ -64732,6 +64774,8 @@ var AddNewObjectTracking = function (_React$Component) {
             'div',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
+              id: 'phone_number',
+              ref: 'phone_number',
               hintText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
               floatingLabelText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i'
             }),
@@ -64741,14 +64785,17 @@ var AddNewObjectTracking = function (_React$Component) {
             'div',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
+              id: 'identification',
+              ref: 'identification',
               hintText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0',
               floatingLabelText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0'
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
           ) : null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_RaisedButton___default.a, {
             disabled: this.state.isSubmitted,
-            onClick: this.submitForm.bind(this),
+            onClick: this.submitForm.bind(this, this.state.submitForm.table_reference),
             label: 'L\u01B0u',
             primary: true,
             icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
@@ -66182,6 +66229,10 @@ var Constant = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__ = __webpack_require__(357);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__constants_Constants__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__TableObjectTracking__ = __webpack_require__(362);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -66189,6 +66240,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
 
 
 
@@ -66205,85 +66260,56 @@ var styles = {
 var ListObjectTracking = function (_React$Component) {
   _inherits(ListObjectTracking, _React$Component);
 
-  function ListObjectTracking() {
+  function ListObjectTracking(props) {
     _classCallCheck(this, ListObjectTracking);
 
-    return _possibleConstructorReturn(this, (ListObjectTracking.__proto__ || Object.getPrototypeOf(ListObjectTracking)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (ListObjectTracking.__proto__ || Object.getPrototypeOf(ListObjectTracking)).call(this, props));
+
+    _this.state = {
+      listMode: null,
+      tabActive: 0
+    };
+
+    __WEBPACK_IMPORTED_MODULE_2_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_3__constants_Constants__["a" /* default */].MODE_TRACKING_ROUTE + 'minimal-list', { required: ['name', 'id', 'table_reference', 'display_property', 'object_owner', 'is_required_phone_number'] }).then(function (response) {
+      this.setState({
+        listMode: response.data
+      });
+    }.bind(_this)).catch(function (err) {
+      console.log(err);
+    });
+
+    return _this;
   }
 
   _createClass(ListObjectTracking, [{
-    key: 'handleActive',
-    value: function handleActive(tab) {
-      alert('A tab with this route property ' + tab.props['data-route'] + ' was activated.');
+    key: 'onTabActive',
+    value: function onTabActive(index) {
+      this.setState({
+        tabActive: index
+      });
     }
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tabs"],
+        'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
-          { label: 'Item One' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'h2',
-              { style: styles.headline },
-              'Tab One'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'p',
-              null,
-              'This is an example tab.'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'p',
-              null,
-              'You can put any sort of HTML or react component in here. It even keeps the component state!'
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
-          { label: 'Item Two' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'h2',
-              { style: styles.headline },
-              'Tab Two'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'p',
-              null,
-              'This is another example tab.'
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
-          {
-            label: 'onActive',
-            'data-route': '/home',
-            onActive: this.handleActive.bind(this)
-          },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'h2',
-              { style: styles.headline },
-              'Tab Three'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              'p',
-              null,
-              'This is a third example tab.'
-            )
-          )
+        this.state.listMode != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tabs"],
+          null,
+          this.state.listMode.map(function (node, k) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
+              { onActive: _this2.onTabActive.bind(_this2, k), label: node.name, key: k },
+              _this2.state.tabActive == k ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TableObjectTracking__["a" /* default */], { ModeProperty: node }) : null
+            );
+          })
+        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'h4',
+          null,
+          'Ch\u01B0a c\xF3 ch\u1EBF \u0111\u1ED9 theo d\xF5i n\xE0o! Nh\u1EA5n v\xE0o ADD \u0111\u1EC3 th\xEAm 1 ch\u1EBF \u0111\u1ED9 m\u1EDBi!'
         )
       );
     }
@@ -67025,6 +67051,143 @@ InkBar.propTypes =  true ? {
   width: _propTypes2.default.string.isRequired
 } : {};
 exports.default = InkBar;
+
+/***/ }),
+/* 362 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_material_ui_Table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_Constants__ = __webpack_require__(355);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(88);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+var TableObjectTracking = function (_React$Component) {
+  _inherits(TableObjectTracking, _React$Component);
+
+  function TableObjectTracking(props) {
+    _classCallCheck(this, TableObjectTracking);
+
+    var _this = _possibleConstructorReturn(this, (TableObjectTracking.__proto__ || Object.getPrototypeOf(TableObjectTracking)).call(this, props));
+
+    _this.state = {
+      listObject: []
+    };
+    return _this;
+  }
+
+  _createClass(TableObjectTracking, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      if (this.state.listObject.length != 0) {
+        return;
+      }
+      console.log('Load Data:' + this.props.ModeProperty.name);
+      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_2__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'list', {
+        table: this.props.ModeProperty.table_reference
+      }).then(function (response) {
+        this.setState({
+          listObject: response.data
+        });
+        console.log(response.data);
+      }.bind(this)).catch(function (err) {
+        console.log(err);
+      });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('did mount');
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
+        null,
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              null,
+              'STT'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              null,
+              this.props.ModeProperty.display_property.toUpperCase()
+            ),
+            this.props.ModeProperty.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              null,
+              this.props.ModeProperty.object_owner.toUpperCase()
+            ) : null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              null,
+              '\u0110\u01A0N V\u1ECA'
+            ),
+            this.props.ModeProperty.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              null,
+              'S\u1ED0 \u0110I\u1EC6N THO\u1EA0I'
+            ) : null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"], null)
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
+          null,
+          this.state.listObject.map(function (node, k) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+              { key: k },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                null,
+                '1'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                null,
+                'John Smith'
+              ),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                null,
+                'Employed'
+              )
+            );
+          })
+        )
+      );
+    }
+  }]);
+
+  return TableObjectTracking;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["a"] = (TableObjectTracking);
 
 /***/ })
 /******/ ]);

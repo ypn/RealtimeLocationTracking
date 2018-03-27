@@ -32,5 +32,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
 
     Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
         Route::post('create','ObjectTrackingController@create');
+        Route::post('list','ObjectTrackingController@list');
     });
 });

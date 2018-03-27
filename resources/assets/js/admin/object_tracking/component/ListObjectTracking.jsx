@@ -1,5 +1,9 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import axios from 'axios';
+import Constants from '../../constants/Constants';
+
+import TableObjectTracking from './TableObjectTracking';
 
 const styles = {
   headline: {
@@ -12,45 +16,57 @@ const styles = {
 
 export default class ListObjectTracking extends React.Component{
 
-  handleActive(tab) {
-    alert(`A tab with this route property ${tab.props['data-route']} was activated.`);
+  constructor(props){
+    super(props);
+    this.state = {
+      listMode:null,
+      tabActive:0
+    }
+
+    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id','table_reference','display_property','object_owner','is_required_phone_number']})
+    .then(function(response){
+      this.setState({
+        listMode:response.data
+      });
+    }.bind(this))
+    .catch(function(err){
+      console.log(err);
+    });
+
+  }
+
+  onTabActive(index){
+    this.setState({
+      tabActive:index
+    });
   }
 
   render(){
     return(
-      <Tabs>
-        <Tab label="Item One" >
-          <div>
-            <h2 style={styles.headline}>Tab One</h2>
-            <p>
-              This is an example tab.
-            </p>
-            <p>
-              You can put any sort of HTML or react component in here. It even keeps the component state!
-            </p>          
-          </div>
-        </Tab>
-        <Tab label="Item Two" >
-          <div>
-            <h2 style={styles.headline}>Tab Two</h2>
-            <p>
-              This is another example tab.
-            </p>
-          </div>
-        </Tab>
-        <Tab
-          label="onActive"
-          data-route="/home"
-          onActive={this.handleActive.bind(this)}
-        >
-          <div>
-            <h2 style={styles.headline}>Tab Three</h2>
-            <p>
-              This is a third example tab.
-            </p>
-          </div>
-        </Tab>
-      </Tabs>
+      <div>
+      {
+        this.state.listMode!=null ? (
+          <Tabs>
+          {
+            this.state.listMode.map((node,k)=>{
+              return(
+                  <Tab onActive={this.onTabActive.bind(this,k)} label={node.name} key={k}>
+                    {
+                      this.state.tabActive==k?(
+                        <TableObjectTracking ModeProperty= {node}/>
+                      ):null
+                    }
+                  </Tab>
+              )
+            })
+          }
+          </Tabs>
+        ):
+        (
+          <h4>Chưa có chế độ theo dõi nào! Nhấn vào ADD để thêm 1 chế độ mới!</h4>
+        )
+      }
+      </div>
     )
   }
 }
