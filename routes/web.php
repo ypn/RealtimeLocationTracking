@@ -29,4 +29,8 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('del','ModeTrackingController@del');
         Route::post('update-state','ModeTrackingController@updateState');
     });
+
+    Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
+        Route::post('create','ObjectTrackingController@create');
+    });
 });
