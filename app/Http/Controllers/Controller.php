@@ -11,7 +11,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function list(){
-      echo 'list';
+    public function login(){
+      return view('login');
     }
 }

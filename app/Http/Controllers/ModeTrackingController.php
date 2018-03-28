@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 
 class ModeTrackingController extends Controller
 {
-    public function entry(){
+    public function entry(){      
       return view('admin.mode_tracking.list');
     }
 

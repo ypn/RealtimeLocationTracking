@@ -11,10 +11,10 @@
 |
 */
 
-
 Route::get('/', 'ModeTrackingController@entry');
+Route::get('/login', 'Controller@login')->name('login');
 
-Route::group(['middleware' => 'web', 'prefix' => 'app'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('/', 'ModeTrackingController@entry');
     Route::get('/{any}', 'ModeTrackingController@entry')->where('any', '.*');
 });
