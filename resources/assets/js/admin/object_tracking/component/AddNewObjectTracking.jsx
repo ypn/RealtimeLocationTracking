@@ -53,7 +53,7 @@ export default class AddNewObjectTracking extends React.Component{
 
     })
     .then(function(reponse){
-      
+
     })
     .catch(function(err){
 
