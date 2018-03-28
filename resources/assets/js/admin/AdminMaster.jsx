@@ -6,7 +6,7 @@ injectTapEventPlugin();
 
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import {Route, Link } from "react-router-dom";
+import {Route, NavLink } from "react-router-dom";
 
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -60,11 +60,11 @@ export default class AdminMaster extends React.Component{
             <div className="drawer-avatar">
 
             </div>
-            <Link to="/app/realtime"><MenuItem>Giám sát thời gian thực</MenuItem></Link>
-            <Link to="/app/checkpoints"><MenuItem>Trạm giám sát</MenuItem></Link>
-            <Link to="/app/mode-tracking"><MenuItem>Chế độ giám sát</MenuItem></Link>
-            <Link to="/app/object-tracking"><MenuItem>Đối tượng giám sát</MenuItem></Link>
-            <Link to="/app/settings"><MenuItem>Cài đặt</MenuItem></Link>
+            <NavLink to="/app/realtime" activeClassName="active"><MenuItem className="menu-item">Giám sát thời gian thực</MenuItem></NavLink>
+            <NavLink to="/app/checkpoints" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
+            <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem className="menu-item">Chế độ giám sát</MenuItem></NavLink>
+            <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem className="menu-item">Đối tượng giám sát</MenuItem></NavLink>
+            <NavLink to="/app/settings" activeClassName="active"><MenuItem className="menu-item">Cài đặt</MenuItem></NavLink>
           </Drawer>
           <div className="root-content">
             <Route exact path="/app/realtime" component={Realtime} />

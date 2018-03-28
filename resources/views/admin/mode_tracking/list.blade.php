@@ -95,6 +95,11 @@
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
       }
 
+      .active .menu-item{
+         background-color: rgb(0, 188, 212)!important;
+         color:#fff!important;                
+      }
+
     </style>
   </head>
   <body>
@@ -103,6 +108,6 @@
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script>
-    <script type="text/javascript" src="/js/admin/admin-bundle.js"></script>  
+    <script type="text/javascript" src="/js/admin/admin-bundle.js"></script>
   </body>
 </html>

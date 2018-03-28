@@ -38,19 +38,18 @@ class ModesTracking extends Model
             $table->string('object_name');
 
             if(isset($data['object_owner'])){
-                $table->string('object_owner');
+                $table->string('object_owner')->nullable();
             }
 
             if($data['is_phone_number']){
-                $table->string('phone_number');
+                $table->string('phone_number')->nullable();
             }
 
             if($data['is_identitication']){
-                $table->string('identification');
+                $table->string('identification')->nullable();
             }
 
-            $table->string('organization');
-            $table->string('display_property');
+            $table->string('organization')->nullable();
             $table->timestamps();
         });
 
