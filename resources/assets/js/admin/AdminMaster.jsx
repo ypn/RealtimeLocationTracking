@@ -16,7 +16,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import RootModeTracking from './mode_tracking/component/RootModeTracking';
 import RootObjectTracking from './object_tracking/component/RootObjectTracking';
-import RootCheckPointsComponent from './checkpoints/component/RootCheckPointsComponent';
+import RootCheckPointsComponent from './checkpoint/component/RootCheckPointComponent';
 
 const AppBarExampleIcon = () => (
   <AppBar
@@ -60,14 +60,14 @@ export default class AdminMaster extends React.Component{
 
             </div>
             <NavLink to="/app/realtime" activeClassName="active"><MenuItem className="menu-item">Dashboard</MenuItem></NavLink>
-            <NavLink to="/app/checkpoints" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
+            <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
             <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem className="menu-item">Chế độ giám sát</MenuItem></NavLink>
             <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem className="menu-item">Đối tượng giám sát</MenuItem></NavLink>
             <NavLink to="/app/settings" activeClassName="active"><MenuItem className="menu-item">Cài đặt</MenuItem></NavLink>
           </Drawer>
           <div className="root-content">
             <Route exact path="/app/realtime" component={Realtime} />
-            <Route exact path="/app/checkpoints" component={Checkpoints} />
+            <Route exact path="/app/checkpoint" component={Checkpoints} />
             <Route path="/app/mode-tracking" component={ModeTracking} />
             <Route path="/app/object-tracking" component={ObjectTracking} />
             <Route path="/app/settings" component={Settings} />

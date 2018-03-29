@@ -29,7 +29,7 @@ export default class ListModes extends React.Component{
 
     axios.post('/api/v1/mode-tracking/list')
     .then(function(response){
-      //console.log(response.data);
+      console.log(response.data);
       if(response.data.status=='success'){
         this.setState({
           listModes:response.data.list

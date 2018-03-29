@@ -22,9 +22,9 @@ class RedirectIfAuthenticated
         //     return redirect('/home');
         // }
 
-        // if(!Sentinel::check()){
-        //   return redirect('/login');
-        // }
+        if(Sentinel::check()){
+          return redirect('/login');
+        }
 
         return $next($request);
     }

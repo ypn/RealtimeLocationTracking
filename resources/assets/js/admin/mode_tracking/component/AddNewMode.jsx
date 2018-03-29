@@ -53,6 +53,7 @@ export default class AddNewMode extends React.Component{
      ){
        this.setState({isSubmitted:true});
        axios.post('/api/v1/mode-tracking/add',{
+         _token:$('meta[name="csrf-token"]').attr('content'),
          mode_name:$('#mode_name').val(),
          object_name:$('#object_name').val(),
          display_property:$('#display_property').val(),

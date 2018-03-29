@@ -20,8 +20,7 @@ Route::group(['middleware' => 'guest', 'prefix' => 'app'], function () {
     Route::get('/{any}', 'ModeTrackingController@entry')->where('any', '.*');
 });
 
-
-Route::group(['middleware' => 'api', 'prefix' => 'api/v1'], function () {
+Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
     Route::group(['middleware' => 'web', 'prefix' => 'mode-tracking'], function () {
         Route::post('add', 'ModeTrackingController@add');
         Route::post('list','ModeTrackingController@list');

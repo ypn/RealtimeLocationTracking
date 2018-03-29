@@ -20,7 +20,15 @@ export default class AddNewObjectTracking extends React.Component{
       isSubmitted:false
     };
 
-    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id','table_reference']})
+    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',
+    {
+      required:[
+        'name',
+        'id',
+        'table_reference'
+      ],
+      _token:$('meta[name="csrf-token"]').attr('content')
+    })
     .then(function(response){
       this.setState({
         listMode:response.data

@@ -19,12 +19,12 @@ class ModeTrackingController extends Controller
       return ModesTracking::add($input);
     }
 
-    public function list(){
+    public function list(){    
       return ModesTracking::list();
     }
 
     public function listEnabled(){
-      return ModesTracking::listEnabled();
+      //return ModesTracking::listEnabled();
     }
 
     public function minList(){

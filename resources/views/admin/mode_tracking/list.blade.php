@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title></title>
     <style media="screen">
       body{
@@ -97,7 +98,7 @@
 
       .active .menu-item{
          background-color: rgb(0, 188, 212)!important;
-         color:#fff!important;                
+         color:#fff!important;
       }
 
     </style>

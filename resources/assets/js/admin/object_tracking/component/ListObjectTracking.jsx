@@ -24,7 +24,18 @@ export default class ListObjectTracking extends React.Component{
 
     }
 
-    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id','table_reference','display_property','object_owner','is_required_phone_number']})
+    axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',
+    {
+      required:[
+        'name',
+        'id',
+        'table_reference',
+        'display_property',
+        'object_owner',
+        'is_required_phone_number'
+      ],
+      _token:$('meta[name="csrf-token"]').attr('content')
+    })
     .then(function(response){
       this.setState({
         listMode:response.data
