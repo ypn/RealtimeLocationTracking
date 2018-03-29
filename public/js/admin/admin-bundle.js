@@ -26834,6 +26834,7 @@ module.exports = camelize;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__mode_tracking_component_RootModeTracking__ = __webpack_require__(306);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__object_tracking_component_RootObjectTracking__ = __webpack_require__(346);
+throw new Error("Cannot find module \"./checkpoints/component/RootCheckPointsComponent\"");
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26847,6 +26848,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 __WEBPACK_IMPORTED_MODULE_0_react_tap_event_plugin___default()();
+
 
 
 
@@ -26880,15 +26882,7 @@ var Realtime = function Realtime() {
 };
 
 var Checkpoints = function Checkpoints() {
-  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-    'div',
-    null,
-    __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      'h2',
-      null,
-      'Checkpoints'
-    )
-  );
+  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_9__checkpoints_component_RootCheckPointsComponent___default.a, null);
 };
 
 var ModeTracking = function ModeTracking() {
@@ -26940,7 +26934,7 @@ var AdminMaster = function (_React$Component) {
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
                 { className: 'menu-item' },
-                'Gi\xE1m s\xE1t th\u1EDDi gian th\u1EF1c'
+                'Dashboard'
               )
             ),
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(

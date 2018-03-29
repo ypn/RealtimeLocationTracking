@@ -16,6 +16,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import RootModeTracking from './mode_tracking/component/RootModeTracking';
 import RootObjectTracking from './object_tracking/component/RootObjectTracking';
+import RootCheckPointsComponent from './checkpoints/component/RootCheckPointsComponent';
 
 const AppBarExampleIcon = () => (
   <AppBar
@@ -31,9 +32,7 @@ const Realtime = () => (
 );
 
 const Checkpoints = () => (
-  <div>
-    <h2>Checkpoints</h2>
-  </div>
+  <RootCheckPointsComponent/>
 );
 
 const ModeTracking = () => (
@@ -60,7 +59,7 @@ export default class AdminMaster extends React.Component{
             <div className="drawer-avatar">
 
             </div>
-            <NavLink to="/app/realtime" activeClassName="active"><MenuItem className="menu-item">Giám sát thời gian thực</MenuItem></NavLink>
+            <NavLink to="/app/realtime" activeClassName="active"><MenuItem className="menu-item">Dashboard</MenuItem></NavLink>
             <NavLink to="/app/checkpoints" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
             <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem className="menu-item">Chế độ giám sát</MenuItem></NavLink>
             <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem className="menu-item">Đối tượng giám sát</MenuItem></NavLink>

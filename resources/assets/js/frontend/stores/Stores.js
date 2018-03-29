@@ -4,11 +4,16 @@ import axios from 'axios';
 
 class CarTrackerStore extends EventEmitter {
 
-  constructor(){  
+  constructor(){
     super();
     this.listTrackingCar = [];
     this.listMarkersObject = [];
     this.listPolylines = [];
+  }
+
+
+  loadObjectsOnTracking($modeId){
+    
   }
 
   /**

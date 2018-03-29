@@ -30,8 +30,8 @@ const List = ()=>(
 );
 
 const Add = () => (
-    <AddNewMode/>
-)
+  <AddNewMode/>
+);
 
 export default class RootModeTracking extends React.Component{
   render(){

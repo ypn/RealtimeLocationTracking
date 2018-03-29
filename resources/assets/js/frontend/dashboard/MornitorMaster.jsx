@@ -5,23 +5,31 @@ import Stores from '../stores/Stores';
 import TableHeader from './TableHeader';
 import TableObjectTracking from './TableObjectTracking';
 import {Tabs, Tab} from 'material-ui/Tabs';
-
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
+import axios from 'axios';
+import GlobalConstants from '../../constants/GlobalConstants';
 
 export default class MornitorMaster extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      listTrackingCar:[]
+      listTrackingCar:[],
+      listModes:[]
     }
+
+    axios.post(GlobalConstants.MODE_TRACKING_ROUTE + 'list-enabled')
+    .then(function(response){
+      if(response.data.status == 'success'){
+        this.setState({
+          listModes:response.data.list
+        });
+
+      }
+
+    }.bind(this))
+    .catch(function(err){
+
+    });
 
   }
 
@@ -56,30 +64,17 @@ export default class MornitorMaster extends Component{
       <div className="mornitor-master-wrapper">
         <div className="monitor-content">
           <Tabs>
-            <Tab label="Item One" >
-              <div>
-              <TableObjectTracking/>
-              </div>
-            </Tab>
-            <Tab label="Item Two" >
-              <div>
-                <h2 style={styles.headline}>Tab Two</h2>
-                <p>
-                  This is another example tab.
-                </p>
-              </div>
-            </Tab>
-            <Tab
-              label="onActive"
-              data-route="/home"
-            >
-              <div>
-                <h2 style={styles.headline}>Tab Three</h2>
-                <p>
-                  This is a third example tab.
-                </p>
-              </div>
-            </Tab>
+            {
+              this.state.listModes.map((node,k)=>{
+                return(
+                  <Tab label = {node.name} key={k} >
+                    <div>
+                    <TableObjectTracking ModeId={node.id} DisplayProperty={node.display_property}/>
+                    </div>
+                  </Tab>
+                )
+              })
+            }
           </Tabs>
         </div>
       </div>

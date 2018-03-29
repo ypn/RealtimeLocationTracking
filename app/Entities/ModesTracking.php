@@ -76,6 +76,14 @@ class ModesTracking extends Model
       ]);
     }
 
+    protected function listEnabled(){
+      return response()->json([
+        'status' => 'success',
+        'status_code' => Res::HTTP_OK,
+        'list'=>$this->select('name','id','display_property','table_reference')->where('state',1)->get()
+      ]);
+    }
+
     protected function minList($data){
       return($this->select($data)->get());
     }

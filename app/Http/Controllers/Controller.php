@@ -14,4 +14,8 @@ class Controller extends BaseController
     public function loadMap(){
       return view('frontend.map');
     }
+
+    public function login(){
+      return view('login');
+    }
 }

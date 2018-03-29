@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 
 class ModeTrackingController extends Controller
 {
-    public function entry(){      
+    public function entry(){
       return view('admin.mode_tracking.list');
     }
 
@@ -21,6 +21,10 @@ class ModeTrackingController extends Controller
 
     public function list(){
       return ModesTracking::list();
+    }
+
+    public function listEnabled(){
+      return ModesTracking::listEnabled();
     }
 
     public function minList(){

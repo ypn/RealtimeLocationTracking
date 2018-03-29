@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Response as Res;
+use App\Entities\TrackingLogger;
 use DB,Validator;
 
 class ObjectTrackingController extends Controller
@@ -70,5 +71,9 @@ class ObjectTrackingController extends Controller
             'message' => $ex->getMessage()
         ]);
       }
+    }
+
+    public function listObjectsOnTracking(){
+      return TrackingLogger::listObjectsOnTracking(Input::get('mode_id'));
     }
 }

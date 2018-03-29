@@ -161,6 +161,9 @@
         padding:0.5rem!important;
         text-shadow: none;
       }
+      .row-active{
+        background: red!;
+      }
 
   </style>
   <body>
