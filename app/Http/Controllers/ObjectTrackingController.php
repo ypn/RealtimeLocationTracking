@@ -41,7 +41,6 @@ class ObjectTrackingController extends Controller
             'status' => 'error',
             'status_code' => Res::HTTP_UNPROCESSABLE_ENTITY,
             'message' => $ex->getMessage()
-
         ]);
       }
     }
@@ -50,5 +49,26 @@ class ObjectTrackingController extends Controller
       $table = Input::get('table');
 
       return DB::table($table)->get();
+    }
+
+    public function remove(){
+      $table = Input::get('table');
+      $id = Input::get('id');
+
+      try{
+        $a = DB::table($table)->where('id',$id)->delete();
+        return response()->json([
+            'status' => 'success',
+            'status_code' => Res::HTTP_OK,
+            'message'=>$a
+        ]);
+
+      }catch(QueryException $ex){
+        return response()->json([
+            'status' => 'error',
+            'status_code' => Res::HTTP_UNPROCESSABLE_ENTITY,
+            'message' => $ex->getMessage()
+        ]);
+      }
     }
 }

@@ -24,7 +24,6 @@ export default class TableObjectTracking extends React.Component{
     if((this.state.listObject).length !=0){
       return;
     }
-    console.log('Load Data:' + this.props.ModeProperty.name);
     axios.post(Constants.OBJECT_TRACKING_ROUTE+'list',{
       table:this.props.ModeProperty.table_reference
     })
@@ -32,15 +31,31 @@ export default class TableObjectTracking extends React.Component{
       this.setState({
         listObject:response.data
       })
-      console.log(response.data);
     }.bind(this))
     .catch(function(err){
       console.log(err);
     })
   }
 
-  componentDidMount(){
-    console.log('did mount');
+  destroyItem(table,id){
+    var result = confirm("Nhấn OK để xác nhận xóa bản ghi!");
+    if(result){
+
+      axios.post(Constants.OBJECT_TRACKING_ROUTE + 'remove',{table,id})
+      .then(function(response){
+        console.log(response.data);
+        if(response.data.status=='success' && response.data.message!=0){
+          this.setState({
+            listObject:this.state.listObject.filter(obj=>{
+              return obj.id!=id;
+            })
+          })
+        }
+      }.bind(this))
+      .catch(function(err){
+        console.log(err);
+      })
+    }
   }
 
   render(){
@@ -61,7 +76,7 @@ export default class TableObjectTracking extends React.Component{
                 <TableHeaderColumn>SỐ ĐIỆN THOẠI</TableHeaderColumn>
               ):null
             }
-            <TableHeaderColumn></TableHeaderColumn>
+            <TableHeaderColumn>Xóa/Sửa</TableHeaderColumn>
           </TableRow>
         </TableHeader>
 
@@ -71,8 +86,23 @@ export default class TableObjectTracking extends React.Component{
               return(
                 <TableRow key={k}>
                   <TableRowColumn>1</TableRowColumn>
-                  <TableRowColumn>John Smith</TableRowColumn>
-                  <TableRowColumn>Employed</TableRowColumn>
+                  <TableRowColumn>{node.object_name}</TableRowColumn>
+                  {
+                    this.props.ModeProperty.object_owner!=null?(
+                      <TableRowColumn>{node.object_owner}</TableRowColumn>
+                    ):null
+                  }
+                  <TableRowColumn>{node.organization}</TableRowColumn>
+                  {
+                    this.props.ModeProperty.is_required_phone_number==1?(
+                      <TableRowColumn>{node.phone_number}</TableRowColumn>
+                    ):null
+                  }
+                  <TableRowColumn>
+                    <a href="javascript:void(0)" onClick={this.destroyItem.bind(this,this.props.ModeProperty.table_reference,node.id)}>Xóa</a>
+                    /
+                    <a href="javascript:void(0)">Sửa</a>
+                  </TableRowColumn>
                 </TableRow>
               )
             })

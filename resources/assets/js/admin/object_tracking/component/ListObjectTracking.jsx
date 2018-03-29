@@ -21,6 +21,7 @@ export default class ListObjectTracking extends React.Component{
     this.state = {
       listMode:null,
       tabActive:0
+
     }
 
     axios.post(Constants.MODE_TRACKING_ROUTE + 'minimal-list',{required:['name','id','table_reference','display_property','object_owner','is_required_phone_number']})
@@ -37,7 +38,7 @@ export default class ListObjectTracking extends React.Component{
 
   onTabActive(index){
     this.setState({
-      tabActive:index
+      tabActive:index,
     });
   }
 
@@ -52,7 +53,7 @@ export default class ListObjectTracking extends React.Component{
               return(
                   <Tab onActive={this.onTabActive.bind(this,k)} label={node.name} key={k}>
                     {
-                      this.state.tabActive==k?(
+                      this.state.tabActive == k ? (
                         <TableObjectTracking ModeProperty= {node}/>
                       ):null
                     }

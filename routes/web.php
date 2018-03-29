@@ -12,7 +12,7 @@
 */
 
 
-Route::get('/', 'ModeTrackingController@entry');
+Route::get('/', 'Controller@loadMap');
 
 Route::group(['middleware' => 'web', 'prefix' => 'app'], function () {
     Route::get('/', 'ModeTrackingController@entry');
@@ -33,5 +33,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
     Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
         Route::post('create','ObjectTrackingController@create');
         Route::post('list','ObjectTrackingController@list');
+        Route::post('remove','ObjectTrackingController@remove');
     });
 });
