@@ -11,10 +11,15 @@
 |
 */
 
+<<<<<<< HEAD
 
 Route::get('/', 'Controller@loadMap');
+=======
+Route::get('/', 'ModeTrackingController@entry');
+Route::get('/login', 'Controller@login')->name('login');
+>>>>>>> a5bd32983688256856811969ffe5ba45ecd4ccea
 
-Route::group(['middleware' => 'web', 'prefix' => 'app'], function () {
+Route::group(['middleware' => 'auth', 'prefix' => 'app'], function () {
     Route::get('/', 'ModeTrackingController@entry');
     Route::get('/{any}', 'ModeTrackingController@entry')->where('any', '.*');
 });
