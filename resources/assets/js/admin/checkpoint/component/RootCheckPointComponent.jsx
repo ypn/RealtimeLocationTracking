@@ -4,6 +4,9 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Divider from 'material-ui/Divider';
 
+import AddNewCheckPoint  from './AddNewCheckPoint';
+import ListCheckPoints from './ListCheckPoints';
+
 import {BrowserRouter as Router,Route, Link } from "react-router-dom";
 const styles = {
   button: {
@@ -22,11 +25,11 @@ const styles = {
 };
 
 const List = ()=>(
-  <h1>List CheckPoints</h1>
+  <ListCheckPoints/>
 );
 
 const Add = ()=>(
-  <h1>Add CheckPoints</h1>
+  <AddNewCheckPoint/>
 );
 
 

@@ -25,7 +25,8 @@
       }
 
       .root-content{
-        margin:100px 15px 0 315px;
+        margin:20px 15px 0 315px;
+        padding-bottom: 100px;
       }
 
       .alert h4{
@@ -109,6 +110,7 @@
     src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlqW-_ymhhj0I6Ez1Jq_8Z87a_A9ZaCU"></script>
     <script type="text/javascript" src="/js/admin/admin-bundle.js"></script>
   </body>
 </html>

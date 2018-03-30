@@ -7664,10 +7664,10 @@ exports.default = _SvgIcon2.default;
 "use strict";
 /* unused harmony export SessionStepInCheckPoint */
 /* unused harmony export SessionStepOutCheckPoint */
-/* harmony export (immutable) */ __webpack_exports__["b"] = getListTrakingCar;
+/* unused harmony export getListTrakingCar */
 /* unused harmony export newSessionDetected */
 /* unused harmony export stopTracking */
-/* harmony export (immutable) */ __webpack_exports__["c"] = togglePath;
+/* harmony export (immutable) */ __webpack_exports__["b"] = togglePath;
 /* unused harmony export updatePosition */
 /* harmony export (immutable) */ __webpack_exports__["a"] = changePathColor;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__dispatcher_dispatcher__ = __webpack_require__(203);
@@ -27677,7 +27677,8 @@ exports.default = _Toggle2.default;
 "use strict";
 var GlobalConstants = {
   MODE_TRACKING_ROUTE: '/api/v1/mode-tracking/',
-  OBJECT_TRACKING_ROUTE: '/api/v1/object-tracking/'
+  OBJECT_TRACKING_ROUTE: '/api/v1/object-tracking/',
+  CHECKPOINT_ROUTE: '/api/v1/checkpoint/'
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (GlobalConstants);
@@ -63976,6 +63977,8 @@ var MornitorMaster = function (_Component) {
   function MornitorMaster(props) {
     _classCallCheck(this, MornitorMaster);
 
+    console.log('Mornitor master');
+
     var _this = _possibleConstructorReturn(this, (MornitorMaster.__proto__ || Object.getPrototypeOf(MornitorMaster)).call(this, props));
 
     _this.state = {
@@ -63989,7 +63992,9 @@ var MornitorMaster = function (_Component) {
           listModes: response.data.list
         });
       }
-    }.bind(_this)).catch(function (err) {});
+    }.bind(_this)).catch(function (err) {
+      console.log(err);
+    });
 
     return _this;
   }
@@ -63997,27 +64002,25 @@ var MornitorMaster = function (_Component) {
   _createClass(MornitorMaster, [{
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var _this2 = this;
-
-      __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].on('load_list_tracking_car', function () {
-        _this2.setState({
-          listTrackingCar: __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].getListTrackingCar()
-        });
-      });
-
-      __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].on('new_session_was_add_to_track', function () {
-        _this2.setState({
-          listTrackingCar: __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].getListTrackingCar()
-        });
-      });
-
-      __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].on('stop_session_tracking', function () {
-        _this2.setState({
-          listTrackingCar: __WEBPACK_IMPORTED_MODULE_3__stores_Stores__["a" /* default */].getListTrackingCar()
-        });
-      });
-
-      __WEBPACK_IMPORTED_MODULE_2__actions_Actions__["b" /* getListTrakingCar */]();
+      // Stores.on('load_list_tracking_car',()=>{
+      //   this.setState({
+      //     listTrackingCar:Stores.getListTrackingCar()
+      //   });
+      // });
+      //
+      // Stores.on('new_session_was_add_to_track',()=>{
+      //   this.setState({
+      //     listTrackingCar:Stores.getListTrackingCar()
+      //   });
+      // });
+      //
+      // Stores.on('stop_session_tracking',()=>{
+      //   this.setState({
+      //     listTrackingCar:Stores.getListTrackingCar()
+      //   });
+      // });
+      //
+      // Actions.getListTrakingCar();
     }
   }, {
     key: 'componentWillUnmount',
@@ -64214,7 +64217,7 @@ var CarTrackedItem = function (_React$Component) {
   }, {
     key: 'checkboxChange',
     value: function checkboxChange(e) {
-      __WEBPACK_IMPORTED_MODULE_2__actions_Actions__["c" /* togglePath */](e.target.value);
+      __WEBPACK_IMPORTED_MODULE_2__actions_Actions__["b" /* togglePath */](e.target.value);
     }
   }, {
     key: 'onToggleColorPicker',

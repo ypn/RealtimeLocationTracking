@@ -11,6 +11,7 @@ import GlobalConstants from '../../constants/GlobalConstants';
 export default class MornitorMaster extends Component{
 
   constructor(props){
+    console.log('Mornitor master');
     super(props);
     this.state = {
       listTrackingCar:[],
@@ -23,36 +24,35 @@ export default class MornitorMaster extends Component{
         this.setState({
           listModes:response.data.list
         });
-
       }
 
     }.bind(this))
     .catch(function(err){
-
+      console.log(err);
     });
 
   }
 
   componentWillMount(){
-    Stores.on('load_list_tracking_car',()=>{
-      this.setState({
-        listTrackingCar:Stores.getListTrackingCar()
-      });
-    });
-
-    Stores.on('new_session_was_add_to_track',()=>{
-      this.setState({
-        listTrackingCar:Stores.getListTrackingCar()
-      });
-    });
-
-    Stores.on('stop_session_tracking',()=>{
-      this.setState({
-        listTrackingCar:Stores.getListTrackingCar()
-      });
-    });
-
-    Actions.getListTrakingCar();
+    // Stores.on('load_list_tracking_car',()=>{
+    //   this.setState({
+    //     listTrackingCar:Stores.getListTrackingCar()
+    //   });
+    // });
+    //
+    // Stores.on('new_session_was_add_to_track',()=>{
+    //   this.setState({
+    //     listTrackingCar:Stores.getListTrackingCar()
+    //   });
+    // });
+    //
+    // Stores.on('stop_session_tracking',()=>{
+    //   this.setState({
+    //     listTrackingCar:Stores.getListTrackingCar()
+    //   });
+    // });
+    //
+    // Actions.getListTrakingCar();
   }
 
   componentWillUnmount(){

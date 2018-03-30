@@ -37,4 +37,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('list-objects-on-tracking','ObjectTrackingController@listObjectsOnTracking');
         Route::post('remove','ObjectTrackingController@remove');
     });
+
+    Route::group(['middleware'=>'web','prefix'=>'checkpoint'],function(){
+        Route::post('create','CheckPointController@create');
+        Route::post('list','CheckPointController@list');
+    });
 });
