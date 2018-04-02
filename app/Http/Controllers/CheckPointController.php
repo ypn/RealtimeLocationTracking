@@ -8,6 +8,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Input;
 use App\Entities\CheckPoint;
+use App\Entities\ModeCheckPoints;
+use Illuminate\Http\Response as Res;
 
 use Validator;
 
@@ -39,5 +41,72 @@ class CheckPointController extends BaseController
 
     public function list(){
       return CheckPoint::list();
+    }
+
+    public function addRemoveFromMode(){
+      $input = Input::all();
+
+      $rules  = [
+        'state'=>'required',
+        'checkpoint_id'=>'required',
+        'mode_id'=>'required'
+      ];
+
+      $validator = Validator::make($input,$rules);
+
+      if($validator->fails()){
+        return response()->json([
+            'status' => 'validator_error',
+            'status_code' => Res::HTTP_OK,
+            'message'=>$validator->messages()
+        ]);
+      }
+
+      return ModeCheckPoints::addRemoveFromMode($input);
+    }
+
+    public function onChangeStateModeCheckPoint(){
+      $input = Input::all();
+      $rules  = [
+        'checkpoint_id'=>'required',
+        'mode_id'=>'required'
+      ];
+
+      $validator = Validator::make($input,$rules);
+
+      if($validator->fails()){
+        return response()->json([
+            'status' => 'validator_error',
+            'status_code' => Res::HTTP_OK,
+            'message'=>$validator->messages()
+        ]);
+      }
+
+      return ModeCheckPoints::onChangeStateModeCheckPoint($input);
+    }
+
+    public function listEnabled(){
+      $mode_id=Input::get('mode_id');
+      return ModeCheckPoints::listEnabled($mode_id);
+    }
+
+    public function isCheckPointAvaiabled(){
+      $input = Input::all();
+      $rules  = [
+        'checkpoint_id'=>'required',
+        'mode_id'=>'required'
+      ];
+
+      $validator = Validator::make($input,$rules);
+
+      if($validator->fails()){
+        return response()->json([
+            'status' => 'validator_error',
+            'status_code' => Res::HTTP_OK,
+            'message'=>$validator->messages()
+        ]);
+      }
+
+      return ModeCheckPoints::isCheckPointAvaiabled($input);
     }
 }

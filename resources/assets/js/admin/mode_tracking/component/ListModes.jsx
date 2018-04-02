@@ -8,6 +8,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+import { Link } from "react-router-dom";
+
 import axios from 'axios';
 
 import Toggle from 'material-ui/Toggle';
@@ -28,8 +30,7 @@ export default class ListModes extends React.Component{
     }
 
     axios.post('/api/v1/mode-tracking/list')
-    .then(function(response){
-      console.log(response.data);
+    .then(function(response){    
       if(response.data.status=='success'){
         this.setState({
           listModes:response.data.list
@@ -98,7 +99,7 @@ export default class ListModes extends React.Component{
                   <TableRowColumn>
                     <a onClick={this.deleteMode.bind(this,node.id,node.table_reference)} href="javascript:void(0);">Xóa</a>
                     /
-                    <a href="javascript:void(0);">Sửa</a>
+                    <Link to={"/app/mode-tracking/edit/" + node.id}>Sửa</Link>
                   </TableRowColumn>
                 </TableRow>
               )

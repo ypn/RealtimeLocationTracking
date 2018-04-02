@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 
 import ListModes from './ListModes';
 import AddNewMode from './AddNewMode';
+import EditMode from './EditMode';
 import {Route, Link } from "react-router-dom";
 
 
@@ -31,6 +32,10 @@ const List = ()=>(
 
 const Add = () => (
   <AddNewMode/>
+);
+
+const Edit = ({match})=> (
+  <EditMode ModeId={match.params.id}/>
 );
 
 export default class RootModeTracking extends React.Component{
@@ -60,6 +65,7 @@ export default class RootModeTracking extends React.Component{
           <Route exact path="/app/mode-tracking" component={List} />
           <Route exact path="/app/mode-tracking/list" component={List} />
           <Route path="/app/mode-tracking/add" component={Add} />
+          <Route path="/app/mode-tracking/edit/:id" component={Edit} />
         </div>
       </div>
     )

@@ -41,5 +41,9 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
     Route::group(['middleware'=>'web','prefix'=>'checkpoint'],function(){
         Route::post('create','CheckPointController@create');
         Route::post('list','CheckPointController@list');
+        Route::post('add-remove-from-mode','CheckPointController@addRemoveFromMode');
+        Route::post('on-changestate-mode-checkpoint','CheckPointController@onChangeStateModeCheckPoint');
+        Route::post('is-checkpoint-available','CheckPointController@isCheckPointAvaiabled');
+        Route::post('list-enabled','CheckPointController@listEnabled');
     });
 });
