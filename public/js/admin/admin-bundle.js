@@ -68165,25 +68165,22 @@ var EditMode = function (_React$Component) {
     __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_6__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'list-enabled', {
       mode_id: _this.props.ModeId
     }).then(function (response) {
-      if (response.data.status == 'success') {
-        this.setState({
-          listInArray: response.data
-        });
-      }
-    }).catch(function (err) {
-      console.log(err);
-    });
+      this.setState({
+        listInArray: response.data
+      });
 
-    __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_6__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'list').then(function (response) {
-      if (response.data.status == 'success') {
-        this.setState({
-          listCheckPoints: response.data.list
-        });
-      }
+      __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_6__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'list').then(function (response) {
+        if (response.data.status == 'success') {
+          this.setState({
+            listCheckPoints: response.data.list
+          });
+        }
+      }.bind(this)).catch(function (err) {
+        console.log(err);
+      });
     }.bind(_this)).catch(function (err) {
       console.log(err);
     });
-
     return _this;
   }
 
@@ -82208,26 +82205,7 @@ var ItemCheckPoints = function (_React$Component) {
   function ItemCheckPoints(props) {
     _classCallCheck(this, ItemCheckPoints);
 
-    var _this = _possibleConstructorReturn(this, (ItemCheckPoints.__proto__ || Object.getPrototypeOf(ItemCheckPoints)).call(this, props));
-
-    _this.state = {
-      checked: false
-    };
-
-    __WEBPACK_IMPORTED_MODULE_4_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'is-checkpoint-available', {
-      checkpoint_id: _this.props.Node.id,
-      mode_id: _this.props.ModeId
-    }).then(function (response) {
-      console.log(response.data);
-      if (response.data.status == 'success' && response.data.item != null) {
-        this.setState({
-          checked: true
-        });
-      }
-    }.bind(_this)).catch(function (err) {
-      console.log(err);
-    });
-    return _this;
+    return _possibleConstructorReturn(this, (ItemCheckPoints.__proto__ || Object.getPrototypeOf(ItemCheckPoints)).call(this, props));
   }
 
   _createClass(ItemCheckPoints, [{
@@ -82244,28 +82222,12 @@ var ItemCheckPoints = function (_React$Component) {
       });
     }
   }, {
-    key: 'onChangeState',
-    value: function onChangeState(event) {
-      __WEBPACK_IMPORTED_MODULE_4_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_5__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'on-changestate-mode-checkpoint', {
-        checkpoint_id: this.props.Node.id,
-        mode_id: this.props.ModeId
-      }).then(function (response) {
-        console.log(response.data);
-      }.bind(this)).catch(function (err) {
-        console.log(err);
-      });
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var checked = this.state.checked;
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_List__["ListItem"], {
         primaryText: this.props.Node.name,
         leftCheckbox: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_Checkbox___default.a, { defaultChecked: this.props.Availabled,
-          onClick: this.addRemoveCheckPoint.bind(this) }),
-        rightToggle: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_Toggle___default.a, { onClick: this.onChangeState.bind(this),
-          defaultToggled: this.state.item != null && this.state.item == 1 ? true : false,
-          disabled: this.state.disabled })
+          onClick: this.addRemoveCheckPoint.bind(this) })
       });
     }
   }]);

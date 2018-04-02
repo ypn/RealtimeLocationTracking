@@ -12,8 +12,7 @@
       if($input['state']){
         try{
           $this->mode_id = $input['mode_id'];
-          $this->checkpoint_id  = $input['checkpoint_id'];
-          $this->status = false;
+          $this->checkpoint_id  = $input['checkpoint_id'];        
           $this->save();
           return response()->json([
               'status' => 'success',

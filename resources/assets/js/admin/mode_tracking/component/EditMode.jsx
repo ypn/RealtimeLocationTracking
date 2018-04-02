@@ -29,28 +29,25 @@ export default class EditMode extends React.Component {
       mode_id:this.props.ModeId
     })
     .then(function(response){
-      if(response.data.status == 'success'){
         this.setState({
           listInArray:response.data
         });
-      }
-    })
-    .catch(function(err){
-      console.log(err);
-    })
 
-    axios.post(GlobalConstants.CHECKPOINT_ROUTE + 'list')
-    .then(function(response){
-      if(response.data.status=='success'){
-        this.setState({
-          listCheckPoints:response.data.list
+        axios.post(GlobalConstants.CHECKPOINT_ROUTE + 'list')
+        .then(function(response){
+          if(response.data.status == 'success'){
+            this.setState({
+              listCheckPoints:response.data.list
+            });
+          }
+        }.bind(this))
+        .catch(function(err){
+          console.log(err);
         });
-      }
     }.bind(this))
     .catch(function(err){
       console.log(err);
-    });
-
+    })
   }
 
   render(){
@@ -62,7 +59,7 @@ export default class EditMode extends React.Component {
             {
               this.state.listCheckPoints.map((node,k)=>{
                 return(
-                  <ItemCheckPoint Availabled={this.state.listInArray.indexOf(node.id)!=-1?true:false} ModeId ={this.props.ModeId} Node={node} key = {k}/>
+                  <ItemCheckPoint Availabled={this.state.listInArray.indexOf(node.id)!=-1  ? true : false} ModeId ={this.props.ModeId} Node={node} key = {k}/>
                 )
               })
             }
