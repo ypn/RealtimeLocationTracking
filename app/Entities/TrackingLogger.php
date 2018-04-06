@@ -16,4 +16,12 @@
           'list' => $this->where('mode_id',$mode_id)->where('type',1)->get()
       ]);
     }
+
+    protected function listAllObjectOnTracking(){
+      return response()->json([
+          'status' => 'success',
+          'status_code' => Res::HTTP_OK,
+          'list' => $this->where('type',1)->get()
+      ]);
+    }
   }

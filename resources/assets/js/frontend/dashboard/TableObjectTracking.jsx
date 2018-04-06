@@ -22,33 +22,37 @@ const styles = {
   }
 };
 
+var _self;
 
 export default class TableObjectTracking extends React.Component{
 
   constructor(props){
     super(props);
     this.state = {
-      listObjectTracking:[]
+      listObjectTracking:[],
+      listCheckPoints:[]
     }
 
-    axios.post(GlobalConstants.OBJECT_TRACKING_ROUTE + 'list-objects-on-tracking',{
+    var _self = this;
+    Stores.on('list-all-on-object-tracking',function(){
+      _self.setState({
+        listObjectTracking:(Stores.getListAllOnObjectTracking()).filter(obj=>{
+          return obj.mode_id == _self.props.ModeId
+        })
+      });
+    });
+
+    axios.post(GlobalConstants.MODE_TRACKING_ROUTE+'list-checkpoints',{
       mode_id:this.props.ModeId
     })
     .then(function(response){
-      if(response.data.status=='success'){
-        console.log(response.data);
-        this.setState({
-          listObjectTracking:response.data.list
-        });
-      }
+      this.setState({
+        listCheckPoints:response.data
+      })
     }.bind(this))
     .catch(function(err){
       console.log(err);
     })
-  }
-
-  componentWillMount(){
-
   }
 
   render(){
@@ -59,8 +63,13 @@ export default class TableObjectTracking extends React.Component{
             <TableHeaderColumn>{this.props.DisplayProperty}</TableHeaderColumn>
             <TableHeaderColumn>Màu đường đi</TableHeaderColumn>
             <TableHeaderColumn>Hiện đường đi</TableHeaderColumn>
-            <TableHeaderColumn>Nhà cân</TableHeaderColumn>
-            <TableHeaderColumn>Bãi phế</TableHeaderColumn>
+            {
+              this.state.listCheckPoints.map((node,k)=>{
+                return(
+                    <TableHeaderColumn key={k}>{node.name}</TableHeaderColumn>
+                )
+              })
+            }
             <TableHeaderColumn>Giờ bắt đầu</TableHeaderColumn>
             <TableHeaderColumn>Thời gian giám sát</TableHeaderColumn>
           </TableRow>
@@ -69,7 +78,7 @@ export default class TableObjectTracking extends React.Component{
           {
             this.state.listObjectTracking.map((node,key)=>{
               return(
-                  <ObjectTrackingItem Data={node} key={key}/>
+                  <ObjectTrackingItem node={node} key={key}/>
               )
             })
           }

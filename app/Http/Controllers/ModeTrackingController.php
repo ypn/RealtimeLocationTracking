@@ -42,4 +42,8 @@ class ModeTrackingController extends Controller
     public function getMode(){
       return ModesTracking::getMode(Input::get('id'));
     }
+
+    public function listCheckpoints(){
+      return ModesTracking::listCheckpoints(Input::get('mode_id'));
+    }
 }

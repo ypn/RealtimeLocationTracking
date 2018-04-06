@@ -1,6 +1,7 @@
 import {EventEmitter} from 'events';
 import dispatcher from '../dispatcher/dispatcher';
 import axios from 'axios';
+import GlobalConstants from '../../constants/GlobalConstants';
 
 class CarTrackerStore extends EventEmitter {
 
@@ -9,12 +10,9 @@ class CarTrackerStore extends EventEmitter {
     this.listTrackingCar = [];
     this.listMarkersObject = [];
     this.listPolylines = [];
+    this.listOnObjectTracking = []
   }
 
-
-  loadObjectsOnTracking($modeId){
-    
-  }
 
   /**
    * Load danh sách xe đang kiểm tra.
@@ -133,6 +131,20 @@ class CarTrackerStore extends EventEmitter {
     this.emit('change_path_color',{id,pathColor})
   }
 
+
+  //
+
+  loadListAllOnObjectTraking(){
+    var _self = this;
+    axios.post(GlobalConstants.OBJECT_TRACKING_ROUTE + 'list-all-objects-on-tracking')
+    .then(response=>{
+      if(response.data.status=='success'){
+        _self.listOnObjectTracking = response.data.list
+        _self.emit('list-all-on-object-tracking');
+      }
+    })
+  }
+
   handleAction(action){
     switch (action.type) {
       case 'SESSION_STEP_IN_CHECKPOINT':
@@ -159,6 +171,13 @@ class CarTrackerStore extends EventEmitter {
       case 'CHANGE_PATH_COLOR':
         this.changePathColor(action.id,action.pathColor);
         break;
+
+
+      //
+
+      case 'GET_LIST_ALL_ON_OBJECT_TRACKING':
+        this.loadListAllOnObjectTraking();
+        break;
     }
   }
 
@@ -177,6 +196,12 @@ class CarTrackerStore extends EventEmitter {
   getListMarkerObject(){
     return this.listMarkersObject;
   }
+
+  getListAllOnObjectTracking(){
+    return this.listOnObjectTracking;
+  }
+
+
 }
 
 const Store = new CarTrackerStore();

@@ -6,17 +6,24 @@ import{
   Marker,
   Polyline
 } from 'react-google-maps';
-//import Stores from '../../stores/Stores';
+import Stores from '../stores/Stores';
+import * as Actions from '../actions/Actions';
 //import MornitorMaster from '../dashboard/MornitorMaster';
+
+const  mapOption = {
+  draggableCursor: 'default',
+  draggingCursor: 'pointer',
+  mapTypeId: 'satellite',
+}
 
 const InitialMap = withGoogleMap(props=>{
   var mk= props.markers
   return(
     <GoogleMap
       ref={props.onMapLoad}
-      defaultZoom={17}
+      defaultZoom={16}
       defaultCenter = {{lat:20.903975, lng: 106.629445}}
-      defaultOptions="tilt"
+      defaultOptions={mapOption}
     >
     {
       props.polylines.map((pl,k)=>{
@@ -31,11 +38,10 @@ const InitialMap = withGoogleMap(props=>{
       })
     }
     {
-      props.markers.map(mk=>{
+      props.markers.map((mk,k)=>{
         return(
           <Marker
-            defaultZIndex = {mk.index}
-            key = {mk.id}
+            key = {k}
             position = {mk.position}
             onClick = {()=>{props.onMarkerClick(mk)}}
           >{
@@ -44,7 +50,7 @@ const InitialMap = withGoogleMap(props=>{
               onCloseClick = {()=>props.handleMarkerClose(mk)}
             >
               {
-                <div><h6>{mk.bienso}</h6></div>
+                <div><h6>{mk.object_tracking}</h6></div>
               }
             </InfoWindow>
           }
@@ -63,6 +69,72 @@ export default class MapContainer extends Component{
         markers:[],
         polylines:[]
       }
+    }
+
+    componentDidMount(){
+      var _self = this;
+      Stores.on('list-all-on-object-tracking',function(){
+        var objects = Stores.getListAllOnObjectTracking();
+
+        for(let i=0;i<objects.length;i++){
+          let pos = JSON.parse(JSON.stringify(eval("(" + objects[i].current_position + ")")));
+
+          let flightPlanCoordinates = JSON.parse(objects[i].path);
+          let path  =[];
+          for(let i = 0 ;i <flightPlanCoordinates.length; i++){
+            let obj = eval('(' + JSON.parse(JSON.stringify(flightPlanCoordinates[i])) + ')');
+            path.push(obj);
+          }
+
+          _self.setState({
+            markers:[..._self.state.markers,{
+              id:objects[i].id,
+              position:{
+                lat:pos.lat,
+                lng:pos.lng
+              },
+              object_tracking:objects[i].object_tracking,
+              showInfo:true
+            }],
+            polylines:[..._self.state.polylines,{
+              id:objects[i].id,
+              isShowed: true,
+              options:{
+                strokeWeight:4,
+                strokeColor:objects[i].path_color!=null? objects[i].path_color : 'orange'
+              },
+              path:path
+            }]
+          })
+        }
+      });
+
+      Stores.on('change_path_color',function(data){
+        console.log(data);
+        _self.setState({
+          polylines:_self.state.polylines.map(pl=>{
+            if(pl.id==data.id){
+              pl.options = {
+                strokeWeight:4,
+                strokeColor:data.pathColor
+              }
+            }
+            return pl;
+          })
+        })
+      })
+
+      Stores.on('togglePath',function(id){
+        _self.setState({
+          polylines:_self.state.polylines.map(pl=>{
+            if(pl.id == id){
+              pl.isShowed = !pl.isShowed;
+            }
+
+            return pl;
+          })
+        });
+      });
     }
 
     onClick(mk){
@@ -86,8 +158,8 @@ export default class MapContainer extends Component{
     render(){
       return(
         <div style = {{
-          width:"100vw",
-          height:"100vh"
+          width:"100%",
+          height:"95vh"
         }}>
         <InitialMap
           containerElement = {

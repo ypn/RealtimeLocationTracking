@@ -110,6 +110,7 @@
       	font-variant: normal;
       	font-weight: 500;
       	line-height: 26.4px;
+        transition:all 0.3s ease;
       }
 
       .monitor-content{
@@ -162,7 +163,11 @@
         text-shadow: none;
       }
       .row-active{
-        background: red!;
+        background: #4CAF50!important;
+      }
+
+      .row-stop{
+        background: #D4E157!important;
       }
 
   </style>

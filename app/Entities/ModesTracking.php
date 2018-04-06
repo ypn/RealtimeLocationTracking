@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Response as Res;
 use Carbon\Carbon;
+use App\Entities\CheckPoint;
+use App\Entities\ModeCheckPoints;
 
 class ModesTracking extends Model
 {
@@ -118,5 +120,10 @@ class ModesTracking extends Model
 
     protected function getMode($id){
       return $this->find($id);
+    }
+
+    protected function listCheckpoints($mode_id){
+      return $checkpoints = ModeCheckPoints::join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')
+      ->select('checkpoints.name','checkpoints.id')->where('mode_checkpoints.mode_id',$mode_id)->get();
     }
 }

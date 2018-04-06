@@ -76,4 +76,8 @@ class ObjectTrackingController extends Controller
     public function listObjectsOnTracking(){
       return TrackingLogger::listObjectsOnTracking(Input::get('mode_id'));
     }
+
+    public function listAllObjectOnTracking(){
+      return TrackingLogger::listAllObjectOnTracking();
+    }
 }

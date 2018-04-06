@@ -1,8 +1,6 @@
 import React,{Component} from 'react';
-import CarTrackedItem from './CarTrackedItem';
 import * as Actions from '../actions/Actions';
 import Stores from '../stores/Stores';
-import TableHeader from './TableHeader';
 import TableObjectTracking from './TableObjectTracking';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import axios from 'axios';
@@ -11,11 +9,11 @@ import GlobalConstants from '../../constants/GlobalConstants';
 export default class MornitorMaster extends Component{
 
   constructor(props){
-    console.log('Mornitor master');
     super(props);
     this.state = {
       listTrackingCar:[],
-      listModes:[]
+      listModes:[],
+      showTable:this.props.ShowTable
     }
 
     axios.post(GlobalConstants.MODE_TRACKING_ROUTE + 'list-enabled')
@@ -33,26 +31,10 @@ export default class MornitorMaster extends Component{
 
   }
 
-  componentWillMount(){
-    // Stores.on('load_list_tracking_car',()=>{
-    //   this.setState({
-    //     listTrackingCar:Stores.getListTrackingCar()
-    //   });
-    // });
-    //
-    // Stores.on('new_session_was_add_to_track',()=>{
-    //   this.setState({
-    //     listTrackingCar:Stores.getListTrackingCar()
-    //   });
-    // });
-    //
-    // Stores.on('stop_session_tracking',()=>{
-    //   this.setState({
-    //     listTrackingCar:Stores.getListTrackingCar()
-    //   });
-    // });
-    //
-    // Actions.getListTrakingCar();
+  componentDidMount (){
+    setTimeout(function(){
+      Actions.getListAllOnObjectTraking();
+    },2);
   }
 
   componentWillUnmount(){
@@ -60,8 +42,11 @@ export default class MornitorMaster extends Component{
   }
 
   render(){
+    var offsetY = this.props.ShowTable ? 0 : 270;
     return(
-      <div className="mornitor-master-wrapper">
+      <div style={{
+          transform:`translate(0,${offsetY}px)`
+        }} className="mornitor-master-wrapper">
         <div className="monitor-content">
           <Tabs>
             {

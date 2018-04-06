@@ -29,6 +29,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('get','ModeTrackingController@getMode');
         Route::post('del','ModeTrackingController@del');
         Route::post('update-state','ModeTrackingController@updateState');
+        Route::post('list-checkpoints','ModeTrackingController@listCheckpoints');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
@@ -36,6 +37,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('list','ObjectTrackingController@list');
         Route::post('list-objects-on-tracking','ObjectTrackingController@listObjectsOnTracking');
         Route::post('remove','ObjectTrackingController@remove');
+        Route::post('list-all-objects-on-tracking','ObjectTrackingController@listAllObjectOnTracking');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'checkpoint'],function(){

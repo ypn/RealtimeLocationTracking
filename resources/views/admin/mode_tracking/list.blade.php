@@ -101,7 +101,6 @@
          background-color: rgb(0, 188, 212)!important;
          color:#fff!important;
       }
-
     </style>
   </head>
   <body>

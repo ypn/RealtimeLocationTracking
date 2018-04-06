@@ -56,3 +56,12 @@ export function changePathColor(id,pathColor){
     pathColor
   });
 }
+
+
+//
+
+export function getListAllOnObjectTraking(){
+  dispatcher.dispatch({
+    type:'GET_LIST_ALL_ON_OBJECT_TRACKING'
+  });
+}
