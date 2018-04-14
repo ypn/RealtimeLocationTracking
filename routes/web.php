@@ -48,4 +48,18 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('is-checkpoint-available','CheckPointController@isCheckPointAvaiabled');
         Route::post('list-enabled','CheckPointController@listEnabled');
     });
+
+    Route::group(['middleware'=>'web','prefix'=>'mobile'],function(){
+      Route::group(['middleware' => 'web', 'prefix' => 'mode-tracking'], function() {
+          Route::get('list-enabled','ModeTrackingController@listEnabled');
+      });
+
+      Route::group(['middleware' => 'web', 'prefix' => 'object-tracking'], function() {
+          Route::post('list','ObjectTrackingController@list');
+      });
+
+      Route::group(['middleware' => 'web', 'prefix' => 'checkpoints'], function() {
+          Route::post('list-checkpoint-of-mode','CheckPointController@listCheckPointsOfMode');
+      });
+    });
 });

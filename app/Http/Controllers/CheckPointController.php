@@ -87,7 +87,14 @@ class CheckPointController extends BaseController
 
     public function listEnabled(){
       $mode_id=Input::get('mode_id');
-      return ModeCheckPoints::listEnabled($mode_id);
+      return ModeCheckPoints::listEnabled((int)$mode_id);
+    }
+
+
+    //For android
+    public function listCheckPointsOfMode(){
+      $mode_id=Input::get('mode_id');
+      return ModeCheckPoints::listCheckPointsOfMode((int)$mode_id);
     }
 
     public function isCheckPointAvaiabled(){

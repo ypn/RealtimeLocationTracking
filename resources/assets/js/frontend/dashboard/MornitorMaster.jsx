@@ -6,6 +6,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import axios from 'axios';
 import GlobalConstants from '../../constants/GlobalConstants';
 
+
 export default class MornitorMaster extends Component{
 
   constructor(props){
@@ -34,7 +35,7 @@ export default class MornitorMaster extends Component{
   componentDidMount (){
     setTimeout(function(){
       Actions.getListAllOnObjectTraking();
-    },2);
+    },10);
   }
 
   componentWillUnmount(){

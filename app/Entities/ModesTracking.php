@@ -82,7 +82,7 @@ class ModesTracking extends Model
       return response()->json([
         'status' => 'success',
         'status_code' => Res::HTTP_OK,
-        'list'=>$this->select('name','id','display_property','table_reference')->where('state',1)->get()
+        'list'=>$this->select('name','id','display_property','table_reference','object_owner')->where('state',1)->get()
       ]);
     }
 

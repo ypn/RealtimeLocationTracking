@@ -8,6 +8,7 @@ import{
 } from 'react-google-maps';
 import Stores from '../stores/Stores';
 import * as Actions from '../actions/Actions';
+import GlobalConstants from '../../constants/GlobalConstants';
 //import MornitorMaster from '../dashboard/MornitorMaster';
 
 const  mapOption = {
@@ -15,6 +16,8 @@ const  mapOption = {
   draggingCursor: 'pointer',
   mapTypeId: 'satellite',
 }
+
+const socket = io(GlobalConstants.REALTIME_SERVER_URL);
 
 const InitialMap = withGoogleMap(props=>{
   var mk= props.markers
@@ -110,7 +113,6 @@ export default class MapContainer extends Component{
       });
 
       Stores.on('change_path_color',function(data){
-        console.log(data);
         _self.setState({
           polylines:_self.state.polylines.map(pl=>{
             if(pl.id==data.id){
@@ -135,6 +137,69 @@ export default class MapContainer extends Component{
           })
         });
       });
+
+      socket.on('start_new_marker',function(data){
+        let obj = JSON.parse(data.data);
+        let pos = JSON.parse(JSON.stringify(eval("(" + obj.current_position + ")")));
+        _self.setState({
+          markers:[..._self.state.markers,{
+            id:obj.id,
+            position:{
+              lat:pos.lat,
+              lng:pos.lng
+            },
+            object_tracking:obj.object_tracking,
+            showInfo:true
+          }],
+
+          polylines:[..._self.state.polylines,{
+            id:obj.id,
+            isShowed: true,
+            options:{
+              strokeWeight:4,
+              strokeColor:obj.path_color !=null ? obj.path_color : 'orange'
+            },
+            path:[]
+          }]
+
+        });
+      });
+
+
+      socket.on('remove_marker',function(data){
+        _self.setState({
+          markers:_self.state.markers.filter(obj=>{
+            return obj.id!= data.sessionId
+          }),
+          polylines:_self.state.polylines.filter(obj=>{
+            return obj.id!= data.sessionId
+          })
+        });
+      })
+
+      socket.on('location_change',function(data){
+        _self.setState({
+          markers:_self.state.markers.map(mk=>{
+            if(mk.id == data.id){
+              mk.position = {
+                lat:data.position.lat,
+                lng:data.position.lng
+              }
+            }
+            return mk;
+          }),
+          polylines:_self.state.polylines.map(pl=>{
+            if(pl.id == data.id){
+              pl.path = [ ...pl.path,{
+                lat:data.position.lat,
+                lng:data.position.lng
+              }]
+            }
+            return pl;
+          })
+        });
+      });
+          
     }
 
     onClick(mk){

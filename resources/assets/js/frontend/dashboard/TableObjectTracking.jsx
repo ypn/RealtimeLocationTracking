@@ -22,6 +22,9 @@ const styles = {
   }
 };
 
+
+const socket = io(GlobalConstants.REALTIME_SERVER_URL);
+
 var _self;
 
 export default class TableObjectTracking extends React.Component{
@@ -53,6 +56,38 @@ export default class TableObjectTracking extends React.Component{
     .catch(function(err){
       console.log(err);
     })
+
+    socket.on('new_session_detected_in_mode_' + this.props.ModeId,function(data){
+      _self.setState({
+        listObjectTracking:[..._self.state.listObjectTracking,JSON.parse(data.data)]
+      })
+    });
+
+    socket.on('stop_tracking_in_' + this.props.ModeId,function(data){
+      _self.setState({
+        listObjectTracking:_self.state.listObjectTracking.filter(ob=>{
+          return ob.id!=data.sessionId
+        })
+      })
+    });
+
+    socket.on('step_into_checkpoint_' + this.props.ModeId,function(data){
+
+      console.log('step in to check point');
+      console.log(data);
+      _self.state.listObjectTracking.map(obj=>{
+          console.log(obj.id);
+          console.log(obj.status);
+
+          // if(obj.id==data.sessionId){
+          //   console.log(obj.status);
+          //   obj.status.total_time = 200;
+          //   obj.status.status =1;
+          // }
+
+      });
+    });
+
   }
 
   render(){

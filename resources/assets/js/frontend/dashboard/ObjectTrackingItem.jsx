@@ -33,7 +33,8 @@ export default class ObjectTrackingItem extends React.Component{
     this.state = {
       isColorPickerShowed:false,
       pathColor:this.props.node.path_color,
-      listTrack:JSON.parse(this.props.node.status),
+      listTrack:this.props.node.status,
+      currentCheckPoint:this.props.currentCheckPoint;
       count_time : Math.floor((time_now-start)/1000)
     }
   }
@@ -47,23 +48,25 @@ export default class ObjectTrackingItem extends React.Component{
         count_time: _self.state.count_time+1
       });
     },1000);
+    
+    // for(let i=0;i < tungnui.length ;i++){
+    //   if(tungnui[i].status ==1){
+    //      let time1 = new Date(tungnui[i].time_start);
+    //      let time2 = new Date();
+    //      tungnui[i].total_time = Math.floor((time2-time1)/1000);
+    //      let a = setInterval(function(){
+    //
+    //        tungnui[i].total_time += 1;
+    //        _self.setState({
+    //            listTrack:tungnui
+    //          });
+    //        }, 1000);
+    //
+    //      _self.listInterval[i] = a;
+    //
+    //     }
+    // }
 
-    for(let i=0;i < tungnui.length ;i++){
-      if(tungnui[i].status ==1){
-         let time1 = new Date(tungnui[i].time_start);
-         let time2 = new Date();
-         tungnui[i].total_time = Math.floor((time2-time1)/1000);
-         let a = setInterval(function(){
-           tungnui[i].total_time += 1;
-           _self.setState({
-               listTrack:tungnui
-             });
-           }, 1000);
-
-         _self.listInterval[i] = a;
-
-        }
-    }
   }
 
   onToggleColorPicker(){
@@ -129,9 +132,12 @@ export default class ObjectTrackingItem extends React.Component{
                 var seconds = node.total_time - minutes * 60;
                 time = `${minutes} m : ${seconds} s`;
                 break;
-              case 0:
+              default:
+                time = '--/--';
                 break;
             }
+
+            if(node.total_time > node.max_time) _class='row-danger';
 
             return(
               <TableRowColumn className={_class} key={key}>{time}</TableRowColumn>

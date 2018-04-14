@@ -3528,7 +3528,8 @@ exports.default = _TextField2.default;
 var GlobalConstants = {
   MODE_TRACKING_ROUTE: '/api/v1/mode-tracking/',
   OBJECT_TRACKING_ROUTE: '/api/v1/object-tracking/',
-  CHECKPOINT_ROUTE: '/api/v1/checkpoint/'
+  CHECKPOINT_ROUTE: '/api/v1/checkpoint/',
+  REALTIME_SERVER_URL: '113.160.215.214:3000'
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (GlobalConstants);
@@ -71184,9 +71185,11 @@ var TableObjectTracking = function (_React$Component) {
       __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_2__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'list', {
         table: this.props.ModeProperty.table_reference
       }).then(function (response) {
-        this.setState({
-          listObject: response.data
-        });
+        if (response.data.status == 'success') {
+          this.setState({
+            listObject: response.data.list
+          });
+        }
       }.bind(this)).catch(function (err) {
         console.log(err);
       });

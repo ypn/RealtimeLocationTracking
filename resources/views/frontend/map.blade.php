@@ -170,6 +170,10 @@
         background: #D4E157!important;
       }
 
+      .row-danger{
+        background: #F44336!important;
+      }
+
   </style>
   <body>
     <div id="react-root"></div>
@@ -178,6 +182,7 @@
     integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlqW-_ymhhj0I6Ez1Jq_8Z87a_A9ZaCU"></script>
+    <script src="http://113.160.215.214:3000/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="/js/frontend/frontend-bundle.js"></script>
   </body>
 </html>

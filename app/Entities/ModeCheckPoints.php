@@ -12,7 +12,7 @@
       if($input['state']){
         try{
           $this->mode_id = $input['mode_id'];
-          $this->checkpoint_id  = $input['checkpoint_id'];        
+          $this->checkpoint_id  = $input['checkpoint_id'];
           $this->save();
           return response()->json([
               'status' => 'success',
@@ -78,6 +78,13 @@
           'status_code' => Res::HTTP_OK,
           'item' => $this->where('mode_id',$input['mode_id'])->where('checkpoint_id',$input['checkpoint_id'])->first()
       ]);
+    }
+
+    protected function listCheckPointsOfMode($mode_id){    
+      return $this
+      ->join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')
+      ->select('checkpoints.id as id','checkpoints.name as name','checkpoints.time as time','checkpoints.polygon as polygon')
+      ->where('mode_checkpoints.mode_id',$mode_id)->get();
     }
 
   }

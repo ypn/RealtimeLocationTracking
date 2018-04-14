@@ -28,9 +28,11 @@ export default class TableObjectTracking extends React.Component{
       table:this.props.ModeProperty.table_reference
     })
     .then(function(response){
-      this.setState({
-        listObject:response.data
-      })
+      if(response.data.status == 'success'){
+        this.setState({
+          listObject:response.data.list
+        })
+      }
     }.bind(this))
     .catch(function(err){
       console.log(err);

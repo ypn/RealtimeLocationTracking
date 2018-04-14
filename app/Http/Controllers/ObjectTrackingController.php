@@ -48,9 +48,13 @@ class ObjectTrackingController extends Controller
 
     public function list(){
       $table = Input::get('table');
-
-      return DB::table($table)->get();
+      return response()->json([
+        'status'=>'success',
+        'status_code'=>Res::HTTP_OK,
+        'list'=>DB::table($table)->get()
+      ]);
     }
+
 
     public function remove(){
       $table = Input::get('table');
