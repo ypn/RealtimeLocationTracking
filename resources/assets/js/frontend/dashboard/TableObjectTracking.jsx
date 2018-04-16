@@ -113,7 +113,7 @@ export default class TableObjectTracking extends React.Component{
           {
             this.state.listObjectTracking.map((node,key)=>{
               return(
-                  <ObjectTrackingItem node={node} key={key}/>
+                  <ObjectTrackingItem modeid={this.props.ModeId}  node={node} key={key}/>
               )
             })
           }

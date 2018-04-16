@@ -178,6 +178,8 @@ export default class MapContainer extends Component{
       })
 
       socket.on('location_change',function(data){
+        console.log('location change');
+        console.log(data);
         _self.setState({
           markers:_self.state.markers.map(mk=>{
             if(mk.id == data.id){
@@ -199,7 +201,7 @@ export default class MapContainer extends Component{
           })
         });
       });
-          
+
     }
 
     onClick(mk){

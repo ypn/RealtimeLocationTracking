@@ -9,6 +9,7 @@ import * as Actions from '../actions/Actions';
 import { HuePicker } from 'react-color';
 import Toggle from 'material-ui/Toggle';
 import moment from 'moment';
+import GlobalConstants from '../../constants/GlobalConstants';
 import {
   TableRow,TableRowColumn
 } from 'material-ui/Table';
@@ -20,9 +21,13 @@ const styles = {
   }
 };
 
+const socket = io(GlobalConstants.REALTIME_SERVER_URL);
+
 export default class ObjectTrackingItem extends React.Component{
   constructor(props){
     super(props);
+
+    var _self = this;
 
     let start = new Date(this.props.node.created_at);
     let time_now = new Date();
@@ -33,22 +38,47 @@ export default class ObjectTrackingItem extends React.Component{
     this.state = {
       isColorPickerShowed:false,
       pathColor:this.props.node.path_color,
-      listTrack:this.props.node.status,
-      currentCheckPoint:this.props.currentCheckPoint;
+      listTrack:JSON.parse(this.props.node.status),
       count_time : Math.floor((time_now-start)/1000)
     }
+
+    console.log('step_into_checkpoint_' + this.props.modeid + "_" + this.props.node.id);
+
+    socket.on('step_into_checkpoint_' + this.props.modeid + "_" + this.props.node.id,function(data){
+
+      var temp = _self.state.listTrack;
+
+      temp.map(obj=>{
+        if(obj.checkpointId == data.data.checkpointId){
+            console.log('co vao day');
+            console.log(obj);
+            obj.status = 1;
+            setInterval(function(){
+              obj.total_time += 1;
+            },1000);
+        }
+
+        return obj;
+      })
+
+      _self.setState({
+        listTrack:temp
+      });
+
+    });
+
   }
 
   componentWillMount(){
-    var _self = this;
-    var tungnui = this.state.listTrack;
+    // var _self = this;
+    // var tungnui = this.state.listTrack;
+    //
+    // _self.total_time_count = setInterval(function(){
+    //   _self.setState({
+    //     count_time: _self.state.count_time+1
+    //   });
+    // },1000);
 
-    _self.total_time_count = setInterval(function(){
-      _self.setState({
-        count_time: _self.state.count_time+1
-      });
-    },1000);
-    
     // for(let i=0;i < tungnui.length ;i++){
     //   if(tungnui[i].status ==1){
     //      let time1 = new Date(tungnui[i].time_start);
