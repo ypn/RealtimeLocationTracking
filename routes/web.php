@@ -49,6 +49,10 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('list-enabled','CheckPointController@listEnabled');
     });
 
+    Route::group(['middleware'=>'web','prefix'=>'report'],function(){
+        Route::post('list','ReportController@list');
+    });
+
     Route::group(['middleware'=>'web','prefix'=>'mobile'],function(){
       Route::group(['middleware' => 'web', 'prefix' => 'mode-tracking'], function() {
           Route::get('list-enabled','ModeTrackingController@listEnabled');

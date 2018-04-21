@@ -17,6 +17,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RootModeTracking from './mode_tracking/component/RootModeTracking';
 import RootObjectTracking from './object_tracking/component/RootObjectTracking';
 import RootCheckPointsComponent from './checkpoint/component/RootCheckPointComponent';
+import RootReportComponent from './report/component/RootReportComponent';
 
 const AppBarExampleIcon = () => (
   <AppBar
@@ -25,10 +26,8 @@ const AppBarExampleIcon = () => (
   />
 );
 
-const Realtime = () => (
-  <div>
-    <h2>Realtime</h2>
-  </div>
+const Report = () => (
+  <RootReportComponent/>
 );
 
 const Checkpoints = () => (
@@ -59,14 +58,15 @@ export default class AdminMaster extends React.Component{
               <div className="drawer-avatar">
 
               </div>
-              <NavLink to="/app/realtime" activeClassName="active"><MenuItem className="menu-item">Dashboard</MenuItem></NavLink>
+              <NavLink to="/app/report" activeClassName="active"><MenuItem className="menu-item">Báo cáo</MenuItem></NavLink>
               <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
               <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem className="menu-item">Chế độ giám sát</MenuItem></NavLink>
               <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem className="menu-item">Đối tượng giám sát</MenuItem></NavLink>
               <NavLink to="/app/settings" activeClassName="active"><MenuItem className="menu-item">Cài đặt</MenuItem></NavLink>
             </Drawer>
             <div className="root-content">
-              <Route exact path="/app/realtime" component={Realtime} />
+              <Route exact path="/app" component={Report} />
+              <Route exact path="/app/report" component={Report} />
               <Route exact path="/app/checkpoint" component={Checkpoints} />
               <Route path="/app/mode-tracking" component={ModeTracking} />
               <Route path="/app/object-tracking" component={ObjectTracking} />

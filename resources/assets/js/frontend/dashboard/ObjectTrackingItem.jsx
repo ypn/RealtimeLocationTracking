@@ -10,6 +10,7 @@ import { HuePicker } from 'react-color';
 import Toggle from 'material-ui/Toggle';
 import moment from 'moment';
 import GlobalConstants from '../../constants/GlobalConstants';
+import TimeCheckPoint from './TimeCheckPoint';
 import {
   TableRow,TableRowColumn
 } from 'material-ui/Table';
@@ -42,61 +43,21 @@ export default class ObjectTrackingItem extends React.Component{
       count_time : Math.floor((time_now-start)/1000)
     }
 
-    console.log('step_into_checkpoint_' + this.props.modeid + "_" + this.props.node.id);
-
-    socket.on('step_into_checkpoint_' + this.props.modeid + "_" + this.props.node.id,function(data){
-
-      var temp = _self.state.listTrack;
-
-      temp.map(obj=>{
-        if(obj.checkpointId == data.data.checkpointId){
-            console.log('co vao day');
-            console.log(obj);
-            obj.status = 1;
-            setInterval(function(){
-              obj.total_time += 1;
-            },1000);
-        }
-
-        return obj;
-      })
-
-      _self.setState({
-        listTrack:temp
-      });
-
-    });
-
   }
 
   componentWillMount(){
-    // var _self = this;
-    // var tungnui = this.state.listTrack;
-    //
-    // _self.total_time_count = setInterval(function(){
-    //   _self.setState({
-    //     count_time: _self.state.count_time+1
-    //   });
-    // },1000);
+    var _self = this;
+    this.total_time_count = setInterval(function(){
+      _self.setState({
+        count_time: _self.state.count_time+1
+      });
+    },1000);
+  }
 
-    // for(let i=0;i < tungnui.length ;i++){
-    //   if(tungnui[i].status ==1){
-    //      let time1 = new Date(tungnui[i].time_start);
-    //      let time2 = new Date();
-    //      tungnui[i].total_time = Math.floor((time2-time1)/1000);
-    //      let a = setInterval(function(){
-    //
-    //        tungnui[i].total_time += 1;
-    //        _self.setState({
-    //            listTrack:tungnui
-    //          });
-    //        }, 1000);
-    //
-    //      _self.listInterval[i] = a;
-    //
-    //     }
-    // }
-
+  componentWillUnmount(){
+    if(this.total_time_count !='undefined'){
+      clearInterval(this.total_time_count);
+    }
   }
 
   onToggleColorPicker(){
@@ -122,10 +83,10 @@ export default class ObjectTrackingItem extends React.Component{
   render(){
     const {...otherProps} = this.props;
     var pathColor = this.state.pathColor!=null ? this.state.pathColor :'orange';
-
-    var minutes_count = Math.floor(this.state.count_time / 60);
-    var seconds_count = this.state.count_time - minutes_count * 60;
-    var ct = `${minutes_count}m : ${seconds_count}s`;
+    var hours = Math.floor(this.state.count_time / 3600);
+    var minutes_count = Math.floor((this.state.count_time - hours * 3600)/60);
+    var seconds_count = this.state.count_time - hours*3600 -  minutes_count * 60;
+    var ct = `${hours}h :${minutes_count}m : ${seconds_count}s`;
 
     var created_atT = moment(new Date(this.props.node.created_at)).format('H:mm');
 
@@ -143,34 +104,17 @@ export default class ObjectTrackingItem extends React.Component{
             )
           }
         </div></TableRowColumn>
-      <TableRowColumn><Toggle defaultToggled={true} onToggle={this.onTogglePath.bind(this)}  /></TableRowColumn>
+        <TableRowColumn><Toggle defaultToggled={true} onToggle={this.onTogglePath.bind(this)}  /></TableRowColumn>
         {
-          this.state.listTrack.map((node,key)=>{
-            var time;
-            var _class='';
-
-            switch (node.status) {
-              case 2:
-                _class = 'row-stop';
-                var minutes = Math.floor(node.total_time / 60);
-                var seconds = node.total_time - minutes * 60;
-                time = `${minutes}m : ${seconds} s`;
-                break;
-              case 1:
-                _class = 'row-active'
-                var minutes = Math.floor(node.total_time / 60);
-                var seconds = node.total_time - minutes * 60;
-                time = `${minutes} m : ${seconds} s`;
-                break;
-              default:
-                time = '--/--';
-                break;
-            }
-
-            if(node.total_time > node.max_time) _class='row-danger';
+          this.state.listTrack.map((node,k)=>{
+            var time1 = node.time_start!='' ? new Date(node.time_start) : new Date();
+            var time2 = new Date();
+            var total_time = node.status!=2 ? Math.floor((time2-time1)/1000) : node.total_time;
 
             return(
-              <TableRowColumn className={_class} key={key}>{time}</TableRowColumn>
+              <TableRowColumn style={{padding:0}} key={k}>
+                <TimeCheckPoint totaltime={total_time} sessionid= {this.props.node.id} node={node}/>
+              </TableRowColumn>
             )
           })
         }

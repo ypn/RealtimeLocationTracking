@@ -7,15 +7,15 @@ import{
   Polyline
 } from 'react-google-maps';
 import Stores from '../stores/Stores';
-import * as Actions from '../actions/Actions';
-import GlobalConstants from '../../constants/GlobalConstants';
-//import MornitorMaster from '../dashboard/MornitorMaster';
+import axios from 'axios';
 
 const  mapOption = {
   draggableCursor: 'default',
   draggingCursor: 'pointer',
   mapTypeId: 'satellite',
 }
+
+import GlobalConstants from '../../constants/GlobalConstants';
 
 const socket = io(GlobalConstants.REALTIME_SERVER_URL);
 
@@ -70,7 +70,8 @@ export default class MapContainer extends Component{
       super(props);
       this.state = {
         markers:[],
-        polylines:[]
+        polylines:[],
+        checkpoints:[]
       }
     }
 

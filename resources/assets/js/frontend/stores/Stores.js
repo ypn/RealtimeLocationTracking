@@ -71,16 +71,15 @@ class CarTrackerStore extends EventEmitter {
    * Xe vào điểm kiểm tra.
    */
   sessionStepInCheckPoint(data){
-    this.emit(`session_step_in_checkpoint_${data.data.checkpointId}`);
-    this.emit(`session_${data.data.sessionId}_step_in_checkpoint`,{data:data});
+    this.emit(`session_step_in_checkpoint_${data.sessionId}_${data.checkpointId}`,{data});
   }
 
   /**
    * Xe ra khỏi điểm kiểm tra.
    */
   SessionStepOutCheckPoint(data){
-    this.emit(`session_step_out_checkpoint_${data.data.checkpointId}`);
-    this.emit(`session_${data.data.sessionId}_step_out_checkpoint`,{data:data});
+    console.log(`session_step_out_checkpoint_${data.sessionId}_${data.checkpointId}`);
+    this.emit(`session_step_out_checkpoint_${data.sessionId}_${data.checkpointId}`,{data});
   }
 
   detectNewSession(data){

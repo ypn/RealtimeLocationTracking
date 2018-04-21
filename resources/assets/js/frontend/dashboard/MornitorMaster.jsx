@@ -6,6 +6,7 @@ import {Tabs, Tab} from 'material-ui/Tabs';
 import axios from 'axios';
 import GlobalConstants from '../../constants/GlobalConstants';
 
+const socket = io(GlobalConstants.REALTIME_SERVER_URL);
 
 export default class MornitorMaster extends Component{
 
@@ -30,6 +31,14 @@ export default class MornitorMaster extends Component{
       console.log(err);
     });
 
+    socket.on('step_into_checkpoint',function(data){
+      Actions.SessionStepInCheckPoint(data.data);
+    });
+
+    socket.on('session_step_out_checkpoint',function(data){
+      console.log('mornitor master section step out checkpoint');
+      Actions.SessionStepOutCheckPoint(data.data);
+    });
   }
 
   componentDidMount (){

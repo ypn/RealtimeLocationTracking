@@ -16,14 +16,13 @@ import GlobalConstants from '../../constants/GlobalConstants';
 import Stores from '../stores/Stores';
 import * as Actions from '../actions/Actions';
 
+const socket = io(GlobalConstants.REALTIME_SERVER_URL);
+
 const styles = {
   toggle: {
     marginBottom: 16,
   }
 };
-
-
-const socket = io(GlobalConstants.REALTIME_SERVER_URL);
 
 var _self;
 
@@ -69,23 +68,6 @@ export default class TableObjectTracking extends React.Component{
           return ob.id!=data.sessionId
         })
       })
-    });
-
-    socket.on('step_into_checkpoint_' + this.props.ModeId,function(data){
-
-      console.log('step in to check point');
-      console.log(data);
-      _self.state.listObjectTracking.map(obj=>{
-          console.log(obj.id);
-          console.log(obj.status);
-
-          // if(obj.id==data.sessionId){
-          //   console.log(obj.status);
-          //   obj.status.total_time = 200;
-          //   obj.status.status =1;
-          // }
-
-      });
     });
 
   }
