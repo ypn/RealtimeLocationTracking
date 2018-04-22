@@ -3,6 +3,8 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Divider from 'material-ui/Divider';
 import DatePicker from 'material-ui/DatePicker';
+import Stores from '../../stores/Stores';
+import * as Actions from '../../actions/Actions';
 import {
   Table,
   TableBody,
@@ -25,13 +27,13 @@ const styles = {
 
 
 export default class RootReportComponent extends React.Component{
-
   constructor(props){
     super(props);
     this.state = {
       mode:{
          id:-1,
-         display_property:null,
+         table_reference:null,
+         display_property:'availabe',
          object_owner:null
       },
       listMode:[]
@@ -39,33 +41,37 @@ export default class RootReportComponent extends React.Component{
     axios.post(GlobalConstants.MODE_TRACKING_ROUTE + 'list-enabled')
     .then(function(response){
       if(response.data.status == 'success'){
+
+        Actions.loadTrackedObject(response.data.list[0].id,0);
         this.setState({
           listMode:response.data.list,
-          mode:{
-            id:response.data.list[0].id,
-            display_property:response.data.list[0].display_property,
-            object_owner:response.data.list[0].object_owner
-          }
+          mode:response.data.list[0],
+          value:response.data.list[0].id
         });
       }
     }.bind(this))
     .catch(function(err){
-
+      alert('xem log để biết lỗi!');
+      console.log(err);
     });
   }
 
   handleChange(event, index, value){
-    this.setState({value});
-
-    axios.post(GlobalConstants.MODE_TRACKING_ROUTE  + 'get',{
+    axios.post(GlobalConstants.MODE_TRACKING_ROUTE + 'get',{
       id:value
     })
     .then(function(response){
-      console.log(response.data);
-    })
+      this.setState({
+        value,
+        mode:response.data
+      });
+    }.bind(this))
     .catch(function(err){
-
+      alert('Xem log để biết chi tiết lỗi!');
+      console.log(err);
     })
+
+    Actions.loadTrackedObject(value,0);
   }
 
   render(){
@@ -100,7 +106,7 @@ export default class RootReportComponent extends React.Component{
         <div>
           <div  className="col-md-12">
             {
-              this.state.mode.id!=-1 ?   <ReportTable DisplayProperty = {this.state.mode.display_property} modeid={this.state.mode.id}/> : null
+              this.state.mode.id!=-1 ?   <ReportTable mode={this.state.mode}/> : null
             }
 
           </div>

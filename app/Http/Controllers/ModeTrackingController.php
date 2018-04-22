@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Entities\ModesTracking;
+use App\Entities\TrackingLogger;
 use Response;
 use Illuminate\Support\Facades\Input;
 
@@ -46,4 +47,5 @@ class ModeTrackingController extends Controller
     public function listCheckpoints(){
       return ModesTracking::listCheckpoints(Input::get('mode_id'));
     }
+
 }

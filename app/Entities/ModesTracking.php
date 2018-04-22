@@ -79,10 +79,18 @@ class ModesTracking extends Model
     }
 
     protected function listEnabled(){
+
+      $list = $this->select('name','id','display_property','table_reference','object_owner')->where('state',1)->get();
+
+      foreach ($list as $l) {
+        $checkpoints = $this->listCheckpoints($l->id);
+        $l->checkpoints = $checkpoints;
+      }
+
       return response()->json([
         'status' => 'success',
         'status_code' => Res::HTTP_OK,
-        'list'=>$this->select('name','id','display_property','table_reference','object_owner')->where('state',1)->get()
+        'list'=>$list
       ]);
     }
 
@@ -119,7 +127,19 @@ class ModesTracking extends Model
     }
 
     protected function getMode($id){
-      return $this->find($id);
+
+      $checkpoint =  ModeCheckPoints::join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')
+      ->select('checkpoints.name','checkpoints.id')->where('mode_checkpoints.mode_id',$id)->get();
+
+      $mode =  $this->find($id);
+
+      $mode->checkpoints = $checkpoint;
+
+      return $mode;
+    }
+
+    protected function getWithCustomInput($input,$id){
+      return $this->select($input)->where('id',$id)->first();
     }
 
     protected function listCheckpoints($mode_id){

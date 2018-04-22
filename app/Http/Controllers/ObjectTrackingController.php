@@ -84,4 +84,8 @@ class ObjectTrackingController extends Controller
     public function listAllObjectOnTracking(){
       return TrackingLogger::listAllObjectOnTracking();
     }
+
+    public function listAllObjectTracked(){
+      return TrackingLogger::listAllObjectTracked();
+    }
 }
