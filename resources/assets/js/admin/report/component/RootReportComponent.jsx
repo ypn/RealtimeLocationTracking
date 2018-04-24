@@ -5,6 +5,8 @@ import Divider from 'material-ui/Divider';
 import DatePicker from 'material-ui/DatePicker';
 import Stores from '../../stores/Stores';
 import * as Actions from '../../actions/Actions';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import {
   Table,
   TableBody,
@@ -24,6 +26,13 @@ const styles = {
     width: 150,
   },
 };
+
+const List = () => (
+  <h1>
+    Danh sách theo dõi
+  </h1>
+);
+
 
 
 export default class RootReportComponent extends React.Component{

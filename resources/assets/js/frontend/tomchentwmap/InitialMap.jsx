@@ -4,7 +4,8 @@ import{
   GoogleMap,
   InfoWindow,
   Marker,
-  Polyline
+  Polyline,
+  Polygon,
 } from 'react-google-maps';
 import Stores from '../stores/Stores';
 import axios from 'axios';
@@ -28,6 +29,17 @@ const InitialMap = withGoogleMap(props=>{
       defaultCenter = {{lat:20.903975, lng: 106.629445}}
       defaultOptions={mapOption}
     >
+    {
+      props.polygons.map((pg,k)=>{
+        return(
+          <Polygon
+            key = {k}
+            path = {pg.path}
+            options = {pg.options}
+          />
+        )
+      })
+    }
     {
       props.polylines.map((pl,k)=>{
         return(
@@ -71,12 +83,40 @@ export default class MapContainer extends Component{
       this.state = {
         markers:[],
         polylines:[],
-        checkpoints:[]
+        checkpoints:[],
+        polygons:[]
       }
     }
 
     componentDidMount(){
       var _self = this;
+
+      axios.post(GlobalConstants.CHECKPOINT_ROUTE + 'list').
+      then(function(response){
+
+        var list = response.data.list;
+
+        for(let i=0; i<list.length ; i++){
+           let path = JSON.parse(list[i].polygon);
+           _self.setState({
+             polygons:[..._self.state.polygons,{
+               isShowed: true,
+               options:{
+                 strokeWeight:1,
+                 strokeColor:'orange',
+                 fillColor:'#00bcd4b8'
+               },
+               path:path
+             }]
+           })
+
+        }
+
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+
       Stores.on('list-all-on-object-tracking',function(){
         var objects = Stores.getListAllOnObjectTracking();
 
@@ -166,7 +206,6 @@ export default class MapContainer extends Component{
         });
       });
 
-
       socket.on('remove_marker',function(data){
         _self.setState({
           markers:_self.state.markers.filter(obj=>{
@@ -179,8 +218,6 @@ export default class MapContainer extends Component{
       })
 
       socket.on('location_change',function(data){
-        console.log('location change');
-        console.log(data);
         _self.setState({
           markers:_self.state.markers.map(mk=>{
             if(mk.id == data.id){
@@ -229,6 +266,7 @@ export default class MapContainer extends Component{
           width:"100%",
           height:"95vh"
         }}>
+
         <InitialMap
           containerElement = {
             <div style = {{height:"100%"}}/>
@@ -241,10 +279,13 @@ export default class MapContainer extends Component{
 
           polylines = {this.state.polylines}
 
+          polygons = {this.state.polygons}
+
           onMarkerClick = {this.onClick.bind(this)}
 
           handleMarkerClose = {this.onHandleMarkerClose.bind(this)}
         />
+
       </div>
       )
     }

@@ -3,6 +3,8 @@ import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationClose from 'material-ui/svg-icons/navigation/close';
 import FlatButton from 'material-ui/FlatButton';
+import IconMenu from 'material-ui/svg-icons/navigation/menu';
+import KeyBoardArrayUp from 'material-ui/svg-icons/hardware/keyboard-arrow-up'
 
 export default class Navbar extends React.Component{
 
@@ -17,9 +19,10 @@ export default class Navbar extends React.Component{
   render(){
     return(
       <AppBar
-        onLeftIconButtonClick= {this.toggleMornitorTable.bind(this)}
+        title="realtime location tracking"
+        iconElementLeft={<IconButton><a href="/app"><IconMenu style={{color:'#fff'}} /></a></IconButton>}
         iconElementRight={
-            <a href="/app"><FlatButton label="dashboard" /></a>
+          <FlatButton onClick= {this.toggleMornitorTable.bind(this)} ><KeyBoardArrayUp style={{color:'#fff'}}/></FlatButton>
         }
       />
     )

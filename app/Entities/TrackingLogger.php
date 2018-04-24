@@ -67,4 +67,14 @@
           'list' => $this->where('type',0)->get()
       ]);
     }
+
+    //Lấy thông tin chi tiết của 1 phiên theo dõi
+    protected function getDetail($id){
+      return response()->json([
+        'status' => 'success',
+        'status_code' => Res::HTTP_OK,
+        'data'=>$this->where('id',$id)->first()
+      ]);
+    }
+
   }

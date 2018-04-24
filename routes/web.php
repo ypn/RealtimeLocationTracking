@@ -52,6 +52,8 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
 
     Route::group(['middleware'=>'web','prefix'=>'report'],function(){
         Route::post('list-object-tracked','ReportController@listObjectTracked');
+        Route::post('get-detail','ReportController@getDetail');
+        Route::post('export-excel','ReportController@exportExcel');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'mobile'],function(){

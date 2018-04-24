@@ -111,6 +111,7 @@
     integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlqW-_ymhhj0I6Ez1Jq_8Z87a_A9ZaCU"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
     <script type="text/javascript" src="/js/admin/admin-bundle.js"></script>
   </body>
 </html>

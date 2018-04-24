@@ -6900,6 +6900,7 @@ var GlobalConstants = {
   MODE_TRACKING_ROUTE: '/api/v1/mode-tracking/',
   OBJECT_TRACKING_ROUTE: '/api/v1/object-tracking/',
   CHECKPOINT_ROUTE: '/api/v1/checkpoint/',
+  REPORT_ROUTE: '/api/v1/report/',
   REALTIME_SERVER_URL: '113.160.215.214:3000'
 };
 
@@ -44926,6 +44927,13 @@ var InitialMap = Object(__WEBPACK_IMPORTED_MODULE_1_react_google_maps__["withGoo
       defaultCenter: { lat: 20.903975, lng: 106.629445 },
       defaultOptions: mapOption
     },
+    props.polygons.map(function (pg, k) {
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_google_maps__["Polygon"], {
+        key: k,
+        path: pg.path,
+        options: pg.options
+      });
+    }),
     props.polylines.map(function (pl, k) {
       return pl.isShowed && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_react_google_maps__["Polyline"], {
         key: k,
@@ -44976,7 +44984,8 @@ var MapContainer = function (_Component) {
     _this.state = {
       markers: [],
       polylines: [],
-      checkpoints: []
+      checkpoints: [],
+      polygons: []
     };
     return _this;
   }
@@ -44985,6 +44994,29 @@ var MapContainer = function (_Component) {
     key: 'componentDidMount',
     value: function componentDidMount() {
       var _self = this;
+
+      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_4__constants_GlobalConstants__["a" /* default */].CHECKPOINT_ROUTE + 'list').then(function (response) {
+
+        var list = response.data.list;
+
+        for (var i = 0; i < list.length; i++) {
+          var path = JSON.parse(list[i].polygon);
+          _self.setState({
+            polygons: [].concat(_toConsumableArray(_self.state.polygons), [{
+              isShowed: true,
+              options: {
+                strokeWeight: 1,
+                strokeColor: 'orange',
+                fillColor: '#00bcd4b8'
+              },
+              path: path
+            }])
+          });
+        }
+      }).catch(function (err) {
+        console.log(err);
+      });
+
       __WEBPACK_IMPORTED_MODULE_2__stores_Stores__["a" /* default */].on('list-all-on-object-tracking', function () {
         var objects = __WEBPACK_IMPORTED_MODULE_2__stores_Stores__["a" /* default */].getListAllOnObjectTracking();
 
@@ -45086,8 +45118,6 @@ var MapContainer = function (_Component) {
       });
 
       socket.on('location_change', function (data) {
-        console.log('location change');
-        console.log(data);
         _self.setState({
           markers: _self.state.markers.map(function (mk) {
             if (mk.id == data.id) {
@@ -45146,6 +45176,8 @@ var MapContainer = function (_Component) {
           markers: this.state.markers,
 
           polylines: this.state.polylines,
+
+          polygons: this.state.polygons,
 
           onMarkerClick: this.onClick.bind(this),
 
@@ -58251,6 +58283,10 @@ module.exports = function spread(callback) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_ui_svg_icons_navigation_close___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_material_ui_svg_icons_navigation_close__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_material_ui_FlatButton__ = __webpack_require__(584);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_material_ui_FlatButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_material_ui_FlatButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_material_ui_svg_icons_navigation_menu__ = __webpack_require__(577);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_material_ui_svg_icons_navigation_menu___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_material_ui_svg_icons_navigation_menu__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_hardware_keyboard_arrow_up__ = __webpack_require__(726);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_hardware_keyboard_arrow_up___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_hardware_keyboard_arrow_up__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -58258,6 +58294,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -58283,11 +58321,20 @@ var Navbar = function (_React$Component) {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_AppBar___default.a, {
-        onLeftIconButtonClick: this.toggleMornitorTable.bind(this),
+        title: 'realtime location tracking',
+        iconElementLeft: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_2_material_ui_IconButton___default.a,
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '/app' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_5_material_ui_svg_icons_navigation_menu___default.a, { style: { color: '#fff' } })
+          )
+        ),
         iconElementRight: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'a',
-          { href: '/app' },
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_FlatButton___default.a, { label: 'dashboard' })
+          __WEBPACK_IMPORTED_MODULE_4_material_ui_FlatButton___default.a,
+          { onClick: this.toggleMornitorTable.bind(this) },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_hardware_keyboard_arrow_up___default.a, { style: { color: '#fff' } })
         )
       });
     }
@@ -77122,6 +77169,7 @@ var TimeCheckPoint = function (_React$Component) {
       });
 
       __WEBPACK_IMPORTED_MODULE_1__stores_Stores__["a" /* default */].on('session_step_out_checkpoint_' + _self.props.sessionid + '_' + _self.props.node.checkpointId, function (data) {
+
         _self.setState({
           status: 2
         });
@@ -77911,6 +77959,45 @@ InkBar.propTypes =  true ? {
   width: _propTypes2.default.string.isRequired
 } : {};
 exports.default = InkBar;
+
+/***/ }),
+/* 725 */,
+/* 726 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _pure = __webpack_require__(78);
+
+var _pure2 = _interopRequireDefault(_pure);
+
+var _SvgIcon = __webpack_require__(79);
+
+var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HardwareKeyboardArrowUp = function HardwareKeyboardArrowUp(props) {
+  return _react2.default.createElement(
+    _SvgIcon2.default,
+    props,
+    _react2.default.createElement('path', { d: 'M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z' })
+  );
+};
+HardwareKeyboardArrowUp = (0, _pure2.default)(HardwareKeyboardArrowUp);
+HardwareKeyboardArrowUp.displayName = 'HardwareKeyboardArrowUp';
+HardwareKeyboardArrowUp.muiName = 'SvgIcon';
+
+exports.default = HardwareKeyboardArrowUp;
 
 /***/ })
 /******/ ]);

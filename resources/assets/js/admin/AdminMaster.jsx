@@ -19,10 +19,22 @@ import RootObjectTracking from './object_tracking/component/RootObjectTracking';
 import RootCheckPointsComponent from './checkpoint/component/RootCheckPointComponent';
 import RootReportComponent from './report/component/RootReportComponent';
 
+import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import IconSettings from 'material-ui/svg-icons/action/settings';
+import IconCheckPoint from 'material-ui/svg-icons/communication/location-on';
+import IconMode from 'material-ui/svg-icons/device/usb';
+import IconObject from 'material-ui/svg-icons/maps/directions-bus';
+
+import IconButton from 'material-ui/IconButton';
+
+import HomePage from 'material-ui/svg-icons/action/home';
+
+
+
 const AppBarExampleIcon = () => (
   <AppBar
-    title="Title"
-    iconClassNameRight="muidocs-icon-navigation-expand-more"
+    title="Dashboard"
+    iconElementLeft={<IconButton><a href="/"><HomePage style={{color:'#fff'}} /></a></IconButton>}
   />
 );
 
@@ -58,11 +70,11 @@ export default class AdminMaster extends React.Component{
               <div className="drawer-avatar">
 
               </div>
-              <NavLink to="/app/report" activeClassName="active"><MenuItem className="menu-item">Báo cáo</MenuItem></NavLink>
-              <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem className="menu-item">Trạm giám sát</MenuItem></NavLink>
-              <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem className="menu-item">Chế độ giám sát</MenuItem></NavLink>
-              <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem className="menu-item">Đối tượng giám sát</MenuItem></NavLink>
-              <NavLink to="/app/settings" activeClassName="active"><MenuItem className="menu-item">Cài đặt</MenuItem></NavLink>
+              <NavLink to="/app/report" activeClassName="active"><MenuItem leftIcon={<ContentInbox />} className="menu-item">Báo cáo</MenuItem></NavLink>
+              <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem leftIcon={<IconCheckPoint />} className="menu-item">Trạm giám sát</MenuItem></NavLink>
+              <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">Chế độ giám sát</MenuItem></NavLink>
+              <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">Đối tượng giám sát</MenuItem></NavLink>
+              <NavLink to="/app/settings" activeClassName="active"><MenuItem leftIcon={<IconSettings />} className="menu-item">Cài đặt</MenuItem></NavLink>
             </Drawer>
             <div className="root-content">
               <Route exact path="/app" component={Report} />
