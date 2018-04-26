@@ -180,22 +180,25 @@
         font-family: 'Roboto';
         font-weight: normal;
         font-size: 12px;
-        padding-top: 15px;
+        padding-top: 5px;
       }
 
       .list-note .note-square{
         content: '';
         border: 1px solid #000;
         display: inline-block;
-        width: 15px;
-        height:15px;
-        margin-right: 15px;
+        width: 9px;
+        height:9px;
+        margin-right: 5px;
       }
 
       .list-note .note-square.default{
         background:#fff;
       }
       .list-note .note-square.active{
+        background: #4CAF50;
+      }
+      .list-note .note-square.deactive{
         background: #D4E157;
       }
       .list-note .note-square.danger{

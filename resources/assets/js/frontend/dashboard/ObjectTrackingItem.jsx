@@ -108,8 +108,8 @@ export default class ObjectTrackingItem extends React.Component{
         {
           this.state.listTrack.map((node,k)=>{
             var time1 = node.time_start!='' ? new Date(node.time_start) : new Date();
-            var time2 = new Date();
-            var total_time = node.status!=2 ? Math.floor((time2-time1)/1000) : node.total_time;
+            var time2 = new Date();          
+            var total_time = node.status!=2 ? (Math.floor((time2-time1)/1000)) + parseInt(node.total_time) : node.total_time;
 
             return(
               <TableRowColumn style={{padding:0}} key={k}>

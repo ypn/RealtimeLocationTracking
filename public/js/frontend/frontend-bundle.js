@@ -68901,7 +68901,7 @@ var ObjectTrackingItem = function (_React$Component) {
         this.state.listTrack.map(function (node, k) {
           var time1 = node.time_start != '' ? new Date(node.time_start) : new Date();
           var time2 = new Date();
-          var total_time = node.status != 2 ? Math.floor((time2 - time1) / 1000) : node.total_time;
+          var total_time = node.status != 2 ? Math.floor((time2 - time1) / 1000) + parseInt(node.total_time) : node.total_time;
 
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
@@ -77180,6 +77180,7 @@ var TimeCheckPoint = function (_React$Component) {
       }
 
       __WEBPACK_IMPORTED_MODULE_1__stores_Stores__["a" /* default */].on('session_step_in_checkpoint_' + _self.props.sessionid + '_' + _self.props.node.checkpointId, function (data) {
+        console.log('session step in to checkpont');
         _self.setState({
           status: 1
         });
@@ -77191,7 +77192,6 @@ var TimeCheckPoint = function (_React$Component) {
       });
 
       __WEBPACK_IMPORTED_MODULE_1__stores_Stores__["a" /* default */].on('session_step_out_checkpoint_' + _self.props.sessionid + '_' + _self.props.node.checkpointId, function (data) {
-
         _self.setState({
           status: 2
         });
@@ -78054,7 +78054,6 @@ var Note = function (_React$Component) {
         'div',
         { style: {
             width: '100%',
-            height: '50px',
             borderTop: '1px solid #000',
             background: 'rgba(0,0,0,0.4)'
 
@@ -78066,19 +78065,25 @@ var Note = function (_React$Component) {
             'li',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'note-square default' }),
-            ' \u0110\u1ED1i t\u01B0\u1EE3ng ch\u01B0a v\xE0o \u0111i\u1EC3m gi\xE1m s\xE1t.'
+            ' Ch\u01B0a ki\u1EC3m tra'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'note-square active' }),
-            ' \u0110\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t n\u1EB1m trong \u0111i\u1EC3m gi\xE1m s\xE1t.'
+            ' \u0110ang ki\u1EC3m tra'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'li',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'note-square deactive' }),
+            ' \u0110\xE3 ki\u1EC3m tra'
           ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'li',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('span', { className: 'note-square danger' }),
-            ' \u0110\u1ED1i t\u01B0\u1EE3ng \u1EDF trong \u0111i\u1EC3m gi\xE1m s\xE1t qu\xE1 h\u1EA1n m\u1EE9c.'
+            ' Qu\xE1 th\u1EDDi gian'
           )
         )
       );

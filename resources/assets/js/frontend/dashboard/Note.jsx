@@ -5,22 +5,24 @@ export default class Note extends React.Component{
     return(
       <div style={{
           width:'100%',
-          height:'50px',
           borderTop:'1px solid #000',
           background:'rgba(0,0,0,0.4)'
 
         }}>
         <ul className="list-note">
           <li>
-            <span className="note-square default"></span> Đối tượng chưa vào điểm giám sát.
+            <span className="note-square default"></span> Chưa kiểm tra
           </li>
           <li>
-            <span className="note-square active"></span> Đối tượng giám sát nằm trong điểm giám sát.
+            <span className="note-square active"></span> Đang kiểm tra
           </li>
           <li>
-            <span className="note-square danger"></span> Đối tượng ở trong điểm giám sát quá hạn mức.
+            <span className="note-square deactive"></span> Đã kiểm tra
           </li>
-        </ul>           
+          <li>
+            <span className="note-square danger"></span> Quá thời gian
+          </li>
+        </ul>
       </div>
     )
   }

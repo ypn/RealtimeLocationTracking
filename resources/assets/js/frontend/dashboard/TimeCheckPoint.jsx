@@ -25,6 +25,7 @@ export default class TimeCheckPoint extends React.Component{
     }
 
     Stores.on(`session_step_in_checkpoint_${_self.props.sessionid}_${_self.props.node.checkpointId}`,function(data){
+      console.log('session step in to checkpont');
       _self.setState({
         status:1
       });
@@ -36,7 +37,6 @@ export default class TimeCheckPoint extends React.Component{
     });
 
     Stores.on(`session_step_out_checkpoint_${_self.props.sessionid}_${_self.props.node.checkpointId}`,function(data){
-
       _self.setState({
         status:2
       });
