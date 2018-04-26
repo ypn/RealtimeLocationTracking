@@ -58,7 +58,7 @@ export default class ListCheckPoints extends React.Component{
 
               return(
                 <TableRow key = {k}>
-                  <TableRowColumn>{k++}</TableRowColumn>
+                  <TableRowColumn>{k+1}</TableRowColumn>
                   <TableRowColumn>{node.name}</TableRowColumn>
                   <TableRowColumn>{node.description}</TableRowColumn>
                   <TableRowColumn>{min + ' phút' + (sec!=0 ?' ' + sec +' giây' : '' )}</TableRowColumn>

@@ -46793,7 +46793,7 @@ var ListModes = function (_React$Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
                 null,
-                '1'
+                key + 1
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
@@ -71639,11 +71639,15 @@ exports.default = InkBar;
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__ = __webpack_require__(63);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_Table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_material_ui_Table__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__constants_Constants__ = __webpack_require__(126);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_CircularProgress__ = __webpack_require__(640);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_material_ui_CircularProgress___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_material_ui_CircularProgress__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_material_ui_pagination__ = __webpack_require__(624);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_material_ui_pagination___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_material_ui_pagination__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__ = __webpack_require__(63);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_material_ui_Table___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_material_ui_Table__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__constants_Constants__ = __webpack_require__(126);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -71651,6 +71655,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
 
 
 
@@ -71667,7 +71673,10 @@ var TableObjectTracking = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (TableObjectTracking.__proto__ || Object.getPrototypeOf(TableObjectTracking)).call(this, props));
 
     _this.state = {
-      listObject: []
+      isLoadComplete: false,
+      listObject: [],
+      currentPage: 1,
+      full_length: 0
     };
     return _this;
   }
@@ -71678,15 +71687,22 @@ var TableObjectTracking = function (_React$Component) {
       if (this.state.listObject.length != 0) {
         return;
       }
-      __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_2__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'list', {
-        table: this.props.ModeProperty.table_reference
+      __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_4__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'list', {
+        table: this.props.ModeProperty.table_reference,
+        current_page: this.state.currentPage
       }).then(function (response) {
         if (response.data.status == 'success') {
           this.setState({
-            listObject: response.data.list
+            listObject: response.data.list,
+            isLoadComplete: true,
+            full_length: response.data.full_length
           });
         }
       }.bind(this)).catch(function (err) {
+        this.setState({
+          isLoadComplete: false
+        });
+        alert('Có lỗi! Xem log để biết thêm chi tiết');
         console.log(err);
       });
     }
@@ -71695,9 +71711,7 @@ var TableObjectTracking = function (_React$Component) {
     value: function destroyItem(table, id) {
       var result = confirm("Nhấn OK để xác nhận xóa bản ghi!");
       if (result) {
-
-        __WEBPACK_IMPORTED_MODULE_3_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_2__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'remove', { table: table, id: id }).then(function (response) {
-          console.log(response.data);
+        __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_4__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'remove', { table: table, id: id }).then(function (response) {
           if (response.data.status == 'success' && response.data.message != 0) {
             this.setState({
               listObject: this.state.listObject.filter(function (obj) {
@@ -71711,101 +71725,151 @@ var TableObjectTracking = function (_React$Component) {
       }
     }
   }, {
+    key: 'changePagination',
+    value: function changePagination(number) {
+      this.setState({
+        currentPage: number
+      });
+
+      __WEBPACK_IMPORTED_MODULE_5_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_4__constants_Constants__["a" /* default */].OBJECT_TRACKING_ROUTE + 'list', {
+        table: this.props.ModeProperty.table_reference,
+        current_page: number
+      }).then(function (response) {
+        console.log(response.data);
+        if (response.data.status == 'success') {
+          this.setState({
+            listObject: response.data.list,
+            full_length: response.data.full_length,
+            isLoadComplete: true
+          });
+        }
+      }.bind(this)).catch(function (err) {
+        this.setState({
+          isLoadComplete: false
+        });
+        alert('Có lỗi! Xem log để biết thêm chi tiết');
+        console.log(err);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this2 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
+        'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
+        this.state.isLoadComplete ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
           null,
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+            __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["Table"],
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
+              __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeader"],
               null,
-              'STT'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              this.props.ModeProperty.display_property.toUpperCase()
-            ),
-            this.props.ModeProperty.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              this.props.ModeProperty.object_owner.toUpperCase()
-            ) : null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              '\u0110\u01A0N V\u1ECA'
-            ),
-            this.props.ModeProperty.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'S\u1ED0 \u0110I\u1EC6N THO\u1EA0I'
-            ) : null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'X\xF3a/S\u1EEDa'
-            )
-          )
-        ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
-          null,
-          this.state.listObject.map(function (node, k) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
-              { key: k },
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
-                null,
-                '1'
-              ),
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
-                null,
-                node.object_name
-              ),
-              _this2.props.ModeProperty.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
-                null,
-                node.object_owner
-              ) : null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
-                null,
-                node.organization
-              ),
-              _this2.props.ModeProperty.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
-                null,
-                node.phone_number
-              ) : null,
-              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRow"],
                 null,
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: 'javascript:void(0)', onClick: _this2.destroyItem.bind(_this2, _this2.props.ModeProperty.table_reference, node.id) },
-                  'X\xF3a'
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  'STT'
                 ),
-                '/',
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: 'javascript:void(0)' },
-                  'S\u1EEDa'
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  this.props.ModeProperty.display_property.toUpperCase()
+                ),
+                this.props.ModeProperty.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  this.props.ModeProperty.object_owner.toUpperCase()
+                ) : null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  '\u0110\u01A0N V\u1ECA'
+                ),
+                this.props.ModeProperty.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  'S\u1ED0 \u0110I\u1EC6N THO\u1EA0I'
+                ) : null,
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableHeaderColumn"],
+                  null,
+                  'X\xF3a/S\u1EEDa'
                 )
               )
-            );
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableBody"],
+              null,
+              this.state.listObject.map(function (node, k) {
+                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRow"],
+                  { key: k },
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    k + 1
+                  ),
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    node.object_name
+                  ),
+                  _this2.props.ModeProperty.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    node.object_owner
+                  ) : null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    node.organization
+                  ),
+                  _this2.props.ModeProperty.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    node.phone_number
+                  ) : null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_3_material_ui_Table__["TableRowColumn"],
+                    null,
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'a',
+                      { href: 'javascript:void(0)', onClick: _this2.destroyItem.bind(_this2, _this2.props.ModeProperty.table_reference, node.id) },
+                      'X\xF3a'
+                    ),
+                    '/',
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                      'a',
+                      { href: 'javascript:void(0)' },
+                      'S\u1EEDa'
+                    )
+                  )
+                );
+              })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_pagination___default.a, {
+            total: this.state.full_length,
+            current: this.state.currentPage,
+            display: 10,
+            onChange: this.changePagination.bind(this)
           })
-        )
+        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_CircularProgress___default.a, {
+          style: {
+            position: 'fixed',
+            top: '50%',
+            left: '50%',
+            background: '#fff',
+            margin: '15px'
+          }
+        })
       );
     }
   }]);
@@ -82692,7 +82756,7 @@ var ListCheckPoints = function (_React$Component) {
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
                 null,
-                k++
+                k + 1
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
@@ -88656,6 +88720,303 @@ ActionNoteAdd.displayName = 'ActionNoteAdd';
 ActionNoteAdd.muiName = 'SvgIcon';
 
 exports.default = ActionNoteAdd;
+
+/***/ }),
+/* 640 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _CircularProgress = __webpack_require__(641);
+
+var _CircularProgress2 = _interopRequireDefault(_CircularProgress);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _CircularProgress2.default;
+
+/***/ }),
+/* 641 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends2 = __webpack_require__(9);
+
+var _extends3 = _interopRequireDefault(_extends2);
+
+var _objectWithoutProperties2 = __webpack_require__(8);
+
+var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+
+var _getPrototypeOf = __webpack_require__(4);
+
+var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+
+var _classCallCheck2 = __webpack_require__(2);
+
+var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+
+var _createClass2 = __webpack_require__(3);
+
+var _createClass3 = _interopRequireDefault(_createClass2);
+
+var _possibleConstructorReturn2 = __webpack_require__(5);
+
+var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+
+var _inherits2 = __webpack_require__(6);
+
+var _inherits3 = _interopRequireDefault(_inherits2);
+
+var _simpleAssign = __webpack_require__(7);
+
+var _simpleAssign2 = _interopRequireDefault(_simpleAssign);
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _propTypes = __webpack_require__(1);
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _autoPrefix = __webpack_require__(58);
+
+var _autoPrefix2 = _interopRequireDefault(_autoPrefix);
+
+var _transitions = __webpack_require__(10);
+
+var _transitions2 = _interopRequireDefault(_transitions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function getRelativeValue(value, min, max) {
+  var clampedValue = Math.min(Math.max(min, value), max);
+  return clampedValue / (max - min);
+}
+
+function getArcLength(fraction, props) {
+  return fraction * Math.PI * (props.size - props.thickness);
+}
+
+function getStyles(props, context) {
+  var max = props.max,
+      min = props.min,
+      size = props.size,
+      value = props.value;
+  var palette = context.muiTheme.baseTheme.palette;
+
+
+  var styles = {
+    root: {
+      position: 'relative',
+      display: 'inline-block',
+      width: size,
+      height: size
+    },
+    wrapper: {
+      width: size,
+      height: size,
+      display: 'inline-block',
+      transition: _transitions2.default.create('transform', '20s', null, 'linear'),
+      transitionTimingFunction: 'linear'
+    },
+    svg: {
+      width: size,
+      height: size,
+      position: 'relative'
+    },
+    path: {
+      stroke: props.color || palette.primary1Color,
+      strokeLinecap: 'round',
+      transition: _transitions2.default.create('all', '1.5s', null, 'ease-in-out')
+    }
+  };
+
+  if (props.mode === 'determinate') {
+    var relVal = getRelativeValue(value, min, max);
+    styles.path.transition = _transitions2.default.create('all', '0.3s', null, 'linear');
+    styles.path.strokeDasharray = getArcLength(relVal, props) + ', ' + getArcLength(1, props);
+  }
+
+  return styles;
+}
+
+var CircularProgress = function (_Component) {
+  (0, _inherits3.default)(CircularProgress, _Component);
+
+  function CircularProgress() {
+    (0, _classCallCheck3.default)(this, CircularProgress);
+    return (0, _possibleConstructorReturn3.default)(this, (CircularProgress.__proto__ || (0, _getPrototypeOf2.default)(CircularProgress)).apply(this, arguments));
+  }
+
+  (0, _createClass3.default)(CircularProgress, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.scalePath(this.refs.path);
+      this.rotateWrapper(this.refs.wrapper);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      clearTimeout(this.scalePathTimer);
+      clearTimeout(this.rotateWrapperTimer);
+    }
+  }, {
+    key: 'scalePath',
+    value: function scalePath(path) {
+      var _this2 = this;
+
+      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.props.mode !== 'indeterminate') return;
+
+      step %= 3;
+
+      if (step === 0) {
+        path.style.strokeDasharray = getArcLength(0, this.props) + ', ' + getArcLength(1, this.props);
+        path.style.strokeDashoffset = 0;
+        path.style.transitionDuration = '0ms';
+      } else if (step === 1) {
+        path.style.strokeDasharray = getArcLength(0.7, this.props) + ', ' + getArcLength(1, this.props);
+        path.style.strokeDashoffset = getArcLength(-0.3, this.props);
+        path.style.transitionDuration = '750ms';
+      } else {
+        path.style.strokeDasharray = getArcLength(0.7, this.props) + ', ' + getArcLength(1, this.props);
+        path.style.strokeDashoffset = getArcLength(-1, this.props);
+        path.style.transitionDuration = '850ms';
+      }
+
+      this.scalePathTimer = setTimeout(function () {
+        return _this2.scalePath(path, step + 1);
+      }, step ? 750 : 250);
+    }
+  }, {
+    key: 'rotateWrapper',
+    value: function rotateWrapper(wrapper) {
+      var _this3 = this;
+
+      if (this.props.mode !== 'indeterminate') return;
+
+      _autoPrefix2.default.set(wrapper.style, 'transform', 'rotate(0deg)');
+      _autoPrefix2.default.set(wrapper.style, 'transitionDuration', '0ms');
+
+      setTimeout(function () {
+        _autoPrefix2.default.set(wrapper.style, 'transform', 'rotate(1800deg)');
+        _autoPrefix2.default.set(wrapper.style, 'transitionDuration', '10s');
+        _autoPrefix2.default.set(wrapper.style, 'transitionTimingFunction', 'linear');
+      }, 50);
+
+      this.rotateWrapperTimer = setTimeout(function () {
+        return _this3.rotateWrapper(wrapper);
+      }, 10050);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props = this.props,
+          style = _props.style,
+          innerStyle = _props.innerStyle,
+          size = _props.size,
+          thickness = _props.thickness,
+          other = (0, _objectWithoutProperties3.default)(_props, ['style', 'innerStyle', 'size', 'thickness']);
+      var prepareStyles = this.context.muiTheme.prepareStyles;
+
+      var styles = getStyles(this.props, this.context);
+
+      return _react2.default.createElement(
+        'div',
+        (0, _extends3.default)({}, other, { style: prepareStyles((0, _simpleAssign2.default)(styles.root, style)) }),
+        _react2.default.createElement(
+          'div',
+          { ref: 'wrapper', style: prepareStyles((0, _simpleAssign2.default)(styles.wrapper, innerStyle)) },
+          _react2.default.createElement(
+            'svg',
+            {
+              viewBox: '0 0 ' + size + ' ' + size,
+              style: prepareStyles(styles.svg)
+            },
+            _react2.default.createElement('circle', {
+              ref: 'path',
+              style: prepareStyles(styles.path),
+              cx: size / 2,
+              cy: size / 2,
+              r: (size - thickness) / 2,
+              fill: 'none',
+              strokeWidth: thickness,
+              strokeMiterlimit: '20'
+            })
+          )
+        )
+      );
+    }
+  }]);
+  return CircularProgress;
+}(_react.Component);
+
+CircularProgress.defaultProps = {
+  mode: 'indeterminate',
+  value: 0,
+  min: 0,
+  max: 100,
+  size: 40,
+  thickness: 3.5
+};
+CircularProgress.contextTypes = {
+  muiTheme: _propTypes2.default.object.isRequired
+};
+CircularProgress.propTypes =  true ? {
+  /**
+   * Override the progress's color.
+   */
+  color: _propTypes2.default.string,
+  /**
+   * Style for inner wrapper div.
+   */
+  innerStyle: _propTypes2.default.object,
+  /**
+   * The max value of progress, only works in determinate mode.
+   */
+  max: _propTypes2.default.number,
+  /**
+   * The min value of progress, only works in determinate mode.
+   */
+  min: _propTypes2.default.number,
+  /**
+   * The mode of show your progress, indeterminate
+   * for when there is no value for progress.
+   */
+  mode: _propTypes2.default.oneOf(['determinate', 'indeterminate']),
+  /**
+   * The diameter of the progress in pixels.
+   */
+  size: _propTypes2.default.number,
+  /**
+   * Override the inline-styles of the root element.
+   */
+  style: _propTypes2.default.object,
+  /**
+   * Stroke width in pixels.
+   */
+  thickness: _propTypes2.default.number,
+  /**
+   * The value of progress, only works in determinate mode.
+   */
+  value: _propTypes2.default.number
+} : {};
+exports.default = CircularProgress;
 
 /***/ })
 /******/ ]);
