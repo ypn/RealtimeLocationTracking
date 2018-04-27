@@ -154,7 +154,7 @@ export default class ReportTable extends React.Component{
                     {
                       _status.map((n,ki)=>{
                         return(
-                          <TableRowColumn key={ki}><TimeCheckPoint node = {n}/></TableRowColumn>
+                          <TableRowColumn key={ki}><TimeCheckPoint timeend ={node.ended_at}  node = {n}/></TableRowColumn>
                         )
                       })
                     }

@@ -38,4 +38,23 @@
       ]);
     }
 
+
+    protected function getCheckpoint($id){
+      return response()->json([
+        'status'=>'success',
+        'code'=>RES::HTTP_OK,
+        'item'=>$this->where('id',$id)->first()
+      ]);
+    }
+
+    protected function editCheckPoint($id,$value){
+      $query = $this->where('id',$id)->update([
+        'name'=>$value['name'],
+        'time'=> round(60*$value['time']),
+        'description'=>$value['description'],
+        'polygon'=>$value['polygon']
+      ]);
+      return $query;
+    }
+
   }

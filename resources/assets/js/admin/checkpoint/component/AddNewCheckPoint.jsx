@@ -4,6 +4,7 @@ import MapComponent from './MapComponent';
 import RaisedButton from 'material-ui/RaisedButton';
 import FontIcon from 'material-ui/FontIcon';
 import axios from 'axios';
+import SaveIcon from 'material-ui/svg-icons/content/save';
 
 import GlobalConstants from '../../../constants/GlobalConstants';
 
@@ -81,7 +82,7 @@ export default class AddNewCheckPoint extends React.Component{
           onClick={this.submitForm.bind(this)}
           label="Lưu"
           primary={true}
-          icon={<FontIcon className="material-icons">save</FontIcon>}
+          icon={<SaveIcon/>}
         />
       </div>
     )

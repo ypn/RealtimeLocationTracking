@@ -79,8 +79,9 @@ export default class MornitorMaster extends Component{
         </div>
         <div style={{
             position:'fixed',
-            right:'15px',
-            bottom:'15px',
+            fontSize:'15px',
+            right:'10px',
+            bottom:'5px',
             zIndex:999,
             color:'#ddd'
           }}>
