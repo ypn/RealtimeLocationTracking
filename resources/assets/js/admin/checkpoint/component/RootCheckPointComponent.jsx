@@ -6,6 +6,7 @@ import Divider from 'material-ui/Divider';
 
 import AddNewCheckPoint  from './AddNewCheckPoint';
 import ListCheckPoints from './ListCheckPoints';
+import EditCheckpoint from './EditCheckpoint';
 
 import {BrowserRouter as Router,Route, Link } from "react-router-dom";
 const styles = {
@@ -32,6 +33,10 @@ const Add = ()=>(
   <AddNewCheckPoint/>
 );
 
+
+const Edit = ({match})=>(
+  <EditCheckpoint CheckPointId = {match.params.id} />
+)
 
 export default class  RootCheckPointComponent extends React.Component{
   render(){
@@ -61,6 +66,7 @@ export default class  RootCheckPointComponent extends React.Component{
           <Route exact path="/app/checkpoint" component={List} />
           <Route exact path="/app/checkpoint/list" component={List} />
           <Route path="/app/checkpoint/add" component={Add} />
+          <Route path="/app/checkpoint/edit/:id" component={Edit} />
         </div>
       </div>
     </Router>

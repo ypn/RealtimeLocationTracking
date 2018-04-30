@@ -21,16 +21,16 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function loadMap(){
-      //return view('frontend.map');
-
-      $spreadsheet = new Spreadsheet();
-      $sheet = $spreadsheet->getActiveSheet();
-      $sheet->setCellValue('A1', 'Hello World !');
-
-      $writer = new Xlsx($spreadsheet);
-      $a = $writer->save('hello world.xlsx');
-
-      return 'tttt';
+      return view('frontend.map');
+      //
+      // $spreadsheet = new Spreadsheet();
+      // $sheet = $spreadsheet->getActiveSheet();
+      // $sheet->setCellValue('A1', 'Hello World !');
+      //
+      // $writer = new Xlsx($spreadsheet);
+      // $a = $writer->save('hello world.xlsx');
+      //
+      // return 'tttt';
 
 
     }

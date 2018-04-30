@@ -48,6 +48,8 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('on-changestate-mode-checkpoint','CheckPointController@onChangeStateModeCheckPoint');
         Route::post('is-checkpoint-available','CheckPointController@isCheckPointAvaiabled');
         Route::post('list-enabled','CheckPointController@listEnabled');
+        Route::post('get','CheckPointController@get');
+        Route::post('edit','CheckPointController@edit');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'report'],function(){

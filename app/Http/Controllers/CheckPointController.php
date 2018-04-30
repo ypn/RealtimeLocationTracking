@@ -116,4 +116,15 @@ class CheckPointController extends BaseController
 
       return ModeCheckPoints::isCheckPointAvaiabled($input);
     }
+
+    public function get(){
+      $id = Input::get('id');
+      return CheckPoint::getCheckpoint($id);
+    }
+
+    public function edit(){
+      $id = Input::get('id');
+      $data = Input::get('value');    
+      return CheckPoint::editCheckPoint($id,$data);
+    }
 }

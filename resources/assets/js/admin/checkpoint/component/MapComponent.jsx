@@ -55,7 +55,7 @@ export default class MapComponent extends React.Component{
       super(props);
       this.state = {
         markers:[],
-        pathPolygon:[]
+        pathPolygon:this.props.pathPolygon!='undefined' ? this.props.pathPolygon :[]
       }
     }
 
@@ -72,7 +72,7 @@ export default class MapComponent extends React.Component{
         markers:[],
         pathPolygon:[]
       });
-      
+
       this.props.UpdatePolygon([]);
     }
 

@@ -48,10 +48,17 @@ class ObjectTrackingController extends Controller
 
     public function list(){
       $table = Input::get('table');
+      $offset = (Input::get('current_page')-1) * 10;
+
+      $list = DB::table($table)
+      ->offset($offset)
+      ->limit(10)
+      ->get();
       return response()->json([
         'status'=>'success',
         'status_code'=>Res::HTTP_OK,
-        'list'=>DB::table($table)->get()
+        'list'=>$list,
+        'full_length'=>ceil(DB::table($table)->count()/10)
       ]);
     }
 

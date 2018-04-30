@@ -102,7 +102,8 @@
         left: 0;
         bottom: 0;
         width: 100%;
-        height: 50vh;
+        max-height: 50vh;
+        height: auto;
         overflow-y: auto;
         background: rgba(53, 53, 53, 0.8);
         -webkit-font-smoothing:antialiased;
@@ -172,6 +173,42 @@
 
       .row-danger{
         background: #F44336!important;
+      }
+
+      .list-note{
+        margin:0;
+        font-family: 'Roboto';
+        font-weight: normal;
+        font-size: 12px;
+        padding-top: 5px;
+      }
+
+      .list-note .note-square{
+        content: '';
+        border: 1px solid #000;
+        display: inline-block;
+        width: 9px;
+        height:9px;
+        margin-right: 5px;
+      }
+
+      .list-note .note-square.default{
+        background:#fff;
+      }
+      .list-note .note-square.active{
+        background: #4CAF50;
+      }
+      .list-note .note-square.deactive{
+        background: #D4E157;
+      }
+      .list-note .note-square.danger{
+        background: #F44336;
+      }
+
+      .list-note li {
+        display: inline-block;
+        list-style-type: none;
+        margin-right: 20px;
       }
 
   </style>

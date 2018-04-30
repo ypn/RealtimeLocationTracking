@@ -30,7 +30,7 @@ export default class ListModes extends React.Component{
     }
 
     axios.post('/api/v1/mode-tracking/list')
-    .then(function(response){    
+    .then(function(response){
       if(response.data.status=='success'){
         this.setState({
           listModes:response.data.list
@@ -86,7 +86,7 @@ export default class ListModes extends React.Component{
             this.state.listModes.map((node,key)=>{
               return(
                 <TableRow key={key}>
-                  <TableRowColumn>1</TableRowColumn>
+                  <TableRowColumn>{key+1}</TableRowColumn>
                   <TableRowColumn>{node.name}</TableRowColumn>
                   <TableRowColumn>{node.object_tracking}</TableRowColumn>
                   <TableRowColumn>

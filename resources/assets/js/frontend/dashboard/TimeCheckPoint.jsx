@@ -6,8 +6,7 @@ export default class TimeCheckPoint extends React.Component{
     super(props);
     this.state = {
       status:this.props.node.status,
-      time:this.props.totaltime,
-      extra_time:68
+      time:parseInt(this.props.totaltime)
     }
     this.listInterval = new Array();
   }
@@ -36,7 +35,6 @@ export default class TimeCheckPoint extends React.Component{
     });
 
     Stores.on(`session_step_out_checkpoint_${_self.props.sessionid}_${_self.props.node.checkpointId}`,function(data){
-
       _self.setState({
         status:2
       });
@@ -47,8 +45,7 @@ export default class TimeCheckPoint extends React.Component{
     })
   }
 
-  componentWillUnmount(){
-    console.log('bye bye');
+  componentWillUnmount(){  
     for(var i=0; i< this.listInterval.length ; i++){
       clearInterval(this.listInterval[i]);
     }

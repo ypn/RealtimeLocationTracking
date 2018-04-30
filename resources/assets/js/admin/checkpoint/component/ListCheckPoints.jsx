@@ -8,6 +8,8 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+import {BrowserRouter as Router,Link } from "react-router-dom";
+
 import axios from 'axios';
 import GlobalConstants from '../../../constants/GlobalConstants';
 
@@ -23,7 +25,6 @@ export default class ListCheckPoints extends React.Component{
 
     axios.post(GlobalConstants.CHECKPOINT_ROUTE + 'list')
     .then(function(response){
-      console.log(response);
       if(response.data.status=='success'){
         this.setState({
           listCheckPoints:response.data.list
@@ -52,20 +53,18 @@ export default class ListCheckPoints extends React.Component{
             this.state.listCheckPoints.map((node,k)=>{
 
               let min = Math.floor(node.time / 60);
-              let sec = node.time - 60 *(min);
-              console.log(sec);
-
+              let sec = node.time - 60 *(min);          
 
               return(
                 <TableRow key = {k}>
-                  <TableRowColumn>{k++}</TableRowColumn>
+                  <TableRowColumn>{k+1}</TableRowColumn>
                   <TableRowColumn>{node.name}</TableRowColumn>
                   <TableRowColumn>{node.description}</TableRowColumn>
                   <TableRowColumn>{min + ' phút' + (sec!=0 ?' ' + sec +' giây' : '' )}</TableRowColumn>
                   <TableRowColumn>
                     <a href="javascript:void(0)">Xóa</a>
                     /
-                    <a href="javascript:void(0)">Sửa</a>
+                    <Link to={"/app/checkpoint/edit/"+node.id}>Sửa</Link>
                   </TableRowColumn>
                 </TableRow>
               )

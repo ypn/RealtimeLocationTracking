@@ -12,6 +12,7 @@ import Toggle from 'material-ui/Toggle';
 import axios from 'axios';
 import ObjectTrackingItem from './ObjectTrackingItem';
 import GlobalConstants from '../../constants/GlobalConstants';
+import _ from 'lodash';
 
 import Stores from '../stores/Stores';
 import * as Actions from '../actions/Actions';
@@ -63,10 +64,16 @@ export default class TableObjectTracking extends React.Component{
     });
 
     socket.on('stop_tracking_in_' + this.props.ModeId,function(data){
+      console.log('stop-tracking');
+      console.log(data.sessionId);
+      // _self.setState({
+      //   listObjectTracking:_self.state.listObjectTracking.filter(ob=>{
+      //     return ob.id!=data.sessionId
+      //   })
+      // })
+
       _self.setState({
-        listObjectTracking:_self.state.listObjectTracking.filter(ob=>{
-          return ob.id!=data.sessionId
-        })
+        listObjectTracking:_.reject(_self.state.listObjectTracking,{'id':data.sessionId})
       })
     });
 
