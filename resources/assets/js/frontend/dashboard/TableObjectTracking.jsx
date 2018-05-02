@@ -64,17 +64,10 @@ export default class TableObjectTracking extends React.Component{
     });
 
     socket.on('stop_tracking_in_' + this.props.ModeId,function(data){
-      console.log('stop-tracking');
-      console.log(data.sessionId);
-      // _self.setState({
-      //   listObjectTracking:_self.state.listObjectTracking.filter(ob=>{
-      //     return ob.id!=data.sessionId
-      //   })
-      // })
-
       _self.setState({
         listObjectTracking:_.reject(_self.state.listObjectTracking,{'id':data.sessionId})
       })
+
     });
 
   }
@@ -84,25 +77,25 @@ export default class TableObjectTracking extends React.Component{
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHeaderColumn>{this.props.DisplayProperty}</TableHeaderColumn>
-            <TableHeaderColumn>Màu đường đi</TableHeaderColumn>
-            <TableHeaderColumn>Hiện đường đi</TableHeaderColumn>
+            <TableHeaderColumn key={'theader_5'}>{this.props.DisplayProperty}</TableHeaderColumn>
+            <TableHeaderColumn key={'theader_4'}>Màu đường đi</TableHeaderColumn>
+            <TableHeaderColumn key={'theader_3'}>Hiện đường đi</TableHeaderColumn>
             {
               this.state.listCheckPoints.map((node,k)=>{
                 return(
-                    <TableHeaderColumn key={k}>{node.name}</TableHeaderColumn>
+                    <TableHeaderColumn key={'theader_checkpoint_' + k}>{node.name}</TableHeaderColumn>
                 )
               })
             }
-            <TableHeaderColumn>Giờ bắt đầu</TableHeaderColumn>
-            <TableHeaderColumn>Thời gian giám sát</TableHeaderColumn>
+            <TableHeaderColumn key={'theader_2'}>Giờ bắt đầu</TableHeaderColumn>
+            <TableHeaderColumn key={'theader_1'}>Thời gian giám sát</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody className="mornitor-tablebody">
           {
-            this.state.listObjectTracking.map((node,key)=>{
+            this.state.listObjectTracking.map(node=>{
               return(
-                  <ObjectTrackingItem modeid={this.props.ModeId}  node={node} key={key}/>
+                  <ObjectTrackingItem modeid={this.props.ModeId}  node={node} key={node.id}/>
               )
             })
           }

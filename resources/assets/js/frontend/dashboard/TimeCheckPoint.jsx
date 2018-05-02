@@ -1,6 +1,7 @@
 import React from 'react';
 import Stores from '../stores/Stores';
 
+
 export default class TimeCheckPoint extends React.Component{
   constructor(props){
     super(props);
@@ -8,7 +9,13 @@ export default class TimeCheckPoint extends React.Component{
       status:this.props.node.status,
       time:parseInt(this.props.totaltime)
     }
-    this.listInterval = new Array();
+
+  }
+
+  tick(){
+     this.setState({
+       time: (this.state.time + 1)
+     });
   }
 
   componentWillMount(){
@@ -16,38 +23,35 @@ export default class TimeCheckPoint extends React.Component{
     var _self = this;
 
     if(this.state.status == 1){
-      _self.listInterval[`checkpoint_${_self.props.node.checkpointId}`] = setInterval(function(){
-        _self.setState({
-            time:_self.state.time+1
-        })
-      },1000);
+      this.interval = setInterval(this.tick.bind(_self),1000);
     }
 
     Stores.on(`session_step_in_checkpoint_${_self.props.sessionid}_${_self.props.node.checkpointId}`,function(data){
-      _self.setState({
-        status:1
-      });
-      _self.listInterval[`checkpoint_${_self.props.node.checkpointId}`] = setInterval(function(){
+      if(_self.refs.myRef){
         _self.setState({
-            time:_self.state.time+1
-        })
-      },1000);
+          status:1
+        });
+        _self.interval = setInterval(_self.tick.bind(_self),1000);
+
+      }
     });
 
     Stores.on(`session_step_out_checkpoint_${_self.props.sessionid}_${_self.props.node.checkpointId}`,function(data){
-      _self.setState({
-        status:2
-      });
+      if(_self.refs.myRef){
+        _self.setState({
+          status:2
+        });
 
-      if(_self.listInterval[`checkpoint_${_self.props.node.checkpointId}`] !='undefined'){
-        clearInterval(_self.listInterval[`checkpoint_${_self.props.node.checkpointId}`]);
+        if(_self.interval != null){
+          clearInterval(_self.interval);
+        }
       }
     })
   }
 
-  componentWillUnmount(){  
-    for(var i=0; i< this.listInterval.length ; i++){
-      clearInterval(this.listInterval[i]);
+  componentWillUnmount(){
+    if(this.interval!=null){
+      clearInterval(this.interval);
     }
   }
 
@@ -76,7 +80,7 @@ export default class TimeCheckPoint extends React.Component{
 
 
     return(
-      <div className={_class} style={{
+      <div ref="myRef" className={_class} style={{
           width:'100%',
           height:'100%',
           padding:'15px 24px'
