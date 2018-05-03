@@ -75,7 +75,7 @@ export default class AddNewCheckPoint extends React.Component{
 
       <h3>Xác định phạm vi trạm theo dõi</h3>
 
-      <MapComponent UpdatePolygon = {this.updatePolygon.bind(this)}/>
+      <MapComponent pathPolygon={[]} UpdatePolygon = {this.updatePolygon.bind(this)}/>
       <br/>
       <br/>
       <RaisedButton
