@@ -25,7 +25,7 @@ import FontIcon from 'material-ui/FontIcon';
 
 import GlobalConstants from '../../../constants/GlobalConstants';
 import axios from 'axios';
-
+import moment from 'moment';
 
 const customContentStyle = {
   width: '100%',
@@ -122,7 +122,7 @@ export default class ReportTable extends React.Component{
                   <TableHeaderColumn>{this.props.mode.object_owner}</TableHeaderColumn>
                 ):null
               }
-              <TableHeaderColumn>Đơn vị</TableHeaderColumn>
+              <TableHeaderColumn>Ngày theo dõi</TableHeaderColumn>
               <TableHeaderColumn>Giờ bắt đầu</TableHeaderColumn>
               <TableHeaderColumn>Giờ kết thúc</TableHeaderColumn>
               {
@@ -140,6 +140,10 @@ export default class ReportTable extends React.Component{
             {
               this.state.listObject.map((node,k)=>{
                 let _status = JSON.parse(node.status);
+                moment.locale('de') ;
+                let date_tracking =  moment(new Date(node.created_at)).subtract('10', 'days').calendar();
+                let created_at = moment(new Date(node.created_at)).format('h:mm:ss a');
+                let ended_at = moment(new Date(node.ended_at)).format('h:mm:ss a');
                 return(
                   <TableRow key={k}>
                     <TableRowColumn>{node.object_tracking}</TableRowColumn>
@@ -148,9 +152,9 @@ export default class ReportTable extends React.Component{
                         <TableRowColumn>{node.object_info.object_owner}</TableRowColumn>
                       ):null
                     }
-                    <TableRowColumn>{node.object_info.organization}</TableRowColumn>
-                    <TableRowColumn>{node.created_at}</TableRowColumn>
-                    <TableRowColumn>{node.ended_at}</TableRowColumn>
+                    <TableRowColumn>{date_tracking}</TableRowColumn>
+                    <TableRowColumn>{created_at}</TableRowColumn>
+                    <TableRowColumn>{ended_at}</TableRowColumn>
                     {
                       _status.map((n,ki)=>{
                         return(
