@@ -37,8 +37,7 @@ export default class MornitorMaster extends Component{
       Actions.SessionStepInCheckPoint(data.data);
     });
 
-    socket.on('session_step_out_checkpoint',function(data){
-      console.log('mornitor master section step out checkpoint');
+    socket.on('session_step_out_checkpoint',function(data){      
       Actions.SessionStepOutCheckPoint(data.data);
     });
   }
@@ -46,7 +45,7 @@ export default class MornitorMaster extends Component{
   componentDidMount (){
     setTimeout(function(){
       Actions.getListAllOnObjectTraking();
-    },10);
+    },100);
   }
 
   componentWillUnmount(){

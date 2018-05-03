@@ -93,33 +93,36 @@ export default class ObjectTrackingItem extends React.Component{
     return(
       <TableRow {...otherProps}>
         {otherProps.children[0]}
-        <TableRowColumn>{this.props.node.object_tracking}</TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn key={'table_row_3'}>{this.props.node.object_tracking}</TableRowColumn>
+        <TableRowColumn key={'table_row_2'}>
           <div onClick={this.onToggleColorPicker.bind(this)} style={{width:'15px',height:'15px',background:`${pathColor}`,border:'1px solid #ddd',position:'relative'}}>
+            {
+              this.state.isColorPickerShowed && (
+                <div style={{zIndex:7,position:'absolute',top:'101%'}}>
+                    <HuePicker color ={this.state.pathColor} onChange={ this.colorChange.bind(this)} />
+                </div>
+              )
+            }
+          </div>
+        </TableRowColumn>
+        <TableRowColumn key={'table_row_1'}><Toggle defaultToggled={true} onToggle={this.onTogglePath.bind(this)}  /></TableRowColumn>
           {
-            this.state.isColorPickerShowed && (
-              <div style={{zIndex:7,position:'absolute',top:'101%'}}>
-                  <HuePicker color ={this.state.pathColor} onChange={ this.colorChange.bind(this)} />
-              </div>
-            )
-          }
-        </div></TableRowColumn>
-        <TableRowColumn><Toggle defaultToggled={true} onToggle={this.onTogglePath.bind(this)}  /></TableRowColumn>
-        {
-          this.state.listTrack.map((node,k)=>{
-            var time1 = node.time_start!='' ? new Date(node.time_start) : new Date();
-            var time2 = new Date();
-            var total_time = node.status!=2 ? (Math.floor((time2-time1)/1000)) + parseInt(node.total_time) : node.total_time;
+            this.state.listTrack.map((node,k)=>{
+              let key = this.props.node.id + '_' + node.checkpointId;
+              var time1 = node.time_start!='' ? new Date(node.time_start) : new Date();
+              var time2 = new Date();
+              var total_time = node.status!=2 ? (Math.floor((time2-time1)/1000)) + parseInt(node.total_time) : node.total_time;
 
-            return(
-              <TableRowColumn style={{padding:0}} key={k}>
-                <TimeCheckPoint totaltime={total_time} sessionid= {this.props.node.id} node={node}/>
-              </TableRowColumn>
-            )
-          })
-        }
-        <TableRowColumn>{created_atT}</TableRowColumn>
-        <TableRowColumn>{ct}</TableRowColumn>
+              return(
+                <TableRowColumn style={{padding:0}} key={'table_row_time_' + k}>
+                  <TimeCheckPoint totaltime={total_time} sessionid= {this.props.node.id} node={node}/>
+                </TableRowColumn>
+              )
+            })
+          }
+
+        <TableRowColumn key={'table_row_5'}>{created_atT}</TableRowColumn>
+        <TableRowColumn key={'table_row_6'}>{ct}</TableRowColumn>
       </TableRow>
     )
   }

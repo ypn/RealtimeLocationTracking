@@ -65776,7 +65776,6 @@ var MornitorMaster = function (_Component) {
     });
 
     socket.on('session_step_out_checkpoint', function (data) {
-      console.log('mornitor master section step out checkpoint');
       __WEBPACK_IMPORTED_MODULE_1__actions_Actions__["b" /* SessionStepOutCheckPoint */](data.data);
     });
     return _this;
@@ -65787,7 +65786,7 @@ var MornitorMaster = function (_Component) {
     value: function componentDidMount() {
       setTimeout(function () {
         __WEBPACK_IMPORTED_MODULE_1__actions_Actions__["d" /* getListAllOnObjectTraking */]();
-      }, 10);
+      }, 100);
     }
   }, {
     key: 'componentWillUnmount',
@@ -66013,14 +66012,6 @@ var TableObjectTracking = function (_React$Component) {
     });
 
     socket.on('stop_tracking_in_' + _this.props.ModeId, function (data) {
-      console.log('stop-tracking');
-      console.log(data.sessionId);
-      // _self.setState({
-      //   listObjectTracking:_self.state.listObjectTracking.filter(ob=>{
-      //     return ob.id!=data.sessionId
-      //   })
-      // })
-
       _self.setState({
         listObjectTracking: __WEBPACK_IMPORTED_MODULE_6_lodash___default.a.reject(_self.state.listObjectTracking, { 'id': data.sessionId })
       });
@@ -66045,34 +66036,34 @@ var TableObjectTracking = function (_React$Component) {
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
+              { key: 'theader_5' },
               this.props.DisplayProperty
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
+              { key: 'theader_4' },
               'M\xE0u \u0111\u01B0\u1EDDng \u0111i'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
+              { key: 'theader_3' },
               'Hi\u1EC7n \u0111\u01B0\u1EDDng \u0111i'
             ),
             this.state.listCheckPoints.map(function (node, k) {
               return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-                { key: k },
+                { key: 'theader_checkpoint_' + k },
                 node.name
               );
             }),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
+              { key: 'theader_2' },
               'Gi\u1EDD b\u1EAFt \u0111\u1EA7u'
             ),
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
+              { key: 'theader_1' },
               'Th\u1EDDi gian gi\xE1m s\xE1t'
             )
           )
@@ -66080,8 +66071,8 @@ var TableObjectTracking = function (_React$Component) {
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
           { className: 'mornitor-tablebody' },
-          this.state.listObjectTracking.map(function (node, key) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ObjectTrackingItem__["a" /* default */], { modeid: _this2.props.ModeId, node: node, key: key });
+          this.state.listObjectTracking.map(function (node) {
+            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__ObjectTrackingItem__["a" /* default */], { modeid: _this2.props.ModeId, node: node, key: node.id });
           })
         )
       );
@@ -68999,12 +68990,12 @@ var ObjectTrackingItem = function (_React$Component) {
         otherProps.children[0],
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-          null,
+          { key: 'table_row_3' },
           this.props.node.object_tracking
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-          null,
+          { key: 'table_row_2' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             { onClick: this.onToggleColorPicker.bind(this), style: { width: '15px', height: '15px', background: '' + pathColor, border: '1px solid #ddd', position: 'relative' } },
@@ -69017,28 +69008,29 @@ var ObjectTrackingItem = function (_React$Component) {
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-          null,
+          { key: 'table_row_1' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_Toggle___default.a, { defaultToggled: true, onToggle: this.onTogglePath.bind(this) })
         ),
         this.state.listTrack.map(function (node, k) {
+          var key = _this2.props.node.id + '_' + node.checkpointId;
           var time1 = node.time_start != '' ? new Date(node.time_start) : new Date();
           var time2 = new Date();
           var total_time = node.status != 2 ? Math.floor((time2 - time1) / 1000) + parseInt(node.total_time) : node.total_time;
 
           return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-            { style: { padding: 0 }, key: k },
+            { style: { padding: 0 }, key: 'table_row_time_' + k },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_7__TimeCheckPoint__["a" /* default */], { totaltime: total_time, sessionid: _this2.props.node.id, node: node })
           );
         }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-          null,
+          { key: 'table_row_5' },
           created_atT
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           __WEBPACK_IMPORTED_MODULE_8_material_ui_Table__["TableRowColumn"],
-          null,
+          { key: 'table_row_6' },
           ct
         )
       );
@@ -77282,50 +77274,53 @@ var TimeCheckPoint = function (_React$Component) {
       status: _this.props.node.status,
       time: parseInt(_this.props.totaltime)
     };
-    _this.listInterval = new Array();
+
     return _this;
   }
 
   _createClass(TimeCheckPoint, [{
+    key: 'tick',
+    value: function tick() {
+      this.setState({
+        time: this.state.time + 1
+      });
+    }
+  }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
 
       var _self = this;
 
       if (this.state.status == 1) {
-        _self.listInterval['checkpoint_' + _self.props.node.checkpointId] = setInterval(function () {
-          _self.setState({
-            time: _self.state.time + 1
-          });
-        }, 1000);
+        this.interval = setInterval(this.tick.bind(_self), 1000);
       }
 
       __WEBPACK_IMPORTED_MODULE_1__stores_Stores__["a" /* default */].on('session_step_in_checkpoint_' + _self.props.sessionid + '_' + _self.props.node.checkpointId, function (data) {
-        _self.setState({
-          status: 1
-        });
-        _self.listInterval['checkpoint_' + _self.props.node.checkpointId] = setInterval(function () {
+        if (_self.refs.myRef) {
           _self.setState({
-            time: _self.state.time + 1
+            status: 1
           });
-        }, 1000);
+          _self.interval = setInterval(_self.tick.bind(_self), 1000);
+        }
       });
 
       __WEBPACK_IMPORTED_MODULE_1__stores_Stores__["a" /* default */].on('session_step_out_checkpoint_' + _self.props.sessionid + '_' + _self.props.node.checkpointId, function (data) {
-        _self.setState({
-          status: 2
-        });
+        if (_self.refs.myRef) {
+          _self.setState({
+            status: 2
+          });
 
-        if (_self.listInterval['checkpoint_' + _self.props.node.checkpointId] != 'undefined') {
-          clearInterval(_self.listInterval['checkpoint_' + _self.props.node.checkpointId]);
+          if (_self.interval != null) {
+            clearInterval(_self.interval);
+          }
         }
       });
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      for (var i = 0; i < this.listInterval.length; i++) {
-        clearInterval(this.listInterval[i]);
+      if (this.interval != null) {
+        clearInterval(this.interval);
       }
     }
   }, {
@@ -77354,7 +77349,7 @@ var TimeCheckPoint = function (_React$Component) {
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: _class, style: {
+        { ref: 'myRef', className: _class, style: {
             width: '100%',
             height: '100%',
             padding: '15px 24px'

@@ -82,4 +82,22 @@ class ReportController extends BaseController
 
     }
 
+    public function getTrackingDetail($id){
+      $result = TrackingLogger::where('id',$id)->first();
+
+      $status = json_decode($result->status);
+      foreach($status as $s){
+        $name = Checkpoint::where('id',$s->checkpointId)->first();
+        if($name){
+            $s->name = $name->name;
+        }else{
+          $s->name = 'Chưa xác định';
+        }
+
+      }
+      $result->status = $status;
+
+      return json_encode($result);
+    }
+
 }
