@@ -67,7 +67,7 @@ export default class AdminMaster extends React.Component{
     super(props);
 
     this.state = {
-      isOpenDrawer:false
+      isOpenDrawer:true
     }
   }
 
@@ -111,12 +111,7 @@ export default class AdminMaster extends React.Component{
                     Dashboard
                 </span>
               </div>
-              <div className="_uuu">
-                <div className="tab-title">
-                  <h3>
-                    Tab title
-                  </h3>
-                </div>
+              <div className="_uuu">              
                 <Route exact path="/app" component={Report} />
                 <Route exact path="/app/report" component={Report} />
                 <Route path="/app/mode-tracking" component={ModeTracking} />

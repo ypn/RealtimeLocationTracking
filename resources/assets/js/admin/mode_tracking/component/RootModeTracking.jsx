@@ -45,7 +45,7 @@ const Edit = ({match})=> (
 export default class RootModeTracking extends React.Component{
   render(){
     return(
-      <div>
+      <div>      
         <div className="control-tool-bar">
           <NavLink activeClassName="_active" to="/app/mode-tracking/list">
               <IconButton

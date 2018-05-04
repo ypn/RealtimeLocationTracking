@@ -124,6 +124,11 @@
          background-color: rgb(0, 188, 212)!important;
          color:#fff!important;
       }
+
+      .active svg{
+        fill:#fff!important;
+      }
+
       .row-danger{
         background: #F44336!important;
       }
@@ -145,6 +150,7 @@
         margin-top: 25px;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         border-radius: 5px; /* 5px rounded corners */
+        min-height: 700px;
       }
       .admin-top-bar{
         width: 100%;
@@ -163,6 +169,7 @@
         padding: 0 15px;
         color: #fff;
         background: rebeccapurple;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
       }
 
       ._active svg{

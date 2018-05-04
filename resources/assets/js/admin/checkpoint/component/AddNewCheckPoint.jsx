@@ -51,39 +51,46 @@ export default class AddNewCheckPoint extends React.Component{
   render(){
     return(
       <div>
-        <TextField
-          id="checkpoint_name"
-          hintText="Nhập tên trạm theo dõi"
-          floatingLabelText="Tên trạm theo dõi"
-        />
-        <TextField
-            id = "checkpoint_time"
-            type="number"
-            hintText="Nhập thời gian định mức theo phút"
-            floatingLabelText="Thời gian định mức theo phút"
-            style={{marginLeft:15}}
-          /><br />
+        <div className="tab-title">
+          <h3>
+            Thêm mới trạm giám sát
+          </h3>
+        </div>
+        <div>
+          <TextField
+            id="checkpoint_name"
+            hintText="Nhập tên trạm theo dõi"
+            floatingLabelText="Tên trạm theo dõi"
+          />
+          <TextField
+              id = "checkpoint_time"
+              type="number"
+              hintText="Nhập thời gian định mức theo phút"
+              floatingLabelText="Thời gian định mức theo phút"
+              style={{marginLeft:15}}
+            /><br />
 
-        <TextField
-          id='description'
-          hintText="Diễn giải ngắn gọn về trạm giám sát"
-          floatingLabelText="Diễn giải"
-          multiLine={true}
-          fullWidth={true}
-          rows={3}
-        />
+          <TextField
+            id='description'
+            hintText="Diễn giải ngắn gọn về trạm giám sát"
+            floatingLabelText="Diễn giải"
+            multiLine={true}
+            fullWidth={true}
+            rows={3}
+          />
 
-      <h3>Xác định phạm vi trạm theo dõi</h3>
+        <h3>Xác định phạm vi trạm theo dõi</h3>
 
-      <MapComponent pathPolygon={[]} UpdatePolygon = {this.updatePolygon.bind(this)}/>
-      <br/>
-      <br/>
-      <RaisedButton
-          onClick={this.submitForm.bind(this)}
-          label="Lưu"
-          primary={true}
-          icon={<SaveIcon/>}
-        />
+        <MapComponent pathPolygon={[]} UpdatePolygon = {this.updatePolygon.bind(this)}/>
+        <br/>
+        <br/>
+        <RaisedButton
+            onClick={this.submitForm.bind(this)}
+            label="Lưu"
+            primary={true}
+            icon={<SaveIcon/>}
+          />
+        </div>
       </div>
     )
   }

@@ -105,82 +105,89 @@ export default class AddNewObjectTracking extends React.Component{
   render(){
     return(
       <div>
-        <SelectField
-          floatingLabelText="Chọn chế độ theo dõi"
-          value={this.state.value}
-          onChange={this.handleChange.bind(this)}
-        >
-        {
-          this.state.listMode.map((node,k)=>{
-            return(
-                <MenuItem key={k} value={node.id} primaryText={node.name} />
-            )
-          })
-        }
-        </SelectField>
-        <br/>
-        {this.state.submitForm!=null?(
-          <div>
-            <TextField
-              id="object_name"
-              ref="object_name"
-              hintText={this.state.submitForm.display_property}
-              floatingLabelText={this.state.submitForm.display_property}
-            /><br/>
-            {
-              this.state.submitForm.object_owner!=null?(
-                <div>
-                <TextField
-                    id="object_owner"
-                    ref="object_owner"
-                    hintText={this.state.submitForm.object_owner}
-                    floatingLabelText={this.state.submitForm.object_owner}
-                  />
-                <br/>
-                </div>
-              ):null
-            }
-            <TextField
-                id="organization"
-                ref="organization"
-                hintText="Đơn vị"
-                floatingLabelText="Đơn vị"
-              />
-            <br/>
-            {
-              this.state.submitForm.is_required_phone_number==1?(
-                <div>
-                <TextField
-                    id="phone_number"
-                    ref="phone_number"
-                    hintText="Số điện thoại"
-                    floatingLabelText="Số điện thoại"
-                  /><br/>
-                </div>
-              ):null
-            }
-            {
-              this.state.submitForm.is_required_identification==1?(
-                <div>
-                <TextField
-                    id="identification"
-                    ref="identification"
-                    hintText="Số chứng minh thư"
-                    floatingLabelText="Số chứng minh thư"
-                  /><br/>
-                </div>
-              ):null
-            }
-            <br/>
-            <RaisedButton
-                disabled = {this.state.isSubmitted}
-                onClick={this.submitForm.bind(this,this.state.submitForm.table_reference)}
-                label="Lưu"
-                primary={true}
-                icon={<FontIcon className="material-icons">save</FontIcon>}
-              />
-          </div>
-        ):null}
+        <div className="tab-title">
+          <h3>
+            Thêm mới đối tượng giám sát
+          </h3>
+        </div>
+        <div>
+          <SelectField
+            floatingLabelText="Chọn chế độ theo dõi"
+            value={this.state.value}
+            onChange={this.handleChange.bind(this)}
+          >
+          {
+            this.state.listMode.map((node,k)=>{
+              return(
+                  <MenuItem key={k} value={node.id} primaryText={node.name} />
+              )
+            })
+          }
+          </SelectField>
+          <br/>
+          {this.state.submitForm!=null?(
+            <div>
+              <TextField
+                id="object_name"
+                ref="object_name"
+                hintText={this.state.submitForm.display_property}
+                floatingLabelText={this.state.submitForm.display_property}
+              /><br/>
+              {
+                this.state.submitForm.object_owner!=null?(
+                  <div>
+                  <TextField
+                      id="object_owner"
+                      ref="object_owner"
+                      hintText={this.state.submitForm.object_owner}
+                      floatingLabelText={this.state.submitForm.object_owner}
+                    />
+                  <br/>
+                  </div>
+                ):null
+              }
+              <TextField
+                  id="organization"
+                  ref="organization"
+                  hintText="Đơn vị"
+                  floatingLabelText="Đơn vị"
+                />
+              <br/>
+              {
+                this.state.submitForm.is_required_phone_number==1?(
+                  <div>
+                  <TextField
+                      id="phone_number"
+                      ref="phone_number"
+                      hintText="Số điện thoại"
+                      floatingLabelText="Số điện thoại"
+                    /><br/>
+                  </div>
+                ):null
+              }
+              {
+                this.state.submitForm.is_required_identification==1?(
+                  <div>
+                  <TextField
+                      id="identification"
+                      ref="identification"
+                      hintText="Số chứng minh thư"
+                      floatingLabelText="Số chứng minh thư"
+                    /><br/>
+                  </div>
+                ):null
+              }
+              <br/>
+              <RaisedButton
+                  disabled = {this.state.isSubmitted}
+                  onClick={this.submitForm.bind(this,this.state.submitForm.table_reference)}
+                  label="Lưu"
+                  primary={true}
+                  icon={<FontIcon className="material-icons">save</FontIcon>}
+                />
+            </div>
+          ):null}
+        </div>
       </div>
     )
   }

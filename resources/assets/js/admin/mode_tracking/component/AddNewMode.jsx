@@ -109,68 +109,75 @@ export default class AddNewMode extends React.Component{
   render(){
     return(
       <div>
-        {
-          this.state.responseError?(
-            <div className="alert alert-danger" role="alert">
-              <button onClick={this.closeAlertError.bind(this)} type="button" className="close-alert">×</button>
-              <h4>Thêm mới không thành công!</h4>
-              {this.state.responseErrorMessage}
-            </div>
-          ):null
-        }
+        <div className="tab-title">
+          <h3>
+            Thêm chế độ giám sát mới
+          </h3>
+        </div>
+        <div>
+          {
+            this.state.responseError?(
+              <div className="alert alert-danger" role="alert">
+                <button onClick={this.closeAlertError.bind(this)} type="button" className="close-alert">×</button>
+                <h4>Thêm mới không thành công!</h4>
+                {this.state.responseErrorMessage}
+              </div>
+            ):null
+          }
 
-        <TextField id="mode_name"
-           ref="mode_name"
-           hintText="Nhập tên chế độ giám sát"
-           floatingLabelText="Tên chế độ giám sát"
-           errorText= {this.state.errorTextModeName}
-           onChange={this.onChangee.bind(this,"errorTextModeName",error.errorTextModeName)}
-         /><br />
-
-         <TextField
-            id="object_name"
-            ref="object_name"
-            hintText="Nhập tên đối tượng giám sát"
-            floatingLabelText="Tên đối tượng giám sát"
-            errorText= {this.state.errorObjectName}
-            onChange={this.onChangee.bind(this,"errorObjectName",error.errorObjectName)}
-
-          /><br />
-
-        <TextField
-             id="display_property"
-             ref="display_property"
-             hintText="Nhập thuộc tính hiển thị"
-             floatingLabelText="Thuộc tính hiển thị"
-             errorText= {this.state.errorDisplayProperty}
-             onChange={this.onChangee.bind(this,"errorDisplayProperty",error.errorDisplayProperty)}
+          <TextField id="mode_name"
+             ref="mode_name"
+             hintText="Nhập tên chế độ giám sát"
+             floatingLabelText="Tên chế độ giám sát"
+             errorText= {this.state.errorTextModeName}
+             onChange={this.onChangee.bind(this,"errorTextModeName",error.errorTextModeName)}
            /><br />
 
-         <TextField
-              id="object_owner"
-              hintText="Nhập đối tượng chủ quản nếu có"
-              floatingLabelText="Đối tượng chủ quản"
-            /><br />
-          <br/>
-          <Checkbox
-            id="is_identitication"
-            label="Yêu cầu số chứng minh thư"
-            style={styles.checkbox}
-          /><br/>
-          <Checkbox
-            id ="is_phone_number"
-            label="Yêu cầu số điện thoại"
-            style={styles.checkbox}
-          /><br/>
+           <TextField
+              id="object_name"
+              ref="object_name"
+              hintText="Nhập tên đối tượng giám sát"
+              floatingLabelText="Tên đối tượng giám sát"
+              errorText= {this.state.errorObjectName}
+              onChange={this.onChangee.bind(this,"errorObjectName",error.errorObjectName)}
 
-          <RaisedButton
-            disabled ={this.state.isSubmitted}
-            onClick={this.onDataSubmit.bind(this)}
-            label="Lưu"
-            labelPosition="before"
-            primary={true}
-            icon={<ActionAndroid />}
-          />
+            /><br />
+
+          <TextField
+               id="display_property"
+               ref="display_property"
+               hintText="Nhập thuộc tính hiển thị"
+               floatingLabelText="Thuộc tính hiển thị"
+               errorText= {this.state.errorDisplayProperty}
+               onChange={this.onChangee.bind(this,"errorDisplayProperty",error.errorDisplayProperty)}
+             /><br />
+
+           <TextField
+                id="object_owner"
+                hintText="Nhập đối tượng chủ quản nếu có"
+                floatingLabelText="Đối tượng chủ quản"
+              /><br />
+            <br/>
+            <Checkbox
+              id="is_identitication"
+              label="Yêu cầu số chứng minh thư"
+              style={styles.checkbox}
+            /><br/>
+            <Checkbox
+              id ="is_phone_number"
+              label="Yêu cầu số điện thoại"
+              style={styles.checkbox}
+            /><br/>
+
+            <RaisedButton
+              disabled ={this.state.isSubmitted}
+              onClick={this.onDataSubmit.bind(this)}
+              label="Lưu"
+              labelPosition="before"
+              primary={true}
+              icon={<ActionAndroid />}
+            />
+        </div>
       </div>
     )
   }

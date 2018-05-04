@@ -49969,7 +49969,7 @@ var AdminMaster = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (AdminMaster.__proto__ || Object.getPrototypeOf(AdminMaster)).call(this, props));
 
     _this2.state = {
-      isOpenDrawer: false
+      isOpenDrawer: true
     };
     return _this2;
   }
@@ -50066,15 +50066,6 @@ var AdminMaster = function (_React$Component2) {
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               'div',
               { className: '_uuu' },
-              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                'div',
-                { className: 'tab-title' },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-                  'h3',
-                  null,
-                  'Tab title'
-                )
-              ),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { exact: true, path: '/app', component: Report }),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { exact: true, path: '/app/report', component: Report }),
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router_dom__["d" /* Route */], { path: '/app/mode-tracking', component: ModeTracking }),
@@ -64161,89 +64152,102 @@ var ListModes = function (_React$Component) {
       var _this2 = this;
 
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
+        'div',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
-          null,
+          'div',
+          { className: 'tab-title' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+            'h3',
             null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'STT'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'T\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              '\u0110\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'Tr\u1EA1ng th\xE1i'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'X\xF3a/S\u1EEDa'
-            )
+            'Danh s\xE1ch ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
+          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
           null,
-          this.state.listModes.map(function (node, key) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
-              { key: key },
+              null,
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                key + 1
+                'STT'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                node.name
+                'T\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                node.object_tracking
+                '\u0110\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_Toggle___default.a, {
-                  onToggle: _this2.toggleStateMode.bind(_this2, node.id),
-                  defaultToggled: node.state ? true : false,
-                  style: styles.toggle
-                })
+                'Tr\u1EA1ng th\xE1i'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { onClick: _this2.deleteMode.bind(_this2, node.id, node.table_reference), href: 'javascript:void(0);' },
-                  'X\xF3a'
-                ),
-                '/',
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
-                  { to: "/app/mode-tracking/edit/" + node.id },
-                  'S\u1EEDa'
-                )
+                'X\xF3a/S\u1EEDa'
               )
-            );
-          })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
+            null,
+            this.state.listModes.map(function (node, key) {
+              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+                { key: key },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  key + 1
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  node.name
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  node.object_tracking
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_Toggle___default.a, {
+                    onToggle: _this2.toggleStateMode.bind(_this2, node.id),
+                    defaultToggled: node.state ? true : false,
+                    style: styles.toggle
+                  })
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'a',
+                    { onClick: _this2.deleteMode.bind(_this2, node.id, node.table_reference), href: 'javascript:void(0);' },
+                    'X\xF3a'
+                  ),
+                  '/',
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                    { to: "/app/mode-tracking/edit/" + node.id },
+                    'S\u1EEDa'
+                  )
+                )
+              );
+            })
+          )
         )
       );
     }
@@ -84928,75 +84932,88 @@ var AddNewMode = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        this.state.responseError ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          { className: 'alert alert-danger', role: 'alert' },
+          { className: 'tab-title' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'button',
-            { onClick: this.closeAlertError.bind(this), type: 'button', className: 'close-alert' },
-            '\xD7'
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'h4',
+            'h3',
             null,
-            'Th\xEAm m\u1EDBi kh\xF4ng th\xE0nh c\xF4ng!'
-          ),
-          this.state.responseErrorMessage
-        ) : null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, { id: 'mode_name',
-          ref: 'mode_name',
-          hintText: 'Nh\u1EADp t\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t',
-          floatingLabelText: 'T\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t',
-          errorText: this.state.errorTextModeName,
-          onChange: this.onChangee.bind(this, "errorTextModeName", error.errorTextModeName)
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'object_name',
-          ref: 'object_name',
-          hintText: 'Nh\u1EADp t\xEAn \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t',
-          floatingLabelText: 'T\xEAn \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t',
-          errorText: this.state.errorObjectName,
-          onChange: this.onChangee.bind(this, "errorObjectName", error.errorObjectName)
+            'Th\xEAm ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t m\u1EDBi'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          this.state.responseError ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            { className: 'alert alert-danger', role: 'alert' },
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'button',
+              { onClick: this.closeAlertError.bind(this), type: 'button', className: 'close-alert' },
+              '\xD7'
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'h4',
+              null,
+              'Th\xEAm m\u1EDBi kh\xF4ng th\xE0nh c\xF4ng!'
+            ),
+            this.state.responseErrorMessage
+          ) : null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, { id: 'mode_name',
+            ref: 'mode_name',
+            hintText: 'Nh\u1EADp t\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t',
+            floatingLabelText: 'T\xEAn ch\u1EBF \u0111\u1ED9 gi\xE1m s\xE1t',
+            errorText: this.state.errorTextModeName,
+            onChange: this.onChangee.bind(this, "errorTextModeName", error.errorTextModeName)
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'object_name',
+            ref: 'object_name',
+            hintText: 'Nh\u1EADp t\xEAn \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t',
+            floatingLabelText: 'T\xEAn \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t',
+            errorText: this.state.errorObjectName,
+            onChange: this.onChangee.bind(this, "errorObjectName", error.errorObjectName)
 
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'display_property',
-          ref: 'display_property',
-          hintText: 'Nh\u1EADp thu\u1ED9c t\xEDnh hi\u1EC3n th\u1ECB',
-          floatingLabelText: 'Thu\u1ED9c t\xEDnh hi\u1EC3n th\u1ECB',
-          errorText: this.state.errorDisplayProperty,
-          onChange: this.onChangee.bind(this, "errorDisplayProperty", error.errorDisplayProperty)
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'object_owner',
-          hintText: 'Nh\u1EADp \u0111\u1ED1i t\u01B0\u1EE3ng ch\u1EE7 qu\u1EA3n n\u1EBFu c\xF3',
-          floatingLabelText: '\u0110\u1ED1i t\u01B0\u1EE3ng ch\u1EE7 qu\u1EA3n'
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_Checkbox___default.a, {
-          id: 'is_identitication',
-          label: 'Y\xEAu c\u1EA7u s\u1ED1 ch\u1EE9ng minh th\u01B0',
-          style: styles.checkbox
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_Checkbox___default.a, {
-          id: 'is_phone_number',
-          label: 'Y\xEAu c\u1EA7u s\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
-          style: styles.checkbox
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_RaisedButton___default.a, {
-          disabled: this.state.isSubmitted,
-          onClick: this.onDataSubmit.bind(this),
-          label: 'L\u01B0u',
-          labelPosition: 'before',
-          primary: true,
-          icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_svg_icons_action_android___default.a, null)
-        })
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'display_property',
+            ref: 'display_property',
+            hintText: 'Nh\u1EADp thu\u1ED9c t\xEDnh hi\u1EC3n th\u1ECB',
+            floatingLabelText: 'Thu\u1ED9c t\xEDnh hi\u1EC3n th\u1ECB',
+            errorText: this.state.errorDisplayProperty,
+            onChange: this.onChangee.bind(this, "errorDisplayProperty", error.errorDisplayProperty)
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'object_owner',
+            hintText: 'Nh\u1EADp \u0111\u1ED1i t\u01B0\u1EE3ng ch\u1EE7 qu\u1EA3n n\u1EBFu c\xF3',
+            floatingLabelText: '\u0110\u1ED1i t\u01B0\u1EE3ng ch\u1EE7 qu\u1EA3n'
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_Checkbox___default.a, {
+            id: 'is_identitication',
+            label: 'Y\xEAu c\u1EA7u s\u1ED1 ch\u1EE9ng minh th\u01B0',
+            style: styles.checkbox
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_Checkbox___default.a, {
+            id: 'is_phone_number',
+            label: 'Y\xEAu c\u1EA7u s\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
+            style: styles.checkbox
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_RaisedButton___default.a, {
+            disabled: this.state.isSubmitted,
+            onClick: this.onDataSubmit.bind(this),
+            label: 'L\u01B0u',
+            labelPosition: 'before',
+            primary: true,
+            icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_svg_icons_action_android___default.a, null)
+          })
+        )
       );
     }
   }]);
@@ -87768,80 +87785,93 @@ var AddNewObjectTracking = function (_React$Component) {
         'div',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_SelectField___default.a,
-          {
-            floatingLabelText: 'Ch\u1ECDn ch\u1EBF \u0111\u1ED9 theo d\xF5i',
-            value: this.state.value,
-            onChange: this.handleChange.bind(this)
-          },
-          this.state.listMode.map(function (node, k) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_MenuItem___default.a, { key: k, value: node.id, primaryText: node.name });
-          })
+          'div',
+          { className: 'tab-title' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'Th\xEAm m\u1EDBi \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t'
+          )
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        this.state.submitForm != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
           null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-            id: 'object_name',
-            ref: 'object_name',
-            hintText: this.state.submitForm.display_property,
-            floatingLabelText: this.state.submitForm.display_property
-          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_SelectField___default.a,
+            {
+              floatingLabelText: 'Ch\u1ECDn ch\u1EBF \u0111\u1ED9 theo d\xF5i',
+              value: this.state.value,
+              onChange: this.handleChange.bind(this)
+            },
+            this.state.listMode.map(function (node, k) {
+              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_MenuItem___default.a, { key: k, value: node.id, primaryText: node.name });
+            })
+          ),
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-          this.state.submitForm.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          this.state.submitForm != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-              id: 'object_owner',
-              ref: 'object_owner',
-              hintText: this.state.submitForm.object_owner,
-              floatingLabelText: this.state.submitForm.object_owner
+              id: 'object_name',
+              ref: 'object_name',
+              hintText: this.state.submitForm.display_property,
+              floatingLabelText: this.state.submitForm.display_property
             }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
-          ) : null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-            id: 'organization',
-            ref: 'organization',
-            hintText: '\u0110\u01A1n v\u1ECB',
-            floatingLabelText: '\u0110\u01A1n v\u1ECB'
-          }),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-          this.state.submitForm.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            this.state.submitForm.object_owner != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
+                id: 'object_owner',
+                ref: 'object_owner',
+                hintText: this.state.submitForm.object_owner,
+                floatingLabelText: this.state.submitForm.object_owner
+              }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
+            ) : null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-              id: 'phone_number',
-              ref: 'phone_number',
-              hintText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
-              floatingLabelText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i'
+              id: 'organization',
+              ref: 'organization',
+              hintText: '\u0110\u01A1n v\u1ECB',
+              floatingLabelText: '\u0110\u01A1n v\u1ECB'
             }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
-          ) : null,
-          this.state.submitForm.is_required_identification == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
-              id: 'identification',
-              ref: 'identification',
-              hintText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0',
-              floatingLabelText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0'
-            }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
-          ) : null,
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_RaisedButton___default.a, {
-            disabled: this.state.isSubmitted,
-            onClick: this.submitForm.bind(this, this.state.submitForm.table_reference),
-            label: 'L\u01B0u',
-            primary: true,
-            icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_5_material_ui_FontIcon___default.a,
-              { className: 'material-icons' },
-              'save'
-            )
-          })
-        ) : null
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            this.state.submitForm.is_required_phone_number == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
+                id: 'phone_number',
+                ref: 'phone_number',
+                hintText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i',
+                floatingLabelText: 'S\u1ED1 \u0111i\u1EC7n tho\u1EA1i'
+              }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
+            ) : null,
+            this.state.submitForm.is_required_identification == 1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              null,
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_TextField___default.a, {
+                id: 'identification',
+                ref: 'identification',
+                hintText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0',
+                floatingLabelText: 'S\u1ED1 ch\u1EE9ng minh th\u01B0'
+              }),
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
+            ) : null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_RaisedButton___default.a, {
+              disabled: this.state.isSubmitted,
+              onClick: this.submitForm.bind(this, this.state.submitForm.table_reference),
+              label: 'L\u01B0u',
+              primary: true,
+              icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_5_material_ui_FontIcon___default.a,
+                { className: 'material-icons' },
+                'save'
+              )
+            })
+          ) : null
+        )
       );
     }
   }]);
@@ -89152,20 +89182,33 @@ var ListObjectTracking = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        this.state.listMode != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tabs"],
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          { className: 'tab-title' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'Danh s\xE1ch \u0111\u1ED1i t\u01B0\u1EE3ng gi\xE1m s\xE1t'
+          )
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
           null,
-          this.state.listMode.map(function (node, k) {
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
-              { onActive: _this2.onTabActive.bind(_this2, k), label: node.name, key: k },
-              _this2.state.tabActive == k ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TableObjectTracking__["a" /* default */], { ModeProperty: node }) : null
-            );
-          })
-        ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h4',
-          null,
-          'Ch\u01B0a c\xF3 ch\u1EBF \u0111\u1ED9 theo d\xF5i n\xE0o! Nh\u1EA5n v\xE0o ADD \u0111\u1EC3 th\xEAm 1 ch\u1EBF \u0111\u1ED9 m\u1EDBi!'
+          this.state.listMode != null ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tabs"],
+            null,
+            this.state.listMode.map(function (node, k) {
+              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Tabs__["Tab"],
+                { onActive: _this2.onTabActive.bind(_this2, k), label: node.name, key: k },
+                _this2.state.tabActive == k ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__TableObjectTracking__["a" /* default */], { ModeProperty: node }) : null
+              );
+            })
+          ) : __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h4',
+            null,
+            'Ch\u01B0a c\xF3 ch\u1EBF \u0111\u1ED9 theo d\xF5i n\xE0o! Nh\u1EA5n v\xE0o ADD \u0111\u1EC3 th\xEAm 1 ch\u1EBF \u0111\u1ED9 m\u1EDBi!'
+          )
         )
       );
     }
@@ -91215,41 +91258,54 @@ var AddNewCheckPoint = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'checkpoint_name',
-          hintText: 'Nh\u1EADp t\xEAn tr\u1EA1m theo d\xF5i',
-          floatingLabelText: 'T\xEAn tr\u1EA1m theo d\xF5i'
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'checkpoint_time',
-          type: 'number',
-          hintText: 'Nh\u1EADp th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c theo ph\xFAt',
-          floatingLabelText: 'Th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c theo ph\xFAt',
-          style: { marginLeft: 15 }
-        }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
-          id: 'description',
-          hintText: 'Di\u1EC5n gi\u1EA3i ng\u1EAFn g\u1ECDn v\u1EC1 tr\u1EA1m gi\xE1m s\xE1t',
-          floatingLabelText: 'Di\u1EC5n gi\u1EA3i',
-          multiLine: true,
-          fullWidth: true,
-          rows: 3
-        }),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          'h3',
-          null,
-          'X\xE1c \u0111\u1ECBnh ph\u1EA1m vi tr\u1EA1m theo d\xF5i'
+          'div',
+          { className: 'tab-title' },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'Th\xEAm m\u1EDBi tr\u1EA1m gi\xE1m s\xE1t'
+          )
         ),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MapComponent__["a" /* default */], { pathPolygon: [], UpdatePolygon: this.updatePolygon.bind(this) }),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
-        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_RaisedButton___default.a, {
-          onClick: this.submitForm.bind(this),
-          label: 'L\u01B0u',
-          primary: true,
-          icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_content_save___default.a, null)
-        })
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'div',
+          null,
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'checkpoint_name',
+            hintText: 'Nh\u1EADp t\xEAn tr\u1EA1m theo d\xF5i',
+            floatingLabelText: 'T\xEAn tr\u1EA1m theo d\xF5i'
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'checkpoint_time',
+            type: 'number',
+            hintText: 'Nh\u1EADp th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c theo ph\xFAt',
+            floatingLabelText: 'Th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c theo ph\xFAt',
+            style: { marginLeft: 15 }
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1_material_ui_TextField___default.a, {
+            id: 'description',
+            hintText: 'Di\u1EC5n gi\u1EA3i ng\u1EAFn g\u1ECDn v\u1EC1 tr\u1EA1m gi\xE1m s\xE1t',
+            floatingLabelText: 'Di\u1EC5n gi\u1EA3i',
+            multiLine: true,
+            fullWidth: true,
+            rows: 3
+          }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'h3',
+            null,
+            'X\xE1c \u0111\u1ECBnh ph\u1EA1m vi tr\u1EA1m theo d\xF5i'
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__MapComponent__["a" /* default */], { pathPolygon: [], UpdatePolygon: this.updatePolygon.bind(this) }),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_material_ui_RaisedButton___default.a, {
+            onClick: this.submitForm.bind(this),
+            label: 'L\u01B0u',
+            primary: true,
+            icon: __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_svg_icons_content_save___default.a, null)
+          })
+        )
       );
     }
   }]);
@@ -101536,89 +101592,102 @@ var ListCheckPoints = function (_React$Component) {
     key: 'render',
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
+        'div',
         null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
-          null,
+          'div',
+          { className: 'tab-title' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+            'h3',
             null,
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'STT'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'T\xEAn tr\u1EA1m gi\xE1m s\xE1t'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'M\xF4 t\u1EA3'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'Th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c'
-            ),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
-              null,
-              'X\xF3a/S\u1EEDa'
-            )
+            'Danh s\xE1ch tr\u1EA1m gi\xE1m s\xE1t'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
+          __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["Table"],
           null,
-          this.state.listCheckPoints.map(function (node, k) {
-
-            var min = Math.floor(node.time / 60);
-            var sec = node.time - 60 * min;
-
-            return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeader"],
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
-              { key: k },
+              null,
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                k + 1
+                'STT'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                node.name
+                'T\xEAn tr\u1EA1m gi\xE1m s\xE1t'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                node.description
+                'M\xF4 t\u1EA3'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                min + ' phút' + (sec != 0 ? ' ' + sec + ' giây' : '')
+                'Th\u1EDDi gian \u0111\u1ECBnh m\u1EE9c'
               ),
               __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableHeaderColumn"],
                 null,
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  'a',
-                  { href: 'javascript:void(0)' },
-                  'X\xF3a'
-                ),
-                '/',
-                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                  __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
-                  { to: "/app/checkpoint/edit/" + node.id },
-                  'S\u1EEDa'
-                )
+                'X\xF3a/S\u1EEDa'
               )
-            );
-          })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableBody"],
+            null,
+            this.state.listCheckPoints.map(function (node, k) {
+
+              var min = Math.floor(node.time / 60);
+              var sec = node.time - 60 * min;
+
+              return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
+                { key: k },
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  k + 1
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  node.name
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  node.description
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  min + ' phút' + (sec != 0 ? ' ' + sec + ' giây' : '')
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                  __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRowColumn"],
+                  null,
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'a',
+                    { href: 'javascript:void(0)' },
+                    'X\xF3a'
+                  ),
+                  '/',
+                  __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    __WEBPACK_IMPORTED_MODULE_2_react_router_dom__["b" /* Link */],
+                    { to: "/app/checkpoint/edit/" + node.id },
+                    'S\u1EEDa'
+                  )
+                )
+              );
+            })
+          )
         )
       );
     }

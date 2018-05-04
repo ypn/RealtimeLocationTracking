@@ -56,28 +56,35 @@ export default class ListObjectTracking extends React.Component{
   render(){
     return(
       <div>
-      {
-        this.state.listMode!=null ? (
-          <Tabs>
-          {
-            this.state.listMode.map((node,k)=>{
-              return(
-                  <Tab onActive={this.onTabActive.bind(this,k)} label={node.name} key={k}>
-                    {
-                      this.state.tabActive == k ? (
-                        <TableObjectTracking ModeProperty= {node}/>
-                      ):null
-                    }
-                  </Tab>
-              )
-            })
-          }
-          </Tabs>
-        ):
-        (
-          <h4>Chưa có chế độ theo dõi nào! Nhấn vào ADD để thêm 1 chế độ mới!</h4>
-        )
-      }
+        <div className="tab-title">
+          <h3>
+            Danh sách đối tượng giám sát
+          </h3>
+        </div>
+        <div>
+        {
+          this.state.listMode!=null ? (
+            <Tabs>
+            {
+              this.state.listMode.map((node,k)=>{
+                return(
+                    <Tab onActive={this.onTabActive.bind(this,k)} label={node.name} key={k}>
+                      {
+                        this.state.tabActive == k ? (
+                          <TableObjectTracking ModeProperty= {node}/>
+                        ):null
+                      }
+                    </Tab>
+                )
+              })
+            }
+            </Tabs>
+          ):
+          (
+            <h4>Chưa có chế độ theo dõi nào! Nhấn vào ADD để thêm 1 chế độ mới!</h4>
+          )
+        }
+        </div>
       </div>
     )
   }

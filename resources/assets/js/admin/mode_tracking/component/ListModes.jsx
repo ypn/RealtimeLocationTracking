@@ -71,42 +71,49 @@ export default class ListModes extends React.Component{
 
   render(){
     return(
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderColumn>STT</TableHeaderColumn>
-            <TableHeaderColumn>Tên chế độ giám sát</TableHeaderColumn>
-            <TableHeaderColumn>Đối tượng giám sát</TableHeaderColumn>
-            <TableHeaderColumn>Trạng thái</TableHeaderColumn>
-            <TableHeaderColumn>Xóa/Sửa</TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {
-            this.state.listModes.map((node,key)=>{
-              return(
-                <TableRow key={key}>
-                  <TableRowColumn>{key+1}</TableRowColumn>
-                  <TableRowColumn>{node.name}</TableRowColumn>
-                  <TableRowColumn>{node.object_tracking}</TableRowColumn>
-                  <TableRowColumn>
-                    <Toggle
-                        onToggle = {this.toggleStateMode.bind(this,node.id)}
-                        defaultToggled={node.state?true:false}
-                        style={styles.toggle}
-                      />
-                  </TableRowColumn>
-                  <TableRowColumn>
-                    <a onClick={this.deleteMode.bind(this,node.id,node.table_reference)} href="javascript:void(0);">Xóa</a>
-                    /
-                    <Link to={"/app/mode-tracking/edit/" + node.id}>Sửa</Link>
-                  </TableRowColumn>
-                </TableRow>
-              )
-            })
-          }
-        </TableBody>
-      </Table>
+      <div>
+        <div className="tab-title">
+          <h3>
+            Danh sách chế độ giám sát
+          </h3>
+        </div>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderColumn>STT</TableHeaderColumn>
+              <TableHeaderColumn>Tên chế độ giám sát</TableHeaderColumn>
+              <TableHeaderColumn>Đối tượng giám sát</TableHeaderColumn>
+              <TableHeaderColumn>Trạng thái</TableHeaderColumn>
+              <TableHeaderColumn>Xóa/Sửa</TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {
+              this.state.listModes.map((node,key)=>{
+                return(
+                  <TableRow key={key}>
+                    <TableRowColumn>{key+1}</TableRowColumn>
+                    <TableRowColumn>{node.name}</TableRowColumn>
+                    <TableRowColumn>{node.object_tracking}</TableRowColumn>
+                    <TableRowColumn>
+                      <Toggle
+                          onToggle = {this.toggleStateMode.bind(this,node.id)}
+                          defaultToggled={node.state?true:false}
+                          style={styles.toggle}
+                        />
+                    </TableRowColumn>
+                    <TableRowColumn>
+                      <a onClick={this.deleteMode.bind(this,node.id,node.table_reference)} href="javascript:void(0);">Xóa</a>
+                      /
+                      <Link to={"/app/mode-tracking/edit/" + node.id}>Sửa</Link>
+                    </TableRowColumn>
+                  </TableRow>
+                )
+              })
+            }
+          </TableBody>
+        </Table>
+      </div>
     )
   }
 }
