@@ -101961,43 +101961,56 @@ var RootReportComponent = function (_React$Component) {
     value: function render() {
       return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
-        { className: 'row component-content-viewer' },
+        null,
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          null,
+          { className: 'tab-title' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-md-4' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-              __WEBPACK_IMPORTED_MODULE_1_material_ui_SelectField___default.a,
-              {
-                floatingLabelText: 'Ch\u1ECDn ch\u1EBF \u0111\u1ED9 theo d\xF5i',
-                value: this.state.value,
-                onChange: this.handleChange.bind(this)
-              },
-              this.state.listMode.map(function (node, k) {
-                return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_MenuItem___default.a, { key: k, value: node.id, primaryText: node.name });
-              })
-            )
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-md-4' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_DatePicker___default.a, { floatingLabelText: 'Xu\u1EA5t b\u1EA3n ghi t\u1EEB ng\xE0y', mode: 'landscape' })
-          ),
-          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-            'div',
-            { className: 'col-md-4' },
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_DatePicker___default.a, { floatingLabelText: '\u0110\u1EBFn ng\xE0y', mode: 'landscape' })
+            'h3',
+            null,
+            'B\xE1o c\xE1o l\u1ECBch s\u1EED gi\xE1m s\xE1t'
           )
         ),
         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
           'div',
-          null,
+          { className: 'row component-content-viewer' },
           __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            { className: 'col-md-12' },
-            this.state.mode.id != -1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ReportTable__["a" /* default */], { mode: this.state.mode }) : null
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-md-4' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_1_material_ui_SelectField___default.a,
+                {
+                  floatingLabelText: 'Ch\u1ECDn ch\u1EBF \u0111\u1ED9 theo d\xF5i',
+                  value: this.state.value,
+                  onChange: this.handleChange.bind(this)
+                },
+                this.state.listMode.map(function (node, k) {
+                  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_MenuItem___default.a, { key: k, value: node.id, primaryText: node.name });
+                })
+              )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-md-4' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_DatePicker___default.a, { floatingLabelText: 'Xu\u1EA5t b\u1EA3n ghi t\u1EEB ng\xE0y', mode: 'landscape' })
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-md-4' },
+              __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4_material_ui_DatePicker___default.a, { floatingLabelText: '\u0110\u1EBFn ng\xE0y', mode: 'landscape' })
+            )
+          ),
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'div',
+            null,
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+              'div',
+              { className: 'col-md-12' },
+              this.state.mode.id != -1 ? __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_11__ReportTable__["a" /* default */], { mode: this.state.mode }) : null
+            )
           )
         )
       );

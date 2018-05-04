@@ -85,39 +85,46 @@ export default class RootReportComponent extends React.Component{
 
   render(){
     return(
-      <div className="row component-content-viewer">
-        <div>
-          <div className="col-md-4">
-            <SelectField
-              floatingLabelText="Chọn chế độ theo dõi"
-              value={this.state.value}
-              onChange={this.handleChange.bind(this)}
-            >
-            {
-              this.state.listMode.map((node,k)=>{
-                return(
-                  <MenuItem key={k} value={node.id} primaryText={node.name} />
-                )
-              })
-            }
-            </SelectField>
-          </div>
-
-          <div className="col-md-4">
-            <DatePicker floatingLabelText="Xuất bản ghi từ ngày" mode="landscape" />
-          </div>
-
-          <div className="col-md-4">
-            <DatePicker floatingLabelText="Đến ngày" mode="landscape" />
-          </div>
+      <div>
+        <div className="tab-title">
+          <h3>
+            Báo cáo lịch sử giám sát
+          </h3>
         </div>
+        <div className="row component-content-viewer">
+          <div>
+            <div className="col-md-4">
+              <SelectField
+                floatingLabelText="Chọn chế độ theo dõi"
+                value={this.state.value}
+                onChange={this.handleChange.bind(this)}
+              >
+              {
+                this.state.listMode.map((node,k)=>{
+                  return(
+                    <MenuItem key={k} value={node.id} primaryText={node.name} />
+                  )
+                })
+              }
+              </SelectField>
+            </div>
 
-        <div>
-          <div  className="col-md-12">
-            {
-              this.state.mode.id!=-1 ?   <ReportTable mode={this.state.mode}/> : null
-            }
+            <div className="col-md-4">
+              <DatePicker floatingLabelText="Xuất bản ghi từ ngày" mode="landscape" />
+            </div>
 
+            <div className="col-md-4">
+              <DatePicker floatingLabelText="Đến ngày" mode="landscape" />
+            </div>
+          </div>
+
+          <div>
+            <div  className="col-md-12">
+              {
+                this.state.mode.id!=-1 ?   <ReportTable mode={this.state.mode}/> : null
+              }
+
+            </div>
           </div>
         </div>
       </div>
