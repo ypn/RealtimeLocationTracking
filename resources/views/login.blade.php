@@ -48,30 +48,6 @@
   </div>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-  <script type="text/javascript">
-    $('#login-button').click(function(){
-      $('#login-button').fadeOut("slow",function(){
-        $("#container").fadeIn();
-        TweenMax.from("#container", .3, { scale: 0, ease:Sine.easeInOut});
-        TweenMax.to("#container", .3, { scale: 1, ease:Sine.easeInOut});
-      });
-      });
-
-      $(".close-btn").click(function(){
-      TweenMax.from("#container", .3, { scale: 1, ease:Sine.easeInOut});
-      TweenMax.to("#container", .3, { left:"0px", scale: 0, ease:Sine.easeInOut});
-      $("#container, #forgotten-container").fadeOut(400, function(){
-        $("#login-button").fadeIn(400);
-      });
-      });
-
-      /* Forgotten Password */
-      $('#forgotten').click(function(){
-      $("#container").fadeOut(function(){
-        $("#forgotten-container").fadeIn();
-      });
-    });
-  </script>
 </body>
 
 </html>

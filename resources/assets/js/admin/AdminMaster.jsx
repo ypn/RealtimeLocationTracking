@@ -31,12 +31,16 @@ import HomePage from 'material-ui/svg-icons/action/home';
 
 
 
-const AppBarExampleIcon = () => (
-  <AppBar
-    title="Dashboard"
-    iconElementLeft={<IconButton><a href="/"><HomePage style={{color:'#fff'}} /></a></IconButton>}
-  />
-);
+class AppBarExampleIcon extends React.Component {
+  render(){
+    return(
+      <AppBar
+        title="Dashboard"
+        iconElementLeft={<IconButton><a href="/"><HomePage style={{color:'#fff'}} /></a></IconButton>}
+      />
+    )
+  }
+}
 
 const Report = () => (
   <RootReportComponent/>
@@ -67,9 +71,7 @@ export default class AdminMaster extends React.Component{
           <div>
             <AppBarExampleIcon/>
             <Drawer containerClassName="root-drawer">
-              <div className="drawer-avatar">
-
-              </div>
+              <div className="drawer-avatar"></div>
               <NavLink to="/app/report" activeClassName="active"><MenuItem leftIcon={<ContentInbox />} className="menu-item">Báo cáo</MenuItem></NavLink>
               <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem leftIcon={<IconCheckPoint />} className="menu-item">Trạm giám sát</MenuItem></NavLink>
               <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">Chế độ giám sát</MenuItem></NavLink>

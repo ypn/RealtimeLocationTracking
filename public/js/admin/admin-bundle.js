@@ -32895,20 +32895,35 @@ __WEBPACK_IMPORTED_MODULE_0_react_tap_event_plugin___default()();
 
 
 
-var AppBarExampleIcon = function AppBarExampleIcon() {
-  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_AppBar___default.a, {
-    title: 'Dashboard',
-    iconElementLeft: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-      __WEBPACK_IMPORTED_MODULE_16_material_ui_IconButton___default.a,
-      null,
-      __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-        'a',
-        { href: '/' },
-        __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_17_material_ui_svg_icons_action_home___default.a, { style: { color: '#fff' } })
-      )
-    )
-  });
-};
+var AppBarExampleIcon = function (_React$Component) {
+  _inherits(AppBarExampleIcon, _React$Component);
+
+  function AppBarExampleIcon() {
+    _classCallCheck(this, AppBarExampleIcon);
+
+    return _possibleConstructorReturn(this, (AppBarExampleIcon.__proto__ || Object.getPrototypeOf(AppBarExampleIcon)).apply(this, arguments));
+  }
+
+  _createClass(AppBarExampleIcon, [{
+    key: 'render',
+    value: function render() {
+      return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_AppBar___default.a, {
+        title: 'Dashboard',
+        iconElementLeft: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_16_material_ui_IconButton___default.a,
+          null,
+          __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            'a',
+            { href: '/' },
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_17_material_ui_svg_icons_action_home___default.a, { style: { color: '#fff' } })
+          )
+        )
+      });
+    }
+  }]);
+
+  return AppBarExampleIcon;
+}(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
 
 var Report = function Report() {
   return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_10__report_component_RootReportComponent__["a" /* default */], null);
@@ -32938,8 +32953,8 @@ var Settings = function Settings() {
   );
 };
 
-var AdminMaster = function (_React$Component) {
-  _inherits(AdminMaster, _React$Component);
+var AdminMaster = function (_React$Component2) {
+  _inherits(AdminMaster, _React$Component2);
 
   function AdminMaster() {
     _classCallCheck(this, AdminMaster);
