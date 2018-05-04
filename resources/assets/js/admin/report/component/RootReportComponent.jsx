@@ -85,7 +85,7 @@ export default class RootReportComponent extends React.Component{
 
   render(){
     return(
-      <div className="component-content-viewer">
+      <div className="row component-content-viewer">
         <div>
           <div className="col-md-4">
             <SelectField

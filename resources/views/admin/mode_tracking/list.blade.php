@@ -8,11 +8,19 @@
     <style media="screen">
       body{
         margin: 0;
+        background: #ddd;
+      }
+
+      .root-drawer._open{
+        width: 260px!important;
+        transition: all 0.3s ease!important;
       }
 
       .root-drawer{
         z-index: 1000!important;
         width: 65px!important;
+        overflow-x: hidden!important;
+        transition: all 0.3s ease!important;
       }
 
       .root-drawer a{
@@ -21,15 +29,27 @@
 
       .drawer-avatar{
         background-image: url('/images/background.jpg');
+        transition: all 0.3s ease;
+        height: 48px;
         width: 100%;
-        height: 250px;
         background-size: cover;
       }
 
+      .drawer-avatar._open{
+        transition: all 0.3s ease;
+        height: 250px;
+      }
+
       .root-content{
-        /*margin:20px 15px 0 315px; */
-        margin:20px 15px 0 100px;
+        position: relative;
+        transition: all 0.3s ease;
+        margin:15px 15px 0 85px;
         padding-bottom: 100px;
+      }
+
+      .root-content._open{
+        margin:15px 15px 0 285px;
+
       }
 
       .alert h4{
@@ -107,6 +127,48 @@
       .row-danger{
         background: #F44336!important;
       }
+
+      .btn-menu{
+        border: none;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        width: 40px;
+        height:40px;
+         outline:none;
+      }
+
+
+      ._uuu{
+        background: #fff;
+        padding: 25px;
+        margin-top: 25px;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        border-radius: 5px; /* 5px rounded corners */
+      }
+      .admin-top-bar{
+        width: 100%;
+      }
+
+      .admin-top-bar .topbar-right-item{
+        float:right;
+      }
+
+      .tab-title{
+        display: inline-block;
+        position: absolute;
+        top: 40px;
+        right: 15px;
+        border-radius: 5px;
+        padding: 0 15px;
+        color: #fff;
+        background: rebeccapurple;
+      }
+
+      ._active svg{
+        color: rebeccapurple!important;
+      }
+
     </style>
   </head>
   <body>

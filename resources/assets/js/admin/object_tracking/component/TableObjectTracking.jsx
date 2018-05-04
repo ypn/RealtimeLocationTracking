@@ -166,8 +166,7 @@ export default class TableObjectTracking extends React.Component{
               style={{
                 position:'fixed',
                 top:'50%',
-                left:'50%',
-                background:'#fff',
+                left:'50%',              
                 margin:'15px'
               }}
             />

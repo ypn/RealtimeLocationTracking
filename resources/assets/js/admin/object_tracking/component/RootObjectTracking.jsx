@@ -3,8 +3,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Divider from 'material-ui/Divider';
+import IconList from 'material-ui/svg-icons/action/list';
+import IconListAdd from 'material-ui/svg-icons/av/playlist-add';
+import ReactTooltip from 'react-tooltip'
+import IconButton from 'material-ui/IconButton';
 
-import {Route, Link } from "react-router-dom";
+import {Route, NavLink } from "react-router-dom";
 
 import AddNewObjectTracking from './AddNewObjectTracking';
 import ListObjectTracking from './ListObjectTracking';
@@ -40,22 +44,25 @@ export default class RootObjectTracking extends React.Component{
     return(
       <div>
         <div className="control-tool-bar">
-          <Link to="/app/object-tracking/list">
-              <RaisedButton
-                label="List"
-                labelPosition="before"
-                primary={true}
-                icon={<ActionAndroid />}
-                style={styles.button}
-              />
-          </Link>
-          <Link to="/app/object-tracking/add">
-              <RaisedButton label="Add"
-                secondary={true}
-                style={styles.button}
-                icon={<FontIcon className="muidocs-icon-custom-github" />}
-              />
-          </Link>
+          <NavLink activeClassName="_active"  to="/app/object-tracking/list">
+            <IconButton
+              data-tip="Danh sách"
+              iconStyle={{
+                color:'#ddd'
+              }}
+            >{<IconList/>}</IconButton><ReactTooltip />
+          </NavLink>
+          <NavLink activeClassName="_active" to="/app/object-tracking/add">
+            <IconButton
+              data-tip="Thêm mới"
+              iconStyle={{
+                  color:'#ddd'
+              }
+
+              }
+
+            >{<IconListAdd/>}</IconButton><ReactTooltip />
+          </NavLink>
         </div>
         <Divider />
         <div className="component-content-viewer">

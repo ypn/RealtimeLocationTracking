@@ -4,11 +4,16 @@ import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
 import Divider from 'material-ui/Divider';
 
+import IconList from 'material-ui/svg-icons/action/list';
+import IconListAdd from 'material-ui/svg-icons/av/playlist-add';
+import ReactTooltip from 'react-tooltip'
+import IconButton from 'material-ui/IconButton';
+
 import AddNewCheckPoint  from './AddNewCheckPoint';
 import ListCheckPoints from './ListCheckPoints';
 import EditCheckpoint from './EditCheckpoint';
 
-import {BrowserRouter as Router,Route, Link } from "react-router-dom";
+import {BrowserRouter as Router,Route, NavLink } from "react-router-dom";
 const styles = {
   button: {
     margin: 12,
@@ -44,22 +49,25 @@ export default class  RootCheckPointComponent extends React.Component{
       <Router>
       <div>
         <div className="control-tool-bar">
-          <Link to="/app/checkpoint/list">
-              <RaisedButton
-                label="List"
-                labelPosition="before"
-                primary={true}
-                icon={<ActionAndroid />}
-                style={styles.button}
-              />
-          </Link>
-          <Link to="/app/checkpoint/add">
-              <RaisedButton label="Add"
-                secondary={true}
-                style={styles.button}
-                icon={<FontIcon className="muidocs-icon-custom-github" />}
-              />
-          </Link>
+          <NavLink activeClassName="_active" to="/app/checkpoint/list">
+              <IconButton
+                data-tip="Danh sách"
+                iconStyle={{
+                  color:'#ddd'
+                }}
+              >{<IconList/>}</IconButton><ReactTooltip />
+          </NavLink>
+          <NavLink activeClassName="_active" to="/app/checkpoint/add">
+            <IconButton
+              data-tip="Thêm mới"
+              iconStyle={{
+                  color:'#ddd'
+              }
+
+              }
+
+            >{<IconListAdd/>}</IconButton><ReactTooltip />
+        </NavLink>
         </div>
         <Divider />
         <div className="component-content-viewer">
