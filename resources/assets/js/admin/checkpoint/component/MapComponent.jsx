@@ -52,10 +52,10 @@ const InitialMap = withGoogleMap(props=>{
 
 export default class MapComponent extends React.Component{
     constructor(props){
-      super(props);
+      super(props);    
       this.state = {
         markers:[],
-        pathPolygon:this.props.pathPolygon!='undefined' ? this.props.pathPolygon :[]
+        pathPolygon:this.props.pathPolygon
       }
     }
 

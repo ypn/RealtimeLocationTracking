@@ -12,6 +12,7 @@
 
       .root-drawer{
         z-index: 1000!important;
+        width: 65px!important;
       }
 
       .root-drawer a{
@@ -26,7 +27,8 @@
       }
 
       .root-content{
-        margin:20px 15px 0 315px;
+        /*margin:20px 15px 0 315px; */
+        margin:20px 15px 0 100px;
         padding-bottom: 100px;
       }
 
@@ -102,6 +104,9 @@
          background-color: rgb(0, 188, 212)!important;
          color:#fff!important;
       }
+      .row-danger{
+        background: #F44336!important;
+      }
     </style>
   </head>
   <body>
@@ -111,7 +116,6 @@
     integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
     crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTlqW-_ymhhj0I6Ez1Jq_8Z87a_A9ZaCU"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/datatables.min.js"></script>
     <script type="text/javascript" src="/js/admin/admin-bundle.js"></script>
   </body>
 </html>
