@@ -16,7 +16,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import RootModeTracking from './mode_tracking/component/RootModeTracking';
 import RootObjectTracking from './object_tracking/component/RootObjectTracking';
-import RootCheckPointsComponent from './checkpoint/component/RootCheckPointComponent';
+import RootCheckPointComponent from './checkpoint/component/RootCheckPointComponent';
 import RootReportComponent from './report/component/RootReportComponent';
 
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
@@ -50,7 +50,7 @@ const Report = () => (
 );
 
 const Checkpoints = () => (
-  <RootCheckPointsComponent/>
+  <RootCheckPointComponent/>
 );
 
 const ModeTracking = () => (
@@ -59,12 +59,6 @@ const ModeTracking = () => (
 
 const ObjectTracking = () => (
   <RootObjectTracking/>
-);
-
-const Settings = () => (
-  <div>
-    <h2>Settings</h2>
-  </div>
 );
 
 export default class AdminMaster extends React.Component{
@@ -92,10 +86,9 @@ export default class AdminMaster extends React.Component{
               <div className={"drawer-avatar "+_open}></div>
               <a href="/"><MenuItem leftIcon={<IconHome />} className="menu-item">{this.state.isOpenDrawer ? "Trang chủ" :null}</MenuItem></a>
               <NavLink to="/app/report" activeClassName="active"><MenuItem leftIcon={<ContentInbox />} className="menu-item">{this.state.isOpenDrawer ? "Báo cáo" :null}</MenuItem></NavLink>
-              <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem leftIcon={<IconCheckPoint />} className="menu-item">{this.state.isOpenDrawer ? "Trạm giám sát" :null}</MenuItem></NavLink>
-              <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">{this.state.isOpenDrawer ? "Chế độ giám sát" :null}</MenuItem></NavLink>
-              <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">{this.state.isOpenDrawer ? "Đối tượng giám sát" :null}</MenuItem></NavLink>
-              <NavLink to="/app/settings" activeClassName="active"><MenuItem leftIcon={<IconSettings />} className="menu-item">{this.state.isOpenDrawer ? "Cài đặt" :null}</MenuItem></NavLink>
+              <NavLink to="/app/checkpoint/list" activeClassName="active"><MenuItem leftIcon={<IconCheckPoint />} className="menu-item">{this.state.isOpenDrawer ? "Trạm giám sát" :null}</MenuItem></NavLink>
+              <NavLink to="/app/mode-tracking/list" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">{this.state.isOpenDrawer ? "Chế độ giám sát" :null}</MenuItem></NavLink>
+              <NavLink to="/app/object-tracking/list" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">{this.state.isOpenDrawer ? "Đối tượng giám sát" :null}</MenuItem></NavLink>
             </Drawer>
             <div className={"root-content " + _open}>
               <div className="admin-top-bar">
@@ -126,10 +119,9 @@ export default class AdminMaster extends React.Component{
                 </div>
                 <Route exact path="/app" component={Report} />
                 <Route exact path="/app/report" component={Report} />
-                <Route exact path="/app/checkpoint" component={Checkpoints} />
                 <Route path="/app/mode-tracking" component={ModeTracking} />
                 <Route path="/app/object-tracking" component={ObjectTracking} />
-                <Route path="/app/settings" component={Settings} />
+                <Route path="/app/checkpoint" component={Checkpoints} />
               </div>
             </div>
           </div>
