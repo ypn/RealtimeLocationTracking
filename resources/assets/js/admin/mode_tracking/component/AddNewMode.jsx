@@ -4,6 +4,7 @@ import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
+import SaveIcon from 'material-ui/svg-icons/content/save';
 
 import axios from 'axios';
 
@@ -172,10 +173,9 @@ export default class AddNewMode extends React.Component{
             <RaisedButton
               disabled ={this.state.isSubmitted}
               onClick={this.onDataSubmit.bind(this)}
-              label="Lưu"
-              labelPosition="before"
+              label="Lưu"            
               primary={true}
-              icon={<ActionAndroid />}
+              icon={<SaveIcon/>}
             />
         </div>
       </div>

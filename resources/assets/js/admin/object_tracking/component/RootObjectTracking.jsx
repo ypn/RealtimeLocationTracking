@@ -44,7 +44,7 @@ export default class RootObjectTracking extends React.Component{
     return(
       <div>
         <div className="control-tool-bar">
-          <NavLink activeClassName="_active"  to="/app/object-tracking/list">
+          <NavLink style={{display:'inline-block'}} activeClassName="_active"  to="/app/object-tracking/list">
             <IconButton
               data-tip="Danh sách"
               iconStyle={{
@@ -52,7 +52,7 @@ export default class RootObjectTracking extends React.Component{
               }}
             >{<IconList/>}</IconButton><ReactTooltip />
           </NavLink>
-          <NavLink activeClassName="_active" to="/app/object-tracking/add">
+          <NavLink style={{display:'inline-block'}} activeClassName="_active" to="/app/object-tracking/add">
             <IconButton
               data-tip="Thêm mới"
               iconStyle={{

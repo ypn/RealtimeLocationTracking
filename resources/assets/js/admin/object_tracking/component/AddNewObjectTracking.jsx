@@ -8,6 +8,7 @@ import FontIcon from 'material-ui/FontIcon';
 
 import axios from 'axios';
 import Constants from '../../constants/Constants';
+import SaveIcon from 'material-ui/svg-icons/content/save';
 
 export default class AddNewObjectTracking extends React.Component{
 
@@ -183,7 +184,7 @@ export default class AddNewObjectTracking extends React.Component{
                   onClick={this.submitForm.bind(this,this.state.submitForm.table_reference)}
                   label="Lưu"
                   primary={true}
-                  icon={<FontIcon className="material-icons">save</FontIcon>}
+                  icon={<SaveIcon/>}
                 />
             </div>
           ):null}

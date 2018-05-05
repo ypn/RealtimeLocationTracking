@@ -49,7 +49,7 @@ export default class  RootCheckPointComponent extends React.Component{
       <Router>
       <div>
         <div className="control-tool-bar">
-          <NavLink activeClassName="_active" to="/app/checkpoint/list">
+          <NavLink style={{display:'inline-block'}} activeClassName="_active" to="/app/checkpoint/list">
               <IconButton
                 data-tip="Danh sách"
                 iconStyle={{
@@ -57,7 +57,7 @@ export default class  RootCheckPointComponent extends React.Component{
                 }}
               >{<IconList/>}</IconButton><ReactTooltip />
           </NavLink>
-          <NavLink activeClassName="_active" to="/app/checkpoint/add">
+          <NavLink style={{display:'inline-block'}} activeClassName="_active" to="/app/checkpoint/add">
             <IconButton
               data-tip="Thêm mới"
               iconStyle={{
