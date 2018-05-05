@@ -49160,22 +49160,29 @@ var AdminMaster = function (_React$Component2) {
     value: function toggleDrawer() {
       this.setState({
         isOpenDrawer: !this.state.isOpenDrawer,
-        isDockedDrawer: true
+        isDockedDrawer: !this.state.isOpenDrawer
       });
     }
-    //
-    // onTT(){
-    //   this.setState({
-    //     isOpenDrawer:true,
-    //   })
-    // }
-    //
-    // onTTT(){
-    //   this.setState({
-    //     isOpenDrawer:false,
-    //   })
-    // }
-
+  }, {
+    key: 'onTT',
+    value: function onTT() {
+      if (this.state.isDockedDrawer) {
+        return;
+      }
+      this.setState({
+        isOpenDrawer: true
+      });
+    }
+  }, {
+    key: 'onTTT',
+    value: function onTTT() {
+      if (this.state.isDockedDrawer) {
+        return;
+      }
+      this.setState({
+        isOpenDrawer: false
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -49188,7 +49195,7 @@ var AdminMaster = function (_React$Component2) {
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'div',
-            null,
+            { onMouseOver: this.onTT.bind(this), onMouseLeave: this.onTTT.bind(this) },
             __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
               __WEBPACK_IMPORTED_MODULE_5_material_ui_Drawer___default.a,
               { containerClassName: "root-drawer " + _open },
@@ -49242,9 +49249,9 @@ var AdminMaster = function (_React$Component2) {
                 __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
                 { to: '#', activeClassName: 'active' },
                 __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, { leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null), className: 'menu-item', primaryText: 'Inbox',
-                  initiallyOpen: true,
+                  initiallyOpen: false,
                   primaryTogglesNestedList: true,
-                  nestedItems: [__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, {
+                  nestedItems: this.state.isOpenDrawer ? [__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, {
                     key: 1,
                     leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null),
                     primaryText: 'Starred'
@@ -49253,7 +49260,7 @@ var AdminMaster = function (_React$Component2) {
                     leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null),
                     primaryText: 'Sent Mail',
                     disabled: true
-                  })]
+                  })] : []
 
                 })
               )

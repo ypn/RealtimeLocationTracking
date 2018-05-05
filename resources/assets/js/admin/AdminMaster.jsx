@@ -80,28 +80,35 @@ export default class AdminMaster extends React.Component{
   toggleDrawer(){
     this.setState({
       isOpenDrawer:!this.state.isOpenDrawer,
-      isDockedDrawer:true
+      isDockedDrawer: !this.state.isOpenDrawer
     });
+
   }
-  //
-  // onTT(){
-  //   this.setState({
-  //     isOpenDrawer:true,
-  //   })
-  // }
-  //
-  // onTTT(){
-  //   this.setState({
-  //     isOpenDrawer:false,
-  //   })
-  // }
+
+  onTT(){
+    if(this.state.isDockedDrawer){
+      return;
+    }
+    this.setState({
+      isOpenDrawer:true,
+    })
+  }
+
+  onTTT(){
+    if(this.state.isDockedDrawer){
+      return;
+    }
+    this.setState({
+      isOpenDrawer:false,
+    })
+  }
 
   render(){
     var _open = this.state.isOpenDrawer?'_open':'';
     return(
         <MuiThemeProvider>
           <div>
-            <div>
+            <div onMouseOver={this.onTT.bind(this)} onMouseLeave = {this.onTTT.bind(this)}>
               <Drawer  containerClassName={"root-drawer " + _open}>
                 <div className={"drawer-avatar "+_open}></div>
                 <a href="/"><MenuItem leftIcon={<IconHome />} className="menu-item">{this.state.isOpenDrawer ? "Trang chủ" :null}</MenuItem></a>
@@ -111,9 +118,9 @@ export default class AdminMaster extends React.Component{
                 <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">{this.state.isOpenDrawer ? "Đối tượng giám sát" :null}</MenuItem></NavLink>
                 <NavLink to="#" activeClassName="active">
                   <MenuItem leftIcon={<IconObject />} className="menu-item" primaryText="Inbox"
-                    initiallyOpen={true}
+                    initiallyOpen={false}
                     primaryTogglesNestedList={true}
-                    nestedItems={[
+                    nestedItems={this.state.isOpenDrawer ? [
                       <MenuItem
                         key={1}
                         leftIcon={<IconObject />}
@@ -125,7 +132,7 @@ export default class AdminMaster extends React.Component{
                         primaryText="Sent Mail"
                         disabled={true}
                       />,
-                    ]}
+                  ] : []}
 
                   />
                 </NavLink>
