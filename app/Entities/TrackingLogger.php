@@ -24,12 +24,12 @@
     //Danh sách các đối tượng đã dừng theo dõi
     protected function listObjectsTracked($mode_id,$offset){
 
-
       $mode = ModesTracking::getWithCustomInput(['table_reference','id'],$mode_id);
 
       $list = $this
       ->select('id','status','object_tracking','created_at','ended_at','object_id')
       ->where('mode_id',$mode_id)->where('type',0)
+      ->where('path','NOT LIKE','[]')
       ->offset($offset)
       ->limit(10)
       ->orderBy('id','desc')
@@ -64,7 +64,7 @@
       return response()->json([
           'status' => 'success',
           'status_code' => Res::HTTP_OK,
-          'list' => $this->where('type',0)->get()
+          'list' => $this->where('type',0)->where('path','=','[]')->get()
       ]);
     }
 

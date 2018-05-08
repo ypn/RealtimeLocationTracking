@@ -25,6 +25,7 @@
         "material-ui": "^0.20.0",
         "material-ui-fullscreen-dialog": "^0.7.2",
         "material-ui-pagination": "^1.1.6",
+        "material-ui-textfield-icon": "^0.2.3",
         "moment": "^2.21.0",
         "react": "^16.2.0",
         "react-color": "^2.14.0",

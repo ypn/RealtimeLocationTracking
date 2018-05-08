@@ -15,7 +15,8 @@ export default class TimeCheckPoint extends React.Component{
      if(time_end=='' || new Date(time_end) - time_start <0 ){
        time_end = new Date(this.props.timeend);
      }else{
-       time_end = new Date(time_end);
+       return parseInt(total_time);
+       //time_end = new Date(time_end);
      }
 
      return (parseInt(total_time) + Math.floor((time_end-time_start)/1000));

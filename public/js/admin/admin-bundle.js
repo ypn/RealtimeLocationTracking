@@ -5805,6 +5805,8 @@ var GlobalConstants = {
   OBJECT_TRACKING_ROUTE: '/api/v1/object-tracking/',
   CHECKPOINT_ROUTE: '/api/v1/checkpoint/',
   REPORT_ROUTE: '/api/v1/report/',
+  LOGIN_ROUTE: '/api/v1/login',
+  LOGOUT_ROUTE: '/api/v1/logout',
   REALTIME_SERVER_URL: '113.160.215.214:3000'
 };
 
@@ -49045,9 +49047,18 @@ module.exports = camelize;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17_material_ui_svg_icons_navigation_close___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17_material_ui_svg_icons_navigation_close__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_material_ui_svg_icons_action_home__ = __webpack_require__(767);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_18_material_ui_svg_icons_action_home___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18_material_ui_svg_icons_action_home__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__Page404__ = __webpack_require__(785);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_material_ui_IconButton__ = __webpack_require__(50);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_material_ui_IconButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_material_ui_IconButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_material_ui_svg_icons_maps_streetview__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19_material_ui_svg_icons_maps_streetview___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19_material_ui_svg_icons_maps_streetview__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_material_ui_svg_icons_content_content_paste__ = __webpack_require__(787);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_20_material_ui_svg_icons_content_content_paste___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_20_material_ui_svg_icons_content_content_paste__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_material_ui_svg_icons_content_undo__ = __webpack_require__(788);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_21_material_ui_svg_icons_content_undo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_21_material_ui_svg_icons_content_undo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_22__Page404__ = __webpack_require__(785);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_material_ui_IconButton__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_material_ui_IconButton___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_23_material_ui_IconButton__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__constants_GlobalConstants__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_axios__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25_axios__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -49061,6 +49072,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 __WEBPACK_IMPORTED_MODULE_0_react_tap_event_plugin___default()();
+
+
+
+
+
+
 
 
 
@@ -49105,7 +49122,7 @@ var AppBarExampleIcon = function (_React$Component) {
       return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_material_ui_AppBar___default.a, {
         title: 'Dashboard',
         iconElementLeft: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
-          __WEBPACK_IMPORTED_MODULE_20_material_ui_IconButton___default.a,
+          __WEBPACK_IMPORTED_MODULE_23_material_ui_IconButton___default.a,
           null,
           __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             'a',
@@ -49137,7 +49154,7 @@ var ObjectTracking = function ObjectTracking() {
 };
 
 var P404 = function P404() {
-  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_19__Page404__["a" /* default */], null);
+  return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_22__Page404__["a" /* default */], null);
 };
 
 var AdminMaster = function (_React$Component2) {
@@ -49149,8 +49166,8 @@ var AdminMaster = function (_React$Component2) {
     var _this2 = _possibleConstructorReturn(this, (AdminMaster.__proto__ || Object.getPrototypeOf(AdminMaster)).call(this, props));
 
     _this2.state = {
-      isOpenDrawer: true,
-      isDockedDrawer: true
+      isOpenDrawer: false,
+      isDockedDrawer: false
     };
     return _this2;
   }
@@ -49182,6 +49199,15 @@ var AdminMaster = function (_React$Component2) {
       this.setState({
         isOpenDrawer: false
       });
+    }
+  }, {
+    key: 'logout',
+    value: function logout() {
+      __WEBPACK_IMPORTED_MODULE_25_axios___default.a.post(__WEBPACK_IMPORTED_MODULE_24__constants_GlobalConstants__["a" /* default */].LOGOUT_ROUTE).then(function (response) {
+        if (response.data != null && response.data != false) {
+          window.location.href = "/login";
+        }
+      }).catch(function (err) {});
     }
   }, {
     key: 'render',
@@ -49248,21 +49274,25 @@ var AdminMaster = function (_React$Component2) {
               __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_3_react_router_dom__["c" /* NavLink */],
                 { to: '#', activeClassName: 'active' },
-                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, { leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null), className: 'menu-item', primaryText: 'Inbox',
+                __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, { leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_12_material_ui_svg_icons_action_settings___default.a, null), className: 'menu-item', primaryText: 'C\xE0i \u0111\u1EB7t',
                   initiallyOpen: false,
                   primaryTogglesNestedList: true,
                   nestedItems: this.state.isOpenDrawer ? [__WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, {
                     key: 1,
-                    leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null),
-                    primaryText: 'Starred'
+                    leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_19_material_ui_svg_icons_maps_streetview___default.a, null),
+                    primaryText: 'B\u1EA3n \u0111\u1ED3'
                   }), __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a, {
                     key: 2,
-                    leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_15_material_ui_svg_icons_maps_directions_bus___default.a, null),
-                    primaryText: 'Sent Mail',
-                    disabled: true
+                    leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_20_material_ui_svg_icons_content_content_paste___default.a, null),
+                    primaryText: 'D\u1EEF li\u1EC7u ngo\xE0i'
                   })] : []
 
                 })
+              ),
+              __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+                __WEBPACK_IMPORTED_MODULE_6_material_ui_MenuItem___default.a,
+                { onClick: this.logout.bind(this), leftIcon: __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_21_material_ui_svg_icons_content_undo___default.a, null), className: 'menu-item' },
+                this.state.isOpenDrawer ? "Đăng xuất" : null
               )
             )
           ),
@@ -104553,9 +104583,9 @@ var ReportTable = function (_React$Component) {
             this.state.listObject.map(function (node, k) {
               var _status = JSON.parse(node.status);
               __WEBPACK_IMPORTED_MODULE_15_moment___default.a.locale('de');
-              var date_tracking = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.created_at)).subtract('10', 'days').calendar();
-              var created_at = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.created_at)).format('h:mm:ss a');
-              var ended_at = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.ended_at)).format('h:mm:ss a');
+              var date_tracking = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.created_at)).format('DD-MM-YYYY');
+              var created_at = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.created_at)).format('h:mm a');
+              var ended_at = __WEBPACK_IMPORTED_MODULE_15_moment___default()(new Date(node.ended_at)).format('h:mm a');
               return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 __WEBPACK_IMPORTED_MODULE_1_material_ui_Table__["TableRow"],
                 { key: k },
@@ -105005,7 +105035,8 @@ var TimeCheckPoint = function (_React$Component) {
       if (time_end == '' || new Date(time_end) - time_start < 0) {
         time_end = new Date(this.props.timeend);
       } else {
-        time_end = new Date(time_end);
+        return parseInt(total_time);
+        //time_end = new Date(time_end);
       }
 
       return parseInt(total_time) + Math.floor((time_end - time_start) / 1000);
@@ -107547,6 +107578,122 @@ var Page404 = function (_React$Component) {
 }(__WEBPACK_IMPORTED_MODULE_0_react___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["a"] = (Page404);
+
+/***/ }),
+/* 786 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _pure = __webpack_require__(14);
+
+var _pure2 = _interopRequireDefault(_pure);
+
+var _SvgIcon = __webpack_require__(15);
+
+var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MapsStreetview = function MapsStreetview(props) {
+  return _react2.default.createElement(
+    _SvgIcon2.default,
+    props,
+    _react2.default.createElement('path', { d: 'M12.56 14.33c-.34.27-.56.7-.56 1.17V21h7c1.1 0 2-.9 2-2v-5.98c-.94-.33-1.95-.52-3-.52-2.03 0-3.93.7-5.44 1.83z' }),
+    _react2.default.createElement('circle', { cx: '18', cy: '6', r: '5' }),
+    _react2.default.createElement('path', { d: 'M11.5 6c0-1.08.27-2.1.74-3H5c-1.1 0-2 .9-2 2v14c0 .55.23 1.05.59 1.41l9.82-9.82C12.23 9.42 11.5 7.8 11.5 6z' })
+  );
+};
+MapsStreetview = (0, _pure2.default)(MapsStreetview);
+MapsStreetview.displayName = 'MapsStreetview';
+MapsStreetview.muiName = 'SvgIcon';
+
+exports.default = MapsStreetview;
+
+/***/ }),
+/* 787 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _pure = __webpack_require__(14);
+
+var _pure2 = _interopRequireDefault(_pure);
+
+var _SvgIcon = __webpack_require__(15);
+
+var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ContentContentPaste = function ContentContentPaste(props) {
+  return _react2.default.createElement(
+    _SvgIcon2.default,
+    props,
+    _react2.default.createElement('path', { d: 'M19 2h-4.18C14.4.84 13.3 0 12 0c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm7 18H5V4h2v3h10V4h2v16z' })
+  );
+};
+ContentContentPaste = (0, _pure2.default)(ContentContentPaste);
+ContentContentPaste.displayName = 'ContentContentPaste';
+ContentContentPaste.muiName = 'SvgIcon';
+
+exports.default = ContentContentPaste;
+
+/***/ }),
+/* 788 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _pure = __webpack_require__(14);
+
+var _pure2 = _interopRequireDefault(_pure);
+
+var _SvgIcon = __webpack_require__(15);
+
+var _SvgIcon2 = _interopRequireDefault(_SvgIcon);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ContentUndo = function ContentUndo(props) {
+  return _react2.default.createElement(
+    _SvgIcon2.default,
+    props,
+    _react2.default.createElement('path', { d: 'M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z' })
+  );
+};
+ContentUndo = (0, _pure2.default)(ContentUndo);
+ContentUndo.displayName = 'ContentUndo';
+ContentUndo.muiName = 'SvgIcon';
+
+exports.default = ContentUndo;
 
 /***/ })
 /******/ ]);

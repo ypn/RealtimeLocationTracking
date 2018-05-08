@@ -10,7 +10,7 @@ use App\Entities\ModesTracking;
 use App\Entities\TrackingLogger;
 use App\Entities\CheckPoint;
 use Illuminate\Support\Collection;
-use DB;
+use DB,Sentinel;
 
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -37,5 +37,14 @@ class Controller extends BaseController
 
     public function login(){
       return view('login');
+    }    
+
+
+    public function register(){
+      $credentials = [
+          'email'    => 'admin',
+          'password' => 'fafgajfg',
+      ];
+      return(Sentinel::registerAndActivate($credentials));
     }
 }

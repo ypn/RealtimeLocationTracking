@@ -15,6 +15,8 @@
 Route::get('/', 'ModeTrackingController@loadMap');
 Route::get('/login', 'Controller@login');
 
+Route::get('/register','Controller@register');
+
 Route::group(['middleware' => 'guest', 'prefix' => 'app'], function () {
     Route::get('/', 'ModeTrackingController@entry');
     Route::get('/{any}', 'ModeTrackingController@entry')->where('any', '.*');
@@ -72,4 +74,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
           Route::post('list-checkpoint-of-mode','CheckPointController@listCheckPointsOfMode');
       });
     });
+
+    Route::post('login','Auth\LoginController@login');
+    Route::post('logout','Auth\LoginController@logoutUser');
 });

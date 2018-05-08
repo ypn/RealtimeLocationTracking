@@ -53,7 +53,7 @@ export default class ReportTable extends React.Component{
 
   componentWillMount(){
     var _self = this;
-    Stores.on('list-object-tracked-in-mode',function(data){
+    Stores.on('list-object-tracked-in-mode',function(data){    
       _self.setState({
         listObject:data.data.list,
         full_length:data.data.full_length
@@ -141,9 +141,9 @@ export default class ReportTable extends React.Component{
               this.state.listObject.map((node,k)=>{
                 let _status = JSON.parse(node.status);
                 moment.locale('de') ;
-                let date_tracking =  moment(new Date(node.created_at)).subtract('10', 'days').calendar();
-                let created_at = moment(new Date(node.created_at)).format('h:mm:ss a');
-                let ended_at = moment(new Date(node.ended_at)).format('h:mm:ss a');
+                let date_tracking =  moment(new Date(node.created_at)).format('DD-MM-YYYY');
+                let created_at = moment(new Date(node.created_at)).format('h:mm a');
+                let ended_at = moment(new Date(node.ended_at)).format('h:mm a');
                 return(
                   <TableRow key={k}>
                     <TableRowColumn>{node.object_tracking}</TableRowColumn>

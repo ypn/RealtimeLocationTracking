@@ -27,11 +27,17 @@ import IconObject from 'material-ui/svg-icons/maps/directions-bus';
 import IconMenu from 'material-ui/svg-icons/navigation/menu';
 import IconClose from 'material-ui/svg-icons/navigation/close';
 import IconHome from 'material-ui/svg-icons/action/home';
+import IconSetting from 'material-ui/svg-icons/action/settings';
+import IconStreetView from 'material-ui/svg-icons/maps/streetview';
+import IconContentPaste from 'material-ui/svg-icons/content/content-paste';
+import IconSignOut from 'material-ui/svg-icons/content/undo';
 import Page404 from './Page404';
 
 import IconButton from 'material-ui/IconButton';
 
 import HomePage from 'material-ui/svg-icons/action/home';
+import GlobalConstant from '../constants/GlobalConstants';
+import axios from 'axios';
 
 
 
@@ -72,8 +78,8 @@ export default class AdminMaster extends React.Component{
     super(props);
 
     this.state = {
-      isOpenDrawer:true,
-      isDockedDrawer:true
+      isOpenDrawer:false,
+      isDockedDrawer:false
     }
   }
 
@@ -103,6 +109,18 @@ export default class AdminMaster extends React.Component{
     })
   }
 
+  logout(){
+    axios.post(GlobalConstant.LOGOUT_ROUTE)
+    .then(function(response){
+      if(response.data!=null && response.data!=false){
+        window.location.href="/login";
+      }
+    })
+    .catch(function(err){
+
+    })
+  }
+
   render(){
     var _open = this.state.isOpenDrawer?'_open':'';
     return(
@@ -117,25 +135,25 @@ export default class AdminMaster extends React.Component{
                 <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">{this.state.isOpenDrawer ? "Chế độ giám sát" :null}</MenuItem></NavLink>
                 <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">{this.state.isOpenDrawer ? "Đối tượng giám sát" :null}</MenuItem></NavLink>
                 <NavLink to="#" activeClassName="active">
-                  <MenuItem leftIcon={<IconObject />} className="menu-item" primaryText="Inbox"
+                  <MenuItem leftIcon={<IconSetting />} className="menu-item" primaryText="Cài đặt"
                     initiallyOpen={false}
                     primaryTogglesNestedList={true}
                     nestedItems={this.state.isOpenDrawer ? [
                       <MenuItem
                         key={1}
-                        leftIcon={<IconObject />}
-                        primaryText="Starred"
+                        leftIcon={<IconStreetView />}
+                        primaryText="Bản đồ"
                       />,
                       <MenuItem
                         key={2}
-                        leftIcon={<IconObject />}
-                        primaryText="Sent Mail"
-                        disabled={true}
+                        leftIcon={<IconContentPaste />}
+                        primaryText="Dữ liệu ngoài"
                       />,
                   ] : []}
 
                   />
                 </NavLink>
+                <MenuItem onClick={this.logout.bind(this)} leftIcon={<IconSignOut />} className="menu-item">{this.state.isOpenDrawer ? "Đăng xuất" :null}</MenuItem>
               </Drawer>
             </div>
             <div className={"root-content " + _open}>
