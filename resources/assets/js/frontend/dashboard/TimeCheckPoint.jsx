@@ -49,11 +49,11 @@ export default class TimeCheckPoint extends React.Component{
     })
   }
 
-  componentWillUnmount(){
-    if(this.interval!=null){
-      clearInterval(this.interval);
-    }
-  }
+  // componentWillUnmount(){
+  //   if(this.interval!=null){
+  //     clearInterval(this.interval);
+  //   }
+  // }
 
 
   render(){

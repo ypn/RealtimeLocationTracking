@@ -1,3 +1,5 @@
 {
+    "/js/admin/admin-bundle.js": "/js/admin/admin-bundle.js",
+    "/js/frontend/frontend-bundle.js": "/js/frontend/frontend-bundle.js",
     "/js/login/login-bundle.js": "/js/login/login-bundle.js"
 }
