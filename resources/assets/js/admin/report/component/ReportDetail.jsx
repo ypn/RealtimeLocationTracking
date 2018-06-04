@@ -1,6 +1,8 @@
 import React from 'react';
 import GlobalConstants from '../../../constants/GlobalConstants';
 import axios from 'axios';
+import TimeLine from './TimeLine';
+import './style.css';
 
 import ReportItem from './ReportItem';
 
@@ -59,13 +61,14 @@ export default class ReportDetail extends React.Component{
         isReplay:true,
         showMarker:false,
         posMarker:null,
+        timeline:[],
         polyline:{
           options:{
             strokeWeight:4,
             strokeColor:'orange'
           },
           path:[]
-        }
+        },
       }
     }
 
@@ -99,7 +102,6 @@ export default class ReportDetail extends React.Component{
         id:this.props.reportIndex
       })
       .then(function(response){
-
         if(response.data.status == 'success'){
           var polyline = response.data.data.path;
           let path  =[];
@@ -117,10 +119,16 @@ export default class ReportDetail extends React.Component{
                 strokeColor:'orange'
               },
               path:path
-            }
+            },
+            time_start:response.data.data.created_at,
+            time_end:response.data.data.ended_at,
+            timeline:JSON.parse(response.data.data.timeline)
           });
 
+
+
         }
+
       }.bind(this))
       .catch(function(err){
         alert('Xem log để biết chi tiết lỗi!');
@@ -138,6 +146,7 @@ export default class ReportDetail extends React.Component{
         <button style={{
             position:'absolute',top:'80px',right:'13px',zIndex:99
           }} onClick={this.replayMove.bind(this)}>Replay</button>
+
         <div style={{
           position: 'absolute',
           bottom: '15px',
@@ -146,12 +155,18 @@ export default class ReportDetail extends React.Component{
           width: 'auto',
           background: '#23527c70',
           zIndex: 99,
-          border: '1px solid red'
+          border: '1px solid #98b2ec'
         }}>
+        {
+          this.state.timeline!=null ? (
+            <TimeLine createdAt = {this.state.time_start} endedAt ={this.state.time_end} timelineeee = {this.state.timeline}/>
+          ):null
+        }
 
-        <ReportItem/>
 
         </div>
+
+
 
         <InitialMap
           containerElement = {

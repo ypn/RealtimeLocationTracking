@@ -38,6 +38,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
     Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
         Route::post('create','ObjectTrackingController@create');
         Route::post('list','ObjectTrackingController@list');
+        Route::post('list-pagination','ObjectTrackingController@listWithPagination');
         Route::post('list-objects-on-tracking','ObjectTrackingController@listObjectsOnTracking');
         Route::post('remove','ObjectTrackingController@remove');
         Route::post('list-all-objects-on-tracking','ObjectTrackingController@listAllObjectOnTracking');
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('get-detail','ReportController@getDetail');
         Route::post('export-excel','ReportController@exportExcel');
         Route::get('get-tracking-detail/{id}','ReportController@getTrackingDetail');
+        Route::get('exportExcel/{mode_id}','ReportController@exportExcel');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'mobile'],function(){
@@ -77,4 +79,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
 
     Route::post('login','Auth\LoginController@login');
     Route::post('logout','Auth\LoginController@logoutUser');
+    Route::get('email','MailController@sendEmail');
+
 });

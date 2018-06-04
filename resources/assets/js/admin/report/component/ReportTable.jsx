@@ -53,7 +53,7 @@ export default class ReportTable extends React.Component{
 
   componentWillMount(){
     var _self = this;
-    Stores.on('list-object-tracked-in-mode',function(data){    
+    Stores.on('list-object-tracked-in-mode',function(data){
       _self.setState({
         listObject:data.data.list,
         full_length:data.data.full_length
@@ -76,23 +76,11 @@ export default class ReportTable extends React.Component{
   }
 
   exportExcel(){
-    axios.post(GlobalConstants.REPORT_ROUTE + 'export-excel',{
-      name:this.props.mode.name,
-      id:this.props.mode.id,
-      current_page:this.props.mode.currentPage
-    })
-    .then(function(response){
-      if(response.data !=0){
-        window.location='/storage/' + response.data + '.xlsx';
-      }
-      else{
-        alert('Không thể xuất file!');
-      }
 
-    })
-    .catch(function(err){
+    var x = screen.width/2 - 1000/2;
+    var y = screen.height/2 - 500/2;
+    var wnd = window.open(GlobalConstants.REPORT_ROUTE + 'exportExcel/' + this.props.mode.id, 'sharegplus','height=500,width=1000,left='+x+',top='+y);
 
-    });
   }
 
   render(){
@@ -111,7 +99,7 @@ export default class ReportTable extends React.Component{
 
     return(
       <div>
-        <RaisedButton icon={<NodeAdd />} label="Excel" onClick = {this.exportExcel.bind(this)} secondary={true} />
+        <RaisedButton icon={<NodeAdd />} label="Export" onClick = {this.exportExcel.bind(this)} secondary={true} />
         <br />
         <Table>
           <TableHeader>

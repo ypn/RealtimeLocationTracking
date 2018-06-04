@@ -10,8 +10,11 @@ use Illuminate\Support\Facades\Input;
 use App\Entities\ModesTracking;
 use App\Entities\TrackingLogger;
 use App\Entities\CheckPoint;
+use App\Entities\ModeCheckPoints;
 use Illuminate\Database\Eloquent\Collection;
 use Excel,DB;
+use Carbon\Carbon;
+use DateTime;
 
 
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -66,19 +69,71 @@ class ReportController extends BaseController
       return TrackingLogger::getDetail(Input::get('id'));
     }
 
-    public function exportExcel(){
+    protected function parseDateArray($date_array){
+      return  (date('Y-m-d H:i:s', mktime($date_array['hour'], $date_array['minute'], $date_array['second'], $date_array['month'], $date_array['day'], $date_array['year'])));
+    }
 
-      $file_name = str_slug(Input::get('name'),'_') . '_' . time();
-      $mode_id = Input::get('id');
-      $current_page = Input::get('current_page');
+    protected function getTimeInCheckPoint($total_time,$time_start,$time_end,$ended_at){
 
-      $resule = Excel::store(new InvoicesExport($mode_id,$current_page), 'public/' . $file_name . '.xlsx');
-
-      if($resule){
-        return $file_name;
+      if($time_start==''){
+        return 0;
       }
 
-      return 0;
+      $time_start_array = date_parse($time_start);
+
+      $time_start =  strtotime($this->parseDateArray($time_start_array));
+      if($time_end==''){
+        $time_end = strtotime($ended_at);
+        return intval($total_time) + ($time_end - $time_start);
+      }else{
+        $time_end_array = date_parse($time_end);
+        $time_end = strtotime($this->parseDateArray($time_end_array));
+        if($time_end - $time_start < 0 ){
+          return intval($total_time) + (strtotime($ended_at) - $time_start);
+        }
+      }
+
+      return $total_time;
+
+    }
+
+    public function exportExcel($mode_id){
+
+      $mode = ModesTracking::getWithCustomInput(['display_property','object_owner','table_reference','id'],$mode_id);
+
+      $checkpoint =  ModeCheckPoints::join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')
+      ->select('checkpoints.name','checkpoints.id')->where('mode_checkpoints.mode_id',$mode_id)->get();
+
+      $list = TrackingLogger::select('id','status','object_tracking','created_at','ended_at','object_id')
+      ->where('mode_id',$mode_id)->where('type',0)
+      ->where('path','NOT LIKE','[]')
+      ->orderBy('id','desc')
+      ->get();
+
+      foreach($list as $l){
+        $obj = DB::table($mode->table_reference)->where('id',$l->object_id)->first();
+        $l->object_info = $obj;
+
+        $status = json_decode($l->status);
+        $time_checkpoints = array();
+        foreach($status as $s){
+          $t = $this->getTimeInCheckPoint($s->total_time,$s->time_start,$s->time_end,$l->ended_at);
+
+          $min = floor($t /60);
+          $sec = $t - $min * 60;
+
+          array_push($time_checkpoints,$min .'m'.':'.$sec.'s');
+        }
+
+        $l->time_checkpoints = $time_checkpoints;
+      }
+
+
+      return view ('admin.export_excel',[
+        'mode'=>$mode,
+        'checkpoints'=>$checkpoint,
+        'list'=>$list
+      ]);
 
     }
 

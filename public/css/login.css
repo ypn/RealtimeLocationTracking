@@ -1,17 +1,19 @@
-html {
-  background: url('../images/background_login.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  overflow: hidden;
-}
 .login{
   width: 350px;
   height:500px;
   margin: auto;
   margin-top: 100px;
   position: relative;
+}
+
+html body{
+  /* position: fixed;
+  top:0;
+  left: 0;
+  object-fit:cover!important; */
+
+  background-image: url('/images/bgg.jpeg');
+
 }
 
 .login .login-title{

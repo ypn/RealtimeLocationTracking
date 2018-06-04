@@ -65,7 +65,10 @@ const InitialMap = withGoogleMap(props=>{
               onCloseClick = {()=>props.handleMarkerClose(mk)}
             >
               {
-                <div><h6>{mk.object_tracking}</h6></div>
+                <div>
+                  <h6>{mk.mode_name}</h6>
+                  <span>{mk.object_tracking}</span>
+                </div>
               }
             </InfoWindow>
           }
@@ -138,6 +141,7 @@ export default class MapContainer extends Component{
                 lng:pos.lng
               },
               object_tracking:objects[i].object_tracking,
+              mode_name:objects[i].mode_name,
               showInfo:true
             }],
             polylines:[..._self.state.polylines,{
@@ -190,6 +194,7 @@ export default class MapContainer extends Component{
               lng:pos.lng
             },
             object_tracking:obj.object_tracking,
+            mode_name:obj.mode_name,
             showInfo:true
           }],
 

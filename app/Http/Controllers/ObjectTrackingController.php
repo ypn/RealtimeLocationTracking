@@ -46,7 +46,7 @@ class ObjectTrackingController extends Controller
       }
     }
 
-    public function list(){
+    public function listWithPagination(){    
       $table = Input::get('table');
       $offset = (Input::get('current_page')-1) * 10;
 
@@ -59,6 +59,16 @@ class ObjectTrackingController extends Controller
         'status_code'=>Res::HTTP_OK,
         'list'=>$list,
         'full_length'=>ceil(DB::table($table)->count()/10)
+      ]);
+    }
+
+    public function list(){
+      $table = Input::get('table');
+      $list = DB::table($table)->get();
+      return response()->json([
+        'status'=>'success',
+        'status_code'=>Res::HTTP_OK,
+        'list'=>$list
       ]);
     }
 

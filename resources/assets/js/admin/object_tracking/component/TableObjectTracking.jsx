@@ -29,7 +29,7 @@ export default class TableObjectTracking extends React.Component{
     if((this.state.listObject).length !=0){
       return;
     }
-    axios.post(Constants.OBJECT_TRACKING_ROUTE+'list',{
+    axios.post(Constants.OBJECT_TRACKING_ROUTE+'list-pagination',{
       table:this.props.ModeProperty.table_reference,
       current_page:this.state.currentPage
     })
@@ -75,12 +75,11 @@ export default class TableObjectTracking extends React.Component{
       currentPage:number
     });
 
-    axios.post(Constants.OBJECT_TRACKING_ROUTE+'list',{
+    axios.post(Constants.OBJECT_TRACKING_ROUTE+'list-pagination',{
       table:this.props.ModeProperty.table_reference,
       current_page:number
     })
-    .then(function(response){
-      console.log(response.data);
+    .then(function(response){    
       if(response.data.status == 'success'){
         this.setState({
           listObject:response.data.list,
@@ -166,7 +165,7 @@ export default class TableObjectTracking extends React.Component{
               style={{
                 position:'fixed',
                 top:'50%',
-                left:'50%',              
+                left:'50%',
                 margin:'15px'
               }}
             />

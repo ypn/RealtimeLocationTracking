@@ -5,13 +5,12 @@
   use Illuminate\Database\QueryException;
   use Illuminate\Http\Response as Res;
   use App\Entities\ModesTracking;
+  use App\Entities\CheckPoint;
   use DB;
 
 
   class TrackingLogger extends Model{
     protected $table = 'tracking_logger';
-
-
     //Danh sách các đối tượng đang được theo dõi theo chế độ theo dõi
     protected function listObjectsOnTracking($mode_id){
       return response()->json([
@@ -52,10 +51,16 @@
 
     //Danh sách tất cả các đối tượng đang theo dõi (thuộc tất cả các chế độ theo dõi)
     protected function listAllObjectOnTracking(){
+      $list = $this->where('type',1)->get();
+
+      foreach($list as $l){
+        $mode = ModesTracking::select('name')->where('id',$l->mode_id)->first();
+        $l->mode_name = $mode->name;
+      }
       return response()->json([
           'status' => 'success',
           'status_code' => Res::HTTP_OK,
-          'list' => $this->where('type',1)->get()
+          'list' => $list
       ]);
     }
 
