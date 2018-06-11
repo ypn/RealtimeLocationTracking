@@ -100,14 +100,15 @@ export default class AdminMaster extends React.Component{
     })
   }
 
-  onTTT(){
-    if(this.state.isDockedDrawer){
-      return;
-    }
-    this.setState({
-      isOpenDrawer:false,
-    })
-  }
+  // onMouseOver={this.onTT.bind(this)} onMouseLeave = {this.onTTT.bind(this)}
+  // onTTT(){
+  //   if(this.state.isDockedDrawer){
+  //     return;
+  //   }
+  //   this.setState({
+  //     isOpenDrawer:false,
+  //   })
+  // }
 
   logout(){
     axios.post(GlobalConstant.LOGOUT_ROUTE)
@@ -126,7 +127,7 @@ export default class AdminMaster extends React.Component{
     return(
         <MuiThemeProvider>
           <div>
-            <div onMouseOver={this.onTT.bind(this)} onMouseLeave = {this.onTTT.bind(this)}>
+            <div>
               <Drawer  containerClassName={"root-drawer " + _open}>
                 <div className={"drawer-avatar "+_open}></div>
                 <a href="/"><MenuItem leftIcon={<IconHome />} className="menu-item">{this.state.isOpenDrawer ? "Trang chủ" :null}</MenuItem></a>

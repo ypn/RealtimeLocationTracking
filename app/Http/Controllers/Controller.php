@@ -37,7 +37,7 @@ class Controller extends BaseController
 
     public function login(){
       return view('login');
-    }    
+    }
 
 
     public function register(){
@@ -46,5 +46,9 @@ class Controller extends BaseController
           'password' => 'fafgajfg',
       ];
       return(Sentinel::registerAndActivate($credentials));
+    }
+
+    public function s5s(){
+      return view('5s');
     }
 }

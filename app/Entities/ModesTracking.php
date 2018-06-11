@@ -146,4 +146,17 @@ class ModesTracking extends Model
       return $checkpoints = ModeCheckPoints::join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')
       ->select('checkpoints.name','checkpoints.id')->where('mode_checkpoints.mode_id',$mode_id)->get();
     }
+
+    protected function updateMode($mode_id,$time_frequence,$list_send,$list_cc){
+      return $this->where('id',$mode_id)->update([
+        'time_frequency'=>$time_frequence,
+        'list_email_send'=>$list_send,
+        'list_email_cc'=>$list_cc
+      ]);
+    }
+
+    protected function getModeEmail($id){
+      return $this->select('name','list_email_send','list_email_cc')->where('id',$id)->first();
+    }
+
 }

@@ -82,4 +82,13 @@
       ]);
     }
 
+    protected function getMinimum($id){
+      $data = $this->select('status','object_tracking','mode_id','object_id','created_at','ended_at','timeline')->where('id',$id)->first();
+      return([
+        'status'=>'success',
+        'status_code'=>Res::HTTP_OK,
+        'data'=>$data
+      ]);
+    }
+
   }

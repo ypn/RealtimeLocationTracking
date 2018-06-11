@@ -14,6 +14,7 @@
 
 Route::get('/', 'ModeTrackingController@loadMap');
 Route::get('/login', 'Controller@login');
+Route::get('/s5s','Controller@s5s');
 
 Route::get('/register','Controller@register');
 
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
         Route::post('del','ModeTrackingController@del');
         Route::post('update-state','ModeTrackingController@updateState');
         Route::post('list-checkpoints','ModeTrackingController@listCheckpoints');
+        Route::post('update-mode','ModeTrackingController@updateMode');
     });
 
     Route::group(['middleware'=>'web','prefix'=>'object-tracking'],function(){
@@ -79,6 +81,6 @@ Route::group(['middleware' => 'web', 'prefix' => 'api/v1'], function () {
 
     Route::post('login','Auth\LoginController@login');
     Route::post('logout','Auth\LoginController@logoutUser');
-    Route::get('email','MailController@sendEmail');
+    Route::get('email/{id}','MailController@apiSendEmail');
 
 });

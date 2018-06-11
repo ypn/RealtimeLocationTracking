@@ -4,7 +4,8 @@ import Checkbox from 'material-ui/Checkbox';
 import RaisedButton from 'material-ui/RaisedButton';
 import ActionAndroid from 'material-ui/svg-icons/action/android';
 import FontIcon from 'material-ui/FontIcon';
-import SaveIcon from 'material-ui/svg-icons/content/save';
+
+
 
 import axios from 'axios';
 
@@ -115,7 +116,7 @@ export default class AddNewMode extends React.Component{
             Thêm chế độ giám sát mới
           </h3>
         </div>
-        <div>
+        <div className="col-md-4">
           {
             this.state.responseError?(
               <div className="alert alert-danger" role="alert">
@@ -173,10 +174,38 @@ export default class AddNewMode extends React.Component{
             <RaisedButton
               disabled ={this.state.isSubmitted}
               onClick={this.onDataSubmit.bind(this)}
-              label="Lưu"            
+              label="Lưu"
               primary={true}
               icon={<SaveIcon/>}
             />
+        </div>
+        <div className="col-md-8">
+          <h1 style={{marginBottom:0}}>Configuration</h1>
+          <TextField id="time_to_send"
+             ref="time_to_send"
+             hintText="Tần suất gửi vị trí"
+             floatingLabelText="Tần suất gửi vị trí theo giây"
+              type="number"
+
+           /><br />
+         <i>Thời gian càng nhỏ, tần suất gửi vị trí của ứng dụng càng dày, báo cáo lộ trình càng chi tiết nhưng sẽ tốn nhiều pin hơn (trung bình 5s).</i>
+        <br/>
+       <TextField id="list_email_to_send_report"
+            ref="list_email_to_send_report"
+            hintText="Danh sách email nhận báo cáo giám sát."
+            floatingLabelText="Danh sách email nhận báo cáo giám sát."
+            multiLine={true}
+            fullWidth={true}
+            rows={3}
+          /><br />
+        <TextField id="list_email_to_cc_report"
+             ref="list_email_to_cc_report"
+             hintText="Danh sách email đính kèm báo cáo giám sát."
+             floatingLabelText="Danh sách email đính kèm báo cáo giám sát."
+             multiLine={true}
+             fullWidth={true}
+             rows={3}
+           /><br />
         </div>
       </div>
     )

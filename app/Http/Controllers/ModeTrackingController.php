@@ -48,4 +48,42 @@ class ModeTrackingController extends Controller
       return ModesTracking::listCheckpoints(Input::get('mode_id'));
     }
 
+    public function updateMode(){
+      $list_send = array();
+      $list_cc = array();
+      $time_frequence = Input::get('time_frequence');
+      $list_email_to_send_report = Input::get('list_email_to_send_report');
+      $list_email_to_cc_report = Input::get('list_email_to_cc_report');
+      $mode_id = Input::get('mode_id');
+
+      if($list_email_to_send_report!=null){
+         $list_send = explode(",",$list_email_to_send_report);
+
+         foreach($list_send as $email){
+           if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+             return response()->json([
+                 'status' => '0',
+                 'status_code' => 'EMAIL_SEND_INVALID',
+                 'message'=>'Định dạng danh sách email gửi không đúng!'
+             ]);
+           }
+         }
+      }
+
+      if($list_email_to_cc_report!=null){
+        $list_cc = explode(",",$list_email_to_cc_report);
+        foreach($list_cc as $email){
+          if(!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return response()->json([
+                'status' => '0',
+                'status_code' => 'EMAIL_CC_INVALID',
+                'message'=>'Định dạng danh sách email đính kèm không đúng!'
+            ]);
+          }
+        }
+      }
+
+      return ModesTracking::updateMode($mode_id,$time_frequence,$list_email_to_send_report,$list_email_to_cc_report);
+    }
+
 }

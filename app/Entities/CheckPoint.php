@@ -47,6 +47,11 @@
       ]);
     }
 
+    protected function getName($id){
+      $cp = $this->select('name')->where('id',$id)->first();
+      return (isset($cp->name) ? $cp->name : '');
+    }
+
     protected function editCheckPoint($id,$value){
       $query = $this->where('id',$id)->update([
         'name'=>$value['name'],
