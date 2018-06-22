@@ -14,5 +14,6 @@
 mix//.js('resources/assets/js/app.js', 'public/js')
    //.sass('resources/assets/sass/app.scss', 'public/css');
    .react('resources/assets/js/admin/admin-bundle.js','public/js/admin');
-   //.react('resources/assets/js/frontend/frontend-bundle.js','public/js/frontend')
+   //.react('resources/assets/js/frontend/frontend-bundle.js','public/js/frontend');
+   //.react('resources/assets/js/report/report-bundle.js','public/js/report');
    //.react('resources/assets/js/login/login-bundle.js','public/js/login');

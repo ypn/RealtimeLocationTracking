@@ -110,18 +110,19 @@ export default class EditMode extends React.Component {
         <div className="col-md-8">
           <div className="col-md-8">
             <h1 style={{marginBottom:0}}>Configuration</h1>
-            <TextField id="time_frequence"
-               ref="time_frequence"
-               hintText="Tần suất gửi vị trí"
-               floatingLabelText="Tần suất gửi vị trí theo giây"
-               type="number"
-               defaultValue={this.state.data!=null?this.state.data.time_frequency:5}
-             /><br />
-           <i>Thời gian càng nhỏ, tần suất gửi vị trí của ứng dụng càng dày, báo cáo lộ trình càng chi tiết nhưng sẽ tốn nhiều pin hơn (trung bình 5s).</i>
-          <br/>
           {
             this.state.data!=null ?(
               <div>
+                <TextField id="time_frequence"
+                   ref="time_frequence"
+                   hintText="Tần suất gửi vị trí"
+                   floatingLabelText="Tần suất gửi vị trí theo giây"
+                   type="number"
+                   defaultValue={this.state.data.time_frequency}
+                 /><br />
+                 <i>Thời gian càng nhỏ, tần suất gửi vị trí của ứng dụng càng dày, báo cáo lộ trình càng chi tiết nhưng sẽ tốn nhiều pin hơn (trung bình 5s).</i>
+                <br/>
+
                 <TextField id="list_email_to_send_report"
                      ref="list_email_to_send_report"
                      hintText="Danh sách email nhận báo cáo giám sát."

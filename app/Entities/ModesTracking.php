@@ -80,7 +80,7 @@ class ModesTracking extends Model
 
     protected function listEnabled(){
 
-      $list = $this->select('name','id','display_property','table_reference','object_owner')->where('state',1)->get();
+      $list = $this->select('name','id','display_property','table_reference','object_owner','time_frequency')->where('state',1)->get();
 
       foreach ($list as $l) {
         $checkpoints = $this->listCheckpoints($l->id);

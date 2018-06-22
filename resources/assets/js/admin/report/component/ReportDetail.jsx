@@ -5,6 +5,7 @@ import TimeLine from './TimeLine';
 import './style.css';
 
 import ReportItem from './ReportItem';
+import ChartSpeed from './ChartSpeed';
 
 import{
   withGoogleMap,
@@ -45,6 +46,10 @@ const InitialMap = withGoogleMap(props=>{
     ):null
     }
 
+    <Marker
+      position = {props.currPos}
+    />
+
     <Polyline
         path = {props.polyline.path}
         options = {props.polyline.options}
@@ -62,6 +67,7 @@ export default class ReportDetail extends React.Component{
         showMarker:false,
         posMarker:null,
         timeline:[],
+        currPos:{lat:20.903975, lng: 106.629445},
         polyline:{
           options:{
             strokeWeight:4,
@@ -97,6 +103,15 @@ export default class ReportDetail extends React.Component{
 
     }
 
+    callbackChart(obji){
+      this.setState({
+        currPos:{
+          lat:parseFloat(obji.lat),
+          lng:parseFloat(obji.lng)
+        }
+      })
+    }
+
     componentWillMount(){
       axios.post(GlobalConstants.REPORT_ROUTE + 'get-detail',{
         id:this.props.reportIndex
@@ -108,7 +123,7 @@ export default class ReportDetail extends React.Component{
           let flightPlanCoordinates = JSON.parse(polyline);
 
           for(let i = 0 ;i <flightPlanCoordinates.length; i++){
-            let obj = eval('(' + JSON.parse(JSON.stringify(flightPlanCoordinates[i])) + ')');
+            let obj =JSON.parse(flightPlanCoordinates[i]);
             path.push(obj);
           }
 
@@ -124,8 +139,6 @@ export default class ReportDetail extends React.Component{
             time_end:response.data.data.ended_at,
             timeline:JSON.parse(response.data.data.timeline)
           });
-
-
 
         }
 
@@ -154,14 +167,12 @@ export default class ReportDetail extends React.Component{
           right:'15px',
           width: 'auto',
           background: '#23527c70',
+          overflowX:"scroll",
           zIndex: 99,
           border: '1px solid #98b2ec'
         }}>
-        {
-          this.state.timeline!=null ? (
-            <TimeLine createdAt = {this.state.time_start} endedAt ={this.state.time_end} timelineeee = {this.state.timeline}/>
-          ):null
-        }
+
+        <ChartSpeed MyData = {this.state.polyline.path} CallBack = {this.callbackChart.bind(this)}/>
 
 
         </div>
@@ -177,6 +188,8 @@ export default class ReportDetail extends React.Component{
           }
 
           polyline = {this.state.polyline}
+
+          currPos = {this.state.currPos}
 
           showMarker = {this.state.showMarker}
 

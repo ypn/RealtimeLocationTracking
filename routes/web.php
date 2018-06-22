@@ -15,6 +15,8 @@
 Route::get('/', 'ModeTrackingController@loadMap');
 Route::get('/login', 'Controller@login');
 Route::get('/s5s','Controller@s5s');
+Route::get('/report-detail/{sessionId}','Controller@reportDetail');
+Route::get('test-send-email','MailController@testSend');
 
 Route::get('/register','Controller@register');
 

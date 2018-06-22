@@ -11,6 +11,7 @@ use App\Entities\TrackingLogger;
 use App\Entities\CheckPoint;
 use Illuminate\Support\Collection;
 use DB,Sentinel;
+use Illuminate\Support\Facades\Input;
 
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -51,4 +52,9 @@ class Controller extends BaseController
     public function s5s(){
       return view('5s');
     }
+
+    public function reportDetail($sessionId){
+      return view('report')->with('sessionId',$sessionId);
+    }
+
 }

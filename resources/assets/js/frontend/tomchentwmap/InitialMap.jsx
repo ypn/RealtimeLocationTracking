@@ -124,13 +124,14 @@ export default class MapContainer extends Component{
         var objects = Stores.getListAllOnObjectTracking();
 
         for(let i=0;i<objects.length;i++){
-          let pos = JSON.parse(JSON.stringify(eval("(" + objects[i].current_position + ")")));
-
-          let flightPlanCoordinates = JSON.parse(objects[i].path);
+          let pos = JSON.parse(objects[i].current_position);
           let path  =[];
-          for(let i = 0 ;i <flightPlanCoordinates.length; i++){
-            let obj = eval('(' + JSON.parse(JSON.stringify(flightPlanCoordinates[i])) + ')');
-            path.push(obj);
+          if(objects[i].path !="[]"){
+            let flightPlanCoordinates = JSON.parse(objects[i].path);
+            for(let i = 0 ;i <flightPlanCoordinates.length; i++){
+              let obj =JSON.parse(flightPlanCoordinates[i]);
+              path.push(obj);
+            }
           }
 
           _self.setState({

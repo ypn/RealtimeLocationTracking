@@ -25,13 +25,22 @@ class MailController extends Controller
       $list_email_to_send = $listemail->list_email_send!=null ? explode(",",$listemail->list_email_send) : null;
 
       if($list_email_to_send==null){
-        return 'email list null';
+        return 0;
       }
 
       $list_email_cc = $listemail->list_email_cc!=null ? explode(",",$listemail->list_email_cc) : null;
       $mode_name = $listemail->name;
 
-      $time_diff = $this->getTimeDiff(new Carbon($data->created_at),new Carbon($data->ended_at));
+      $created_at = new Carbon($data->created_at);
+      $ended_at = new Carbon($data->ended_at);
+
+      if($ended_at->diffInSeconds($created_at) <600 ){
+        return 0;
+      }
+
+      $time_diff = $this->getTimeDiff($created_at,$ended_at);
+
+
 
       $timeline = json_decode($data->timeline);
 
@@ -48,7 +57,7 @@ class MailController extends Controller
 
 
         if($time->type==1){
-          $time_end = new Carbon((json_decode($timeline[$k+1]))->time_at);
+          $time_end = ($k < count($timeline)-1 ) ? new Carbon((json_decode($timeline[$k+1]))->time_at) : new Carbon($time->time_at);
           $time_start = new Carbon($time->time_at);
           $time->time_diff_in_second = $time_end->diffInSeconds($time_start);
           $time->time_diff_formatted = $this->getTimeDiff($time_start,$time_end);
@@ -64,18 +73,21 @@ class MailController extends Controller
           'ended_at'=>$data->ended_at,
           'time_diff'=>$time_diff,
           'mode_name'=>$mode_name,
-          'timeline'=>$timelineformatted
+          'timeline'=>$timelineformatted,
+          'sessionId'=>$sessionId
         ), function($message) use ($list_email_to_send,$list_email_cc) {
-             $message->to($list_email_to_send)->subject('Hệ thống tự động thông kết quả giám sát!');
+             $message->to($list_email_to_send)->subject('Hệ thống tự động thông báo kết quả giám sát!');
              if($list_email_cc !=null){
                $message->cc($list_email_cc);
              }
          });
       }catch(\Exception $ex){
-        return $ex->getMessage();
+        echo $ex->getMessage();
+        return 0;
+
       }
 
-       return ('send successfully');
+      return 1;
     }
 
     protected function getTimeDiff($time1,$time2){
@@ -86,5 +98,13 @@ class MailController extends Controller
       $hour = floor($min_diff/60);
       $m = $min_diff - $hour*60;
       return($hour . 'h' . ':' . $m . 'm' .':' .$sec .'s');
+    }
+
+    protected function testSend(){
+      Mail::send('test',array(
+        'object_tracking'=>"This is object tracking"
+      ), function($message){
+           $message->to('ypn@vijagroup.com.vn')->subject('Hệ thống tự động thông báo kết quả giám sát!');
+       });
     }
 }

@@ -42,8 +42,11 @@
       <p>Bắt đầu: <b>{{$created_at}}</b>
       <p>Kết thúc:<b>{{$ended_at}}</b>
       <p>Tổng thời gian giám sát: <b>{{$time_diff}}</b></p>
-      <p>Kết quả tổng quan</p>
-      <h3>Lộ trình chi tiết</h3>
+      <p>Lộ trình chi tiết: <a href="http://113.160.215.214:8092/report-detail/{{$sessionId}}">Click vào đây để xem lộ trình chi tiết</a></p>
+      <p>
+        <img src="https://api.thumbnail.ws/api/ab4e893a78f8aa4a81c3c5dce3bca921fe26c7d3c7bd/thumbnail/get?url=http://113.160.215.214:8092/report-detail/{{$sessionId}}/&width=460"/>
+      </p>
+      <h3>Kết quả tổng quan</h3>
       <table id="customers">
         <thead>
           <tr>
