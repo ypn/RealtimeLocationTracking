@@ -50,7 +50,6 @@ export default class RootReportComponent extends React.Component{
     axios.post(GlobalConstants.MODE_TRACKING_ROUTE + 'list-enabled')
     .then(function(response){
       if(response.data.status == 'success'){
-
         Actions.loadTrackedObject(response.data.list[0].id,0);
         this.setState({
           listMode:response.data.list,
@@ -121,9 +120,8 @@ export default class RootReportComponent extends React.Component{
           <div>
             <div  className="col-md-12">
               {
-                this.state.mode.id!=-1 ?   <ReportTable mode={this.state.mode}/> : null
+                this.state.mode.id!=-1 ?  <ReportTable mode={this.state.mode}/> : null
               }
-
             </div>
           </div>
         </div>

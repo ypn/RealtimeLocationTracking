@@ -75,8 +75,7 @@ export default class EditMode extends React.Component {
       list_email_to_send_report:$('#list_email_to_send_report').val(),
       list_email_to_cc_report:$('#list_email_to_cc_report').val()
     })
-    .then(function(response){
-      //console.log(response.data);
+    .then(function(response){    
       if(response.data==1){
         alert('Cập nhật thành công');
       }

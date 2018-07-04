@@ -124,37 +124,45 @@ export default class MapContainer extends Component{
         var objects = Stores.getListAllOnObjectTracking();
 
         for(let i=0;i<objects.length;i++){
-          let pos = JSON.parse(objects[i].current_position);
-          let path  =[];
-          if(objects[i].path !="[]"){
-            let flightPlanCoordinates = JSON.parse(objects[i].path);
-            for(let i = 0 ;i <flightPlanCoordinates.length; i++){
-              let obj =JSON.parse(flightPlanCoordinates[i]);
-              path.push(obj);
+          try{
+            let pos = JSON.parse(objects[i].current_position);
+            let path  =[];
+            if(objects[i].path !="[]"){
+              try{
+                let flightPlanCoordinates = JSON.parse(objects[i].path);
+                for(let i = 0 ;i <flightPlanCoordinates.length; i++){
+                  let obj =JSON.parse(flightPlanCoordinates[i]);
+                  path.push(obj);
+                }
+              }catch(err){
+                console.log(objects[i].path);
+              }
             }
+            _self.setState({
+              markers:[..._self.state.markers,{
+                id:objects[i].id,
+                position:{
+                  lat:pos.lat,
+                  lng:pos.lng
+                },
+                object_tracking:objects[i].object_tracking,
+                mode_name:objects[i].mode_name,
+                showInfo:true
+              }],
+              polylines:[..._self.state.polylines,{
+                id:objects[i].id,
+                isShowed: true,
+                options:{
+                  strokeWeight:4,
+                  strokeColor:objects[i].path_color!=null? objects[i].path_color : 'orange'
+                },
+                path:path
+              }]
+            })
+          }catch(err){
+            console.log('error parase json');
           }
 
-          _self.setState({
-            markers:[..._self.state.markers,{
-              id:objects[i].id,
-              position:{
-                lat:pos.lat,
-                lng:pos.lng
-              },
-              object_tracking:objects[i].object_tracking,
-              mode_name:objects[i].mode_name,
-              showInfo:true
-            }],
-            polylines:[..._self.state.polylines,{
-              id:objects[i].id,
-              isShowed: true,
-              options:{
-                strokeWeight:4,
-                strokeColor:objects[i].path_color!=null? objects[i].path_color : 'orange'
-              },
-              path:path
-            }]
-          })
         }
       });
 

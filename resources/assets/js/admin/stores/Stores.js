@@ -10,7 +10,7 @@ class AdminStores extends EventEmitter {
         id:mode_id,
         offset
       })
-      .then(function(response){    
+      .then(function(response){
         if(response.data.status=='success'){
           this.emit('list-object-tracked-in-mode',{data:response.data});
         }
@@ -20,11 +20,17 @@ class AdminStores extends EventEmitter {
       })
   }
 
+  loadReportData(data){
+    this.emit('load-report-data',data);
+  }
+
   handleAction(action){
     switch (action.type) {
       case 'LOAD_TRACKED_OBJECT':
         this.loadTrackedObject(action.mode_id,action.offset);
         break;
+      case 'LOAD_REPORT_DATA':
+        this.loadReportData(action.data);
       default:
     }
   }

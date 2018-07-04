@@ -155,4 +155,7 @@ class ReportController extends BaseController
       return json_encode($result);
     }
 
+    public function getViolateSubject(){
+      return TrackingLogger::getViolateSubject(Input::all());
+    }
 }

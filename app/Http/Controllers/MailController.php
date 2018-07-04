@@ -34,7 +34,7 @@ class MailController extends Controller
       $created_at = new Carbon($data->created_at);
       $ended_at = new Carbon($data->ended_at);
 
-      if($ended_at->diffInSeconds($created_at) <600 ){
+      if($ended_at->diffInSeconds($created_at) <120 ){
         return 0;
       }
 
@@ -98,6 +98,24 @@ class MailController extends Controller
       $hour = floor($min_diff/60);
       $m = $min_diff - $hour*60;
       return($hour . 'h' . ':' . $m . 'm' .':' .$sec .'s');
+    }
+
+    public function sendWarning(){
+
+      try{
+        Mail::send('test',array(
+          'object_name'=>Input::get('object_name'),
+          'lat'=>Input::get('lat'),
+          'lng'=>Input::get('lng')
+        ), function($message)  {
+             $message->to('ypn@vijagroup.com.vn')->subject('Cảnh báo không di chuyển!');
+         });
+      }catch(\Exception $ex){
+        return $ex->getMessage();
+
+      }
+
+
     }
 
     protected function testSend(){

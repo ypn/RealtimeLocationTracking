@@ -126,6 +126,11 @@ class ModesTracking extends Model
        }
     }
 
+    protected function getModeParent($id){
+      $a = ModesTracking::select('parent')->where('id',$id)->first();
+      return $a;
+    }
+
     protected function getMode($id){
 
       $checkpoint =  ModeCheckPoints::join('checkpoints','mode_checkpoints.checkpoint_id','=','checkpoints.id')

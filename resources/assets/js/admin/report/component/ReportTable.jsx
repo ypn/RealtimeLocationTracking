@@ -19,6 +19,7 @@ import Stores from '../../stores/Stores';
 import Pagination from 'material-ui-pagination';
 import TimeCheckPoint from './TimeCheckPoint';
 import FullscreenDialog from 'material-ui-fullscreen-dialog'
+import CircularProgress from 'material-ui/CircularProgress';
 
 import NodeAdd from 'material-ui/svg-icons/action/note-add';
 import FontIcon from 'material-ui/FontIcon';
@@ -26,6 +27,7 @@ import FontIcon from 'material-ui/FontIcon';
 import GlobalConstants from '../../../constants/GlobalConstants';
 import axios from 'axios';
 import moment from 'moment';
+
 
 const customContentStyle = {
   width: '100%',
@@ -47,7 +49,8 @@ export default class ReportTable extends React.Component{
       full_length:0,
       currentPage:1,
       open:false,
-      reportIndex:-1
+      reportIndex:-1,
+      isLoadComplete:false
     }
   }
 
@@ -56,14 +59,16 @@ export default class ReportTable extends React.Component{
     Stores.on('list-object-tracked-in-mode',function(data){
       _self.setState({
         listObject:data.data.list,
-        full_length:data.data.full_length
+        full_length:data.data.full_length,
+        isLoadComplete:true
       })
     })
   }
 
   changePagination(number){
     this.setState({
-      currentPage:number
+      currentPage:number,
+      isLoadComplete:false
     })
     Actions.loadTrackedObject(this.props.mode.id,(number-1)*10);
   }
@@ -83,8 +88,7 @@ export default class ReportTable extends React.Component{
 
   }
 
-  render(){
-
+  render(){    
     const actions = [
       <FlatButton
         label="Cancel"
@@ -99,87 +103,103 @@ export default class ReportTable extends React.Component{
 
     return(
       <div>
-        <RaisedButton icon={<NodeAdd />} label="Export" onClick = {this.exportExcel.bind(this)} secondary={true} />
-        <br />
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHeaderColumn>{this.props.mode.display_property}</TableHeaderColumn>
-              {
-                this.props.mode.object_owner!=null ? (
-                  <TableHeaderColumn>{this.props.mode.object_owner}</TableHeaderColumn>
-                ):null
-              }
-              <TableHeaderColumn>Ngày theo dõi</TableHeaderColumn>
-              <TableHeaderColumn>Giờ bắt đầu</TableHeaderColumn>
-              <TableHeaderColumn>Giờ kết thúc</TableHeaderColumn>
-              {
-                this.props.mode.checkpoints.map((node,k)=>{
-                  return(
-                    <TableHeaderColumn key={k}>{node.name}</TableHeaderColumn>
-                  )
-                })
-              }
-              <TableHeaderColumn>Chi tiết</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+      {
+        this.state.isLoadComplete ?(
 
-            {
-              this.state.listObject.map((node,k)=>{
-                let _status = JSON.parse(node.status);
-                moment.locale('de') ;
-                let date_tracking =  moment(new Date(node.created_at)).format('DD-MM-YYYY');
-                let created_at = moment(new Date(node.created_at)).format('h:mm a');
-                let ended_at = moment(new Date(node.ended_at)).format('h:mm a');
-                return(
-                  <TableRow key={k}>
-                    <TableRowColumn>{node.object_tracking}</TableRowColumn>
-                    {
-                      this.props.mode.object_owner!=null ? (
-                        <TableRowColumn>{node.object_info.object_owner}</TableRowColumn>
-                      ):null
-                    }
-                    <TableRowColumn>{date_tracking}</TableRowColumn>
-                    <TableRowColumn>{created_at}</TableRowColumn>
-                    <TableRowColumn>{ended_at}</TableRowColumn>
-                    {
-                      _status.map((n,ki)=>{
-                        return(
-                          <TableRowColumn key={ki}><TimeCheckPoint timeend ={node.ended_at}  node = {n}/></TableRowColumn>
-                        )
-                      })
-                    }
-                    <TableRowColumn>
-                      <button onClick={this.openModal.bind(this,node.id)}>Chi tiết</button>
-                    </TableRowColumn>
-                  </TableRow>
-                )
-              })
-            }
+          <div>
+            <RaisedButton icon={<NodeAdd />} label="Export" onClick = {this.exportExcel.bind(this)} secondary={true} />
+            <br />
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderColumn>{this.props.mode.display_property}</TableHeaderColumn>
+                  {
+                    this.props.mode.object_owner!=null ? (
+                      <TableHeaderColumn>{this.props.mode.object_owner}</TableHeaderColumn>
+                    ):null
+                  }
+                  <TableHeaderColumn>Ngày theo dõi</TableHeaderColumn>
+                  <TableHeaderColumn>Giờ bắt đầu</TableHeaderColumn>
+                  <TableHeaderColumn>Giờ kết thúc</TableHeaderColumn>
+                  {
+                    this.props.mode.checkpoints.map((node,k)=>{
+                      return(
+                        <TableHeaderColumn key={k}>{node.name}</TableHeaderColumn>
+                      )
+                    })
+                  }
+                  <TableHeaderColumn>Chi tiết</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
 
-          </TableBody>
-        </Table>
-        <br/>
-        <Pagination
-          total = {this.state.full_length }
-          current = { this.state.currentPage }
-          display = { 10 }
-          onChange = { this.changePagination.bind(this) }
-        />
+                {
+                  this.state.listObject.map((node,k)=>{
+                    let _status = JSON.parse(node.status);
+                    moment.locale('de') ;
+                    let date_tracking =  moment(new Date(node.created_at)).format('DD-MM-YYYY');
+                    let created_at = moment(new Date(node.created_at)).format('h:mm a');
+                    let ended_at = moment(new Date(node.ended_at)).format('h:mm a');
+                    return(
+                      <TableRow key={k}>
+                        <TableRowColumn>{node.object_tracking}</TableRowColumn>
+                        {
+                          this.props.mode.object_owner!=null ? (
+                            <TableRowColumn>{node.object_info.object_owner}</TableRowColumn>
+                          ):null
+                        }
+                        <TableRowColumn>{date_tracking}</TableRowColumn>
+                        <TableRowColumn>{created_at}</TableRowColumn>
+                        <TableRowColumn>{ended_at}</TableRowColumn>
+                        {
+                          _status.map((n,ki)=>{
+                            return(
+                              <TableRowColumn key={ki}><TimeCheckPoint timeend ={node.ended_at}  node = {n}/></TableRowColumn>
+                            )
+                          })
+                        }
+                        <TableRowColumn>
+                          <button onClick={this.openModal.bind(this,node.id)}>Chi tiết</button>
+                        </TableRowColumn>
+                      </TableRow>
+                    )
+                  })
+                }
 
-        <FullscreenDialog
-          open={this.state.open}
-          onRequestClose={() => this.setState({ open: false })}
-          title={'Lịch sử di chuyển'}
-          actionButton={<FlatButton
-            label='Trở lại'
-            onClick={() => this.setState({ open: false })}
-          />}
-        >
-        <ReportDetail   reportIndex = {this.state.reportIndex} />
-       </FullscreenDialog>
-      </div>
+              </TableBody>
+            </Table>
+            <br/>
+            <Pagination
+              total = {this.state.full_length }
+              current = { this.state.currentPage }
+              display = { 10 }
+              onChange = { this.changePagination.bind(this) }
+            />
+
+            <FullscreenDialog
+              open={this.state.open}
+              onRequestClose={() => this.setState({ open: false })}
+              title={'Lịch sử di chuyển'}
+              actionButton={<FlatButton
+                label='Trở lại'
+                onClick={() => this.setState({ open: false })}
+              />}
+            >
+            <ReportDetail   reportIndex = {this.state.reportIndex} />
+           </FullscreenDialog>
+          </div>
+        ):(
+          <CircularProgress
+            style={{
+              position:'fixed',
+              top:'50%',
+              left:'50%',
+              margin:'15px'
+            }}
+          />
+        )
+      }
+    </div>
     )
   }
 }

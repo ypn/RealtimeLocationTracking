@@ -6,7 +6,7 @@ injectTapEventPlugin();
 
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
-import {Route, NavLink ,Switch  } from "react-router-dom";
+import {Route, NavLink ,Switch,Link } from "react-router-dom";
 
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
@@ -18,6 +18,7 @@ import RootModeTracking from './mode_tracking/component/RootModeTracking';
 import RootObjectTracking from './object_tracking/component/RootObjectTracking';
 import RootCheckPointComponent from './checkpoint/component/RootCheckPointComponent';
 import RootReportComponent from './report/component/RootReportComponent';
+import RootReportSynthetic from './report/component/report_synthetic/RootReportSynthetic';
 
 import ContentInbox from 'material-ui/svg-icons/content/inbox';
 import IconSettings from 'material-ui/svg-icons/action/settings';
@@ -54,6 +55,14 @@ class AppBarExampleIcon extends React.Component {
 
 const Report = () => (
   <RootReportComponent/>
+);
+
+const TrackingHistory = () =>(
+  <h1>Tracking History</h1>
+);
+
+const ReportSynthetic = () =>(
+ <RootReportSynthetic/>
 );
 
 const Checkpoints = () => (
@@ -100,15 +109,6 @@ export default class AdminMaster extends React.Component{
     })
   }
 
-  // onMouseOver={this.onTT.bind(this)} onMouseLeave = {this.onTTT.bind(this)}
-  // onTTT(){
-  //   if(this.state.isDockedDrawer){
-  //     return;
-  //   }
-  //   this.setState({
-  //     isOpenDrawer:false,
-  //   })
-  // }
 
   logout(){
     axios.post(GlobalConstant.LOGOUT_ROUTE)
@@ -131,7 +131,26 @@ export default class AdminMaster extends React.Component{
               <Drawer  containerClassName={"root-drawer " + _open}>
                 <div className={"drawer-avatar "+_open}></div>
                 <a href="/"><MenuItem leftIcon={<IconHome />} className="menu-item">{this.state.isOpenDrawer ? "Trang chủ" :null}</MenuItem></a>
-                <NavLink to="/app/report" activeClassName="active"><MenuItem leftIcon={<ContentInbox />} className="menu-item">{this.state.isOpenDrawer ? "Báo cáo" :null}</MenuItem></NavLink>
+                <MenuItem leftIcon={<ContentInbox />} className="menu-item" primaryText="Báo cáo"
+                  initiallyOpen={false}
+                  primaryTogglesNestedList={true}
+                  nestedItems={this.state.isOpenDrawer ? [
+                    <MenuItem
+                      containerElement={<Link to="/app/tracking_history" />}
+                      key={1}
+                      leftIcon={<IconStreetView />}
+                      primaryText="Lịch sử theo dõi"
+                    />,
+                    <MenuItem
+                      containerElement={<Link to="/app/report_synthetic"  />}
+                      key={2}
+                      leftIcon={<IconContentPaste />}
+                      primaryText="Báo cáo vi phạm"
+                    />,
+                ] : []}
+
+                />
+
                 <NavLink to="/app/checkpoint" activeClassName="active"><MenuItem leftIcon={<IconCheckPoint />} className="menu-item">{this.state.isOpenDrawer ? "Trạm giám sát" :null}</MenuItem></NavLink>
                 <NavLink to="/app/mode-tracking" activeClassName="active"><MenuItem leftIcon={<IconMode />} className="menu-item">{this.state.isOpenDrawer ? "Chế độ giám sát" :null}</MenuItem></NavLink>
                 <NavLink to="/app/object-tracking" activeClassName="active"><MenuItem leftIcon={<IconObject />} className="menu-item">{this.state.isOpenDrawer ? "Đối tượng giám sát" :null}</MenuItem></NavLink>
@@ -181,7 +200,8 @@ export default class AdminMaster extends React.Component{
               <div className="_uuu">
                 <Switch>
                   <Route exact path="/app" component={Report} />
-                  <Route exact path="/app/report" component={Report} />
+                  <Route path ="/app/tracking_history" component = {Report} />
+                  <Route path ="/app/report_synthetic" component = {ReportSynthetic} />
                   <Route path="/app/object-tracking" component={ObjectTracking} />
                   <Route path="/app/checkpoint" component={Checkpoints} />
                   <Route path="/app/mode-tracking" component={ModeTracking} />

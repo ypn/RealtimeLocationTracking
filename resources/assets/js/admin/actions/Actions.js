@@ -7,3 +7,10 @@ export function loadTrackedObject(mode_id,offset){
     offset
   })
 }
+
+export function loadReportData(data){
+  dispatcher.dispatch({
+    type:'LOAD_REPORT_DATA',
+    data
+  })
+}
